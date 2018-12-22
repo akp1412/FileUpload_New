@@ -42,7 +42,7 @@ module.exports = [
   },
   {
     "id": "cordova-plugin-camera.CameraPopoverHandle",
-    "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+    "file": "plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js",
     "pluginId": "cordova-plugin-camera",
     "clobbers": [
       "CameraPopoverHandle"
@@ -207,8 +207,8 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-file.androidFileSystem",
-    "file": "plugins/cordova-plugin-file/www/android/FileSystem.js",
+    "id": "cordova-plugin-file.iosFileSystem",
+    "file": "plugins/cordova-plugin-file/www/ios/FileSystem.js",
     "pluginId": "cordova-plugin-file",
     "merges": [
       "FileSystem"
@@ -247,7 +247,7 @@ module.exports = [
   },
   {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
-    "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
+    "file": "plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
     "clobbers": [
       "window.Keyboard"
@@ -259,6 +259,14 @@ module.exports = [
     "pluginId": "cordova-plugin-ionic-webview",
     "clobbers": [
       "Ionic.WebView"
+    ]
+  },
+  {
+    "id": "cordova-plugin-ionic-webview.ios-wkwebview-exec",
+    "file": "plugins/cordova-plugin-ionic-webview/src/www/ios/ios-wkwebview-exec.js",
+    "pluginId": "cordova-plugin-ionic-webview",
+    "clobbers": [
+      "cordova.exec"
     ]
   },
   {
@@ -299,8 +307,8 @@ module.exports.metadata =
   "cordova-plugin-ionic-webview": "2.2.5",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-statusbar": "2.4.2",
-  "cordova-plugin-whitelist": "1.3.3",
-  "cordova-plugin-telerik-imagepicker": "2.2.2"
+  "cordova-plugin-telerik-imagepicker": "2.2.2",
+  "cordova-plugin-whitelist": "1.3.3"
 };
 // BOTTOM OF METADATA
 });
