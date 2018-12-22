@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions,Headers } from '@angular/http';
 import { Observable, throwError } from 'rxjs'
-import 'rxjs/Rx';
+//import 'rxjs/Rx';
 import { map, catchError } from "rxjs/operators";
 import { Storage } from '@ionic/storage';
 import { FileTransferObject } from '@ionic-native/file-transfer/ngx';
