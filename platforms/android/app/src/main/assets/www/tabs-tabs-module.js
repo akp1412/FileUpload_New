@@ -56,7 +56,7 @@ var AboutPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<ion-content>\n\n    <ion-grid class=\"MyGrid\">\n        <ion-row wrap>\n            <ion-col  *ngFor=\"let album of Albums\" >\n                <img (click)=\"loadAlbum(album)\" src=\"assets/icon/albums.jpg\" />\n                <ion-label align=\"center\">{{album}}</ion-label>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>\n<ion-footer>\n    <ion-toolbar>\n        <ion-buttons>\n            <ion-button (click)=\"addAlbum()\">\r\n                <ion-icon slot=\"start\" name=\"add\"></ion-icon>\r\n                Add Album\r\n            </ion-button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-footer>\n"
+module.exports = "\r\n\r\n<ion-content>\r\n\r\n    <ion-grid class=\"MyGrid\">\r\n        <ion-row wrap>\r\n            <ion-col  *ngFor=\"let album of Albums\" >\r\n                <img (click)=\"loadAlbum(album)\" src=\"assets/icon/albums.jpg\" />\r\n                <ion-label align=\"center\">{{album}}</ion-label>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n</ion-content>\r\n<ion-footer>\r\n    <ion-toolbar>\r\n        <ion-buttons>\r\n            <ion-button (click)=\"addAlbum()\">\r\n                <ion-icon slot=\"start\" name=\"add\"></ion-icon>\r\n                Add Album\r\n            </ion-button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n</ion-footer>\r\n"
 
 /***/ }),
 
@@ -267,7 +267,7 @@ var ContactPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>\n      <ion-label>\n        Follow us on Twitter\n      </ion-label>\n    </ion-list-header>\n    <ion-item>\n      <ion-label>\n        <ion-icon name=\"logo-ionic\" slot=\"start\"></ion-icon>\n        @ionicframework\n      </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Dont Contact\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-list-header>\r\n      <ion-label>\r\n        Follow us on Twitter\r\n      </ion-label>\r\n    </ion-list-header>\r\n    <ion-item>\r\n      <ion-label>\r\n        <ion-icon name=\"logo-ionic\" slot=\"start\"></ion-icon>\r\n        @ionicframework\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-content>"
 
 /***/ }),
 
@@ -1035,7 +1035,7 @@ var TabsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs>\n\n  <ion-tab tab=\"Gallery\">\n    <ion-router-outlet name=\"home\"></ion-router-outlet>\n  </ion-tab>\n  <ion-tab tab=\"Albums\">\n    <ion-router-outlet name=\"about\"></ion-router-outlet>\n  </ion-tab>\n  <!--<ion-tab tab=\"contact\">\n    <ion-router-outlet name=\"contact\"></ion-router-outlet>\n  </ion-tab>-->\n\n  <ion-tab-bar slot=\"top\" translucent=\"true\" color=\"primary\">\n\n    <ion-tab-button tab=\"Gallery\" href=\"/tabs/(home:home)\">\n      <ion-icon name=\"film\"></ion-icon>\n      <ion-label>Gallery</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"Albums\" href=\"/tabs/(about:about)\">\n      <ion-icon name=\"albums\"></ion-icon>\n      <ion-label>Albums</ion-label>\n    </ion-tab-button>\n\n    <!--<ion-tab-button tab=\"contact\" href=\"/tabs/(contact:contact)\">\n      <ion-icon name=\"contacts\"></ion-icon>\n      <ion-label>Contact</ion-label>\n    </ion-tab-button>-->\n\n  </ion-tab-bar>\n\n</ion-tabs>\n"
+module.exports = "<ion-tabs>\r\n\r\n  <ion-tab tab=\"Gallery\">\r\n    <ion-router-outlet name=\"home\"></ion-router-outlet>\r\n  </ion-tab>\r\n  <ion-tab tab=\"Albums\">\r\n    <ion-router-outlet name=\"about\"></ion-router-outlet>\r\n  </ion-tab>\r\n  <!--<ion-tab tab=\"contact\">\r\n    <ion-router-outlet name=\"contact\"></ion-router-outlet>\r\n  </ion-tab>-->\r\n\r\n  <ion-tab-bar slot=\"top\" translucent=\"true\" color=\"primary\">\r\n\r\n    <ion-tab-button tab=\"Gallery\" href=\"/tabs/(home:home)\">\r\n      <ion-icon name=\"film\"></ion-icon>\r\n      <ion-label>Gallery</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"Albums\" href=\"/tabs/(about:about)\">\r\n      <ion-icon name=\"albums\"></ion-icon>\r\n      <ion-label>Albums</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <!--<ion-tab-button tab=\"contact\" href=\"/tabs/(contact:contact)\">\r\n      <ion-icon name=\"contacts\"></ion-icon>\r\n      <ion-label>Contact</ion-label>\r\n    </ion-tab-button>-->\r\n\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n"
 
 /***/ }),
 
