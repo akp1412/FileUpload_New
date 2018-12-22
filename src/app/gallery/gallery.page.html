@@ -1,0 +1,48 @@
+<!--<ion-header>
+    <ion-toolbar>
+        <ion-back-button (click)="goback()" slot="start"></ion-back-button>
+        <ion-title>Gallery</ion-title>
+    </ion-toolbar>
+
+</ion-header>-->
+<!--text-center  class="vertical-align-content"-->
+<ion-content background-color="black">
+    <!--<ion-grid>
+        <ion-row *ngFor="let row of grid">
+            <ion-col width-50 *ngFor="let file_uri of row">
+                <img src="{{file_uri}}" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>-->
+
+
+    <ion-slides style="height:100vh; background:black;" scrollbar="true" pager="false" sliderperview="2" (ionSlideDidChange)="slideChanged()">
+        <ion-slide text-align="center" style="height:100vh;" background-color="red" *ngFor="let img of imgUrls">
+
+
+
+            <!--<img src={{img.imgUrl}} style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;" (click)="loadImage(img.imgParentUrl)">-->
+            <!--<div background-color="black">
+                <img src={{img.imgUrl}} class="thumb-img" style=" display: block; width: 100%; padding:5px; height: auto; margin: auto; " imageViewer />
+            </div>-->
+            <div class="swiper-zoom-container">
+                <img id={{img.imgUrl}} (load)="loaded(img.imgUrl)" src={{img.imgUrl}} class="thumb-img" style=" display: block;  padding:5px; height: auto; margin: auto; " imageViewer />
+            </div>
+            <!-- <div   [style.background-image]="'url(' + img.imgUrl + ')'"></div>-->
+        </ion-slide>
+    </ion-slides>
+
+    <ion-fab vertical="top" horizontal="start" slot="fixed">
+        <ion-fab-button (click)="goback()" color="light" ion-fab mini><ion-icon name="ios-arrow-back"></ion-icon></ion-fab-button>
+    </ion-fab>
+    <ion-fab id="AddToAlbum" vertical="top" horizontal="end" slot="fixed" *ngIf="hasAlbum === false">
+        <ion-fab-button (click)="presentPopover($event)" color="tertiary" ion-fab mini><ion-icon name="filing"></ion-icon></ion-fab-button>
+    </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="deleteImage()" color="danger" ion-fab mini><ion-icon name="ios-trash"></ion-icon></ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="hasAlbum === true">
+        <ion-fab-button (click)="removeFromAlbum()" color="danger" ion-fab mini><ion-icon name="remove"></ion-icon></ion-fab-button>
+    </ion-fab>
+</ion-content>

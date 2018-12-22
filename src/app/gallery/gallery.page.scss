@@ -1,0 +1,25 @@
+page-gallery {
+
+    ion-slide.swiper-slide {
+        left: 25%;
+        background:black;
+    }
+
+    .slide-zoom {
+        background: #e6e6e6;
+        //background: black;
+    }
+
+    .thumb-img {
+        padding: 10px;
+        vertical-align:middle;
+    }
+}
+.square {
+    width: 100%;
+    padding-bottom: 100%;
+    background-color: black;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

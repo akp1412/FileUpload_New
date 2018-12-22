@@ -1,0 +1,58 @@
+<!--<ion-header>
+    <ion-toolbar>
+        <ion-back-button (click)="goback()" slot="start"></ion-back-button>
+        <ion-title>Gallery</ion-title>
+        <ion-buttons slot="end">
+            <button ion-button icon-only (click)="presentPopover($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>-->
+<ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-button color="primary" (click)="goback()">
+            <ion-icon color="light" slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-title>{{strHeading}}</ion-title>
+    <ion-buttons slot="end">
+        <ion-button  color="primary" (click)="presentPopover($event)">
+            <ion-icon color="light" slot="icon-only" name="more"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>
+<!--text-center  class="vertical-align-content"-->
+
+<ion-content>
+    <!--<ion-item>-->
+        <p style="color: darkred;font-size:12px;" >Current Filter: {{currFilter}}</p>
+    <!--</ion-item>-->
+        <ion-grid>
+            <ion-row *ngFor="let row of localGrid">
+                <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                    <!-- <img src="{{file_uri}}" (click)="LoadImage(file_uri)" style="width:100%; display: block;-->
+                    <!--<div class="square" (click)="LoadImage(file_uri)" style="background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)"></div>-->
+                    <div class="square" (click)="LoadImage(file_uri)" [style.background-image]="'url(' + file_uri + ')'"></div>
+
+
+                    <!--margin-left: auto;  margin-right: auto; vertical-align:middle;" />-->
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    
+
+        <!--<!--<div >
+            <!-- Responsive Layout with Ion Grid-->
+        <!--<ion-grid >
+            <ion-row>
+                <ion-col col-6 col-md-4 col-xl-3 *ngFor="let objImg of objImage">
+                     <div class="image-container" [style.background-image]="'url(objImg.imgUrl)'"></div>
+                    <img src={{objImg.imgUrl}}>
+                </ion-col>
+            </ion-row>
+        </ion-grid>-->
+        <!-- More Pinterest floating gallery style -->
+        <!--</div>-->
+</ion-content>

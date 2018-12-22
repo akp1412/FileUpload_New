@@ -1,0 +1,206 @@
+<ion-content>
+
+<!--<div class="swiper-container">-->
+    <!--<div class="swiper-wrapper">-->
+    <!--<ion-slides pager="false" autoHeight="true" (ionSlideDidChange)="slideDidChange()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{ 'height': slideIndex===0 ? 'auto' : '100vh' }">-->
+    <!--<ion-slides ion-fixed pager="false" [options]="slideOpts" (ionSlideDidChange)="slideDidChange()" [ngStyle]="{ 'height': slideIndex===1 ? '100vh': 'auto' }">
+       
+            <ion-slide>-->
+                <!--<ion-content>-->
+
+                <ion-grid style="width:100%;">
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">This Week</ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_W1">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'W1')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color: darkred;font-size:12px;">Last Week</ion-label>
+                            </ion-item>
+
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_W2">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'W2')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">2 Weeks Ago</ion-label>
+                            </ion-item>
+
+
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_W3">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'W3')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">3 Week Ago</ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_W4">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'W4')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">Last Month</ion-label>
+                            </ion-item>
+
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_M1">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'M1')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">2 Month Ago</ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_M2">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'M2')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;">Earlier this Year</ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_M3">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'M3')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y1')">1 Year ago </ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_Y1">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'Y1')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y2')">2 Years ago </ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_Y2">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'Y2')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y3')">3 Years ago </ion-label>
+                            </ion-item>
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_Y3">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'Y3')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y4')">Older... </ion-label>
+                            </ion-item>
+
+
+
+                            <ion-grid>
+                                <ion-row *ngFor="let row of grid_Y4">
+                                    <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                                        <div class="square" (click)="LoadImage(file_uri,'Y4')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <!--</ion-content>-->
+
+          <!--  </ion-slide>-->
+        <!--</ion-content>-->
+
+
+            <!--<ion-slide >
+               
+                <h2> Album SLide</h2>
+               
+            </ion-slide>
+
+</ion-slides>
+        </div>-->
+
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="LoadSourceOptions()" ion-fab mini><ion-icon name="add"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>

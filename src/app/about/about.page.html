@@ -1,0 +1,23 @@
+
+
+<ion-content>
+
+    <ion-grid class="MyGrid">
+        <ion-row wrap>
+            <ion-col  *ngFor="let album of Albums" >
+                <img (click)="loadAlbum(album)" src="assets/icon/albums.jpg" />
+                <ion-label align="center">{{album}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-button (click)="addAlbum()">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Add Album
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
