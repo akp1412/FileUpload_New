@@ -14,14 +14,24 @@ export class AboutPage {
     Albums: string[] = [];
     constructor(private navCtrl: NavController,
         private masterDetailService: MasterDetailService,
-        public alertController: AlertController) { }
+        public alertController: AlertController,
+        public loadingCtrl: LoadingController) { }
 
     ngOnInit() {
         this.Albums = this.masterDetailService.getAlbums().split(",");
 
     }
 
+    async presentLoading() {
+        const loading = await this.loadingCtrl.create({
+            message: 'Busy...',
+            duration: 3000
+        });
+        return await loading.present();
+    }
+
     loadAlbum(strAlbum) {
+        this.presentLoading();
         this.masterDetailService.setCurrAlbum(strAlbum);
         this.masterDetailService.setListMode("ALBUM");
         this.navCtrl.navigateForward('imglist');

@@ -30,7 +30,7 @@ export class ImglistPage implements OnInit {
         private popoverCtrl: PopoverController) { }
 
     ngOnInit() {
-        this.presentLoading();
+        //this.presentLoading();
 
         if (this.masterDetailService.getListMode() === "GALLERY") {
             this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
@@ -41,10 +41,11 @@ export class ImglistPage implements OnInit {
         }
         
         this.populateGrid();
-        this.loadingCtrl.dismiss();
+        
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
+        this.loadingCtrl.dismiss();
        
     }
 
@@ -94,7 +95,7 @@ export class ImglistPage implements OnInit {
 
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
-            message: 'Loading...',
+            message: 'Busy...',
             duration: 3000
         });
         return await loading.present();
@@ -102,7 +103,7 @@ export class ImglistPage implements OnInit {
 
 
     LoadImage(imgUrl) {
-
+        this.presentLoading();
         let intIndex = this.objImage.findIndex(x => x.imgUrl === imgUrl);
         this.masterDetailService.setIndex(intIndex);
         //this.masterDetailService.setImages(this.objImageList.filter(p => p.period === strFilter));

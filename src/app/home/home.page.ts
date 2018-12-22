@@ -138,6 +138,7 @@ export class HomePage {
                     cssClass: 'secondary',
                     handler: (blah) => {
                         this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+                        this.presentLoading();
                         this.getImageList();
                         console.log('Confirm Cancel: blah');
                     }
@@ -146,6 +147,7 @@ export class HomePage {
                     handler: () => {
                         // this.navCtrl.navigateForward('add_news');
                         this.communityService.baseUrl = "http://localhost:49168/api";
+                        this.presentLoading();
                         this.getImageList();
                         console.log('Confirm Okay');
 
@@ -155,6 +157,7 @@ export class HomePage {
                     handler: () => {
                         // this.navCtrl.navigateForward('add_news');
                         this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                        this.presentLoading();
                         this.getImageList();
                         //this.slides.options = this.slideOpts;
                         console.log('Confirm Okay');
@@ -170,7 +173,7 @@ export class HomePage {
     }
 
     LoadImage(imgUrl,strFilter){
-        
+        this.presentLoading();
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         } else {
@@ -203,12 +206,13 @@ export class HomePage {
         
         this.imagePicker.getPictures(options).then(
             (file_uris) => {
+                
                 console.log(file_uris);
                 this.masterDetailService.setUris(file_uris);
                 //this.navCtrl.navigateForward('gallery');
                 for (let i = 0; i < file_uris.length; i++) {
 
-
+                    this.presentLoading();
                     this.getBase64String(file_uris[i]);
                     
                     
@@ -250,6 +254,7 @@ export class HomePage {
             this.populateGrid("Y2");
             this.populateGrid("Y3");
             this.populateGrid("Y4");
+            this.loadingCtrl.dismiss();
         });
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
@@ -353,6 +358,7 @@ export class HomePage {
         
         this.masterDetailService.setFilter(strFilter);
         //(this.objImageList.filter(p => p.period === strFilter));
+        this.presentLoading();
         this.masterDetailService.setListMode("GALLERY");
         this.masterDetailService.setIsDirty(false);
         this.navCtrl.navigateForward('imglist');
@@ -399,6 +405,7 @@ export class HomePage {
         this.camera.getPicture(options).then((imageData) => {
 
             
+            this.presentLoading();
             this.getBase64String(imageData);
 
 
@@ -418,7 +425,7 @@ export class HomePage {
 
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
-            message: 'Uploading...',
+            message: 'Busy...',
             duration: 3000
         });
         return await loading.present();
@@ -447,7 +454,7 @@ export class HomePage {
     }
 
     uploadFile() {
-        this.presentLoading();
+        
 
         var headers = new Headers();
         headers.append("Accept", 'application/json');

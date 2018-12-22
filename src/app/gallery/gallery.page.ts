@@ -96,7 +96,7 @@ export class GalleryPage {
 
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
-            message: 'Loading...',
+            message: 'Busy...',
             duration: 3000
         });
         return await loading.present();
@@ -281,6 +281,7 @@ export class GalleryPage {
         }
         
         this.slideTo(currIndex);
+        this.loadingCtrl.dismiss();
     }
 
     loadImage(imgUrl) {
