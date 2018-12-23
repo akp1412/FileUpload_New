@@ -1,4 +1,5 @@
 .vs/slnx.sqlite.SQLITE
 node_modules/
+platforms/
 node_modules/.bin/browserslist.cmd
 node_modules/.bin/browserslist.cmd

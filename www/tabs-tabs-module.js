@@ -133,16 +133,35 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var AboutPage = /** @class */ (function () {
-    function AboutPage(navCtrl, masterDetailService, alertController) {
+    function AboutPage(navCtrl, masterDetailService, alertController, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.masterDetailService = masterDetailService;
         this.alertController = alertController;
+        this.loadingCtrl = loadingCtrl;
         this.Albums = [];
     }
     AboutPage.prototype.ngOnInit = function () {
         this.Albums = this.masterDetailService.getAlbums().split(",");
     };
+    AboutPage.prototype.presentLoading = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var loading;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadingCtrl.create({
+                            message: 'Busy...',
+                            duration: 3000
+                        })];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     AboutPage.prototype.loadAlbum = function (strAlbum) {
+        this.presentLoading();
         this.masterDetailService.setCurrAlbum(strAlbum);
         this.masterDetailService.setListMode("ALBUM");
         this.navCtrl.navigateForward('imglist');
@@ -202,7 +221,8 @@ var AboutPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"],
             _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_2__["MasterDetailService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"]])
     ], AboutPage);
     return AboutPage;
 }());
@@ -556,6 +576,7 @@ var HomePage = /** @class */ (function () {
                                     cssClass: 'secondary',
                                     handler: function (blah) {
                                         _this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+                                        _this.presentLoading();
                                         _this.getImageList();
                                         console.log('Confirm Cancel: blah');
                                     }
@@ -564,6 +585,7 @@ var HomePage = /** @class */ (function () {
                                     handler: function () {
                                         // this.navCtrl.navigateForward('add_news');
                                         _this.communityService.baseUrl = "http://localhost:49168/api";
+                                        _this.presentLoading();
                                         _this.getImageList();
                                         console.log('Confirm Okay');
                                     }
@@ -572,6 +594,7 @@ var HomePage = /** @class */ (function () {
                                     handler: function () {
                                         // this.navCtrl.navigateForward('add_news');
                                         _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                                        _this.presentLoading();
                                         _this.getImageList();
                                         //this.slides.options = this.slideOpts;
                                         console.log('Confirm Okay');
@@ -590,6 +613,7 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.LoadImage = function (imgUrl, strFilter) {
+        this.presentLoading();
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         }
@@ -621,6 +645,7 @@ var HomePage = /** @class */ (function () {
             _this.masterDetailService.setUris(file_uris);
             //this.navCtrl.navigateForward('gallery');
             for (var i = 0; i < file_uris.length; i++) {
+                _this.presentLoading();
                 _this.getBase64String(file_uris[i]);
             }
             //////this.getImageList();
@@ -656,6 +681,7 @@ var HomePage = /** @class */ (function () {
             _this.populateGrid("Y2");
             _this.populateGrid("Y3");
             _this.populateGrid("Y4");
+            _this.loadingCtrl.dismiss();
         });
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
@@ -766,6 +792,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.setImgFilter = function (strFilter) {
         this.masterDetailService.setFilter(strFilter);
         //(this.objImageList.filter(p => p.period === strFilter));
+        this.presentLoading();
         this.masterDetailService.setListMode("GALLERY");
         this.masterDetailService.setIsDirty(false);
         this.navCtrl.navigateForward('imglist');
@@ -801,6 +828,7 @@ var HomePage = /** @class */ (function () {
             sourceType: this.camera.PictureSourceType.CAMERA
         };
         this.camera.getPicture(options).then(function (imageData) {
+            _this.presentLoading();
             _this.getBase64String(imageData);
             //this.file.resolveLocalFilesystemUrl(imageData).then(oneFile => {
             //    this.imageFileName = oneFile.name;
@@ -820,7 +848,7 @@ var HomePage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Uploading...',
+                            message: 'Busy...',
                             duration: 3000
                         })];
                     case 1:
@@ -853,7 +881,6 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.uploadFile = function () {
         var _this = this;
-        this.presentLoading();
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_5__["Headers"]();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');

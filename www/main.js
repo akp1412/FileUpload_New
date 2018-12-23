@@ -1715,12 +1715,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_photo_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/photo-viewer/ngx */ "./node_modules/@ionic-native/photo-viewer/ngx/index.js");
 /* harmony import */ var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/image-picker/ngx */ "./node_modules/@ionic-native/image-picker/ngx/index.js");
 /* harmony import */ var _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./popover/popover.module */ "./src/app/popover/popover.module.ts");
+/* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1756,6 +1758,7 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],
                 _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_10__["Camera"],
                 _ionic_native_photo_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__["PhotoViewer"],
+                _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_16__["SocialSharing"],
                 _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__["ImagePicker"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
@@ -1934,9 +1937,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Rx */ "../node_modules/rxjs-compat/_esm5/Rx.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1949,7 +1951,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
+//import 'rxjs/Rx';
 
 
 var CommunityService = /** @class */ (function () {
@@ -1960,37 +1962,37 @@ var CommunityService = /** @class */ (function () {
         this.baseUrl = "http://localhost:49168/api";
     }
     CommunityService.prototype.getImageList = function () {
-        return this.http.get(this.baseUrl + '/ImageUpload/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/ImageUpload/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getCommunity = function (id) {
-        return this.http.get(this.baseUrl + '/Community/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/Community/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getCommunities = function (user) {
-        return this.http.get(this.baseUrl + '/Community/User/' + user + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/Community/User/' + user + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getNewsList = function (id) {
-        return this.http.get(this.baseUrl + '/News/Community/' + id + '/User/' + 'akp1412attherategmailddotcom').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/News/Community/' + id + '/User/' + 'akp1412attherategmailddotcom').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getNewsDetail = function (id, User) {
-        return this.http.get(this.baseUrl + '/News/News/' + id + '/User/' + User + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/News/News/' + id + '/User/' + User + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.postDelete = function (imgKey) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({ headers: headers });
-        return this.http.post(this.baseUrl + '/ImageUpload/Delete/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.post(this.baseUrl + '/ImageUpload/Delete/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.postAddToAlbum = function (strAlbum, imgKey) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({ headers: headers });
-        return this.http.post(this.baseUrl + '/ImageUpload/AddToAlbum/' + strAlbum + '/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.post(this.baseUrl + '/ImageUpload/AddToAlbum/' + strAlbum + '/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
     ], CommunityService);
     return CommunityService;
 }());

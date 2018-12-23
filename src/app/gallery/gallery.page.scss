@@ -1,8 +1,9 @@
 page-gallery {
 
     ion-slide.swiper-slide {
-        left: 25%;
-        background:black;
+        left: 2%;
+        background: black;
+        
     }
 
     .slide-zoom {
@@ -11,8 +12,9 @@ page-gallery {
     }
 
     .thumb-img {
-        padding: 10px;
-        vertical-align:middle;
+        padding: 0px;
+        vertical-align: middle;
+        width:100%;
     }
 }
 .square {

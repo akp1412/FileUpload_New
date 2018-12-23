@@ -1,0 +1,57 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "com-sarriaroman-photoviewer": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-telerik-imagepicker": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.azdevelopers.networkgallery"
+    }
+  }
+}

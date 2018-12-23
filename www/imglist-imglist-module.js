@@ -158,8 +158,8 @@ var ImglistPage = /** @class */ (function () {
         this.blnDidLeave = false;
     }
     ImglistPage.prototype.ngOnInit = function () {
+        //this.presentLoading();
         var _this = this;
-        this.presentLoading();
         if (this.masterDetailService.getListMode() === "GALLERY") {
             this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
             this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
@@ -169,10 +169,10 @@ var ImglistPage = /** @class */ (function () {
             this.objImage = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
         }
         this.populateGrid();
-        this.loadingCtrl.dismiss();
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
+        this.loadingCtrl.dismiss();
     };
     ImglistPage.prototype.presentPopover = function (ev) {
         return __awaiter(this, void 0, void 0, function () {
@@ -237,7 +237,7 @@ var ImglistPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Loading...',
+                            message: 'Busy...',
                             duration: 3000
                         })];
                     case 1:
@@ -249,6 +249,7 @@ var ImglistPage = /** @class */ (function () {
         });
     };
     ImglistPage.prototype.LoadImage = function (imgUrl) {
+        this.presentLoading();
         var intIndex = this.objImage.findIndex(function (x) { return x.imgUrl === imgUrl; });
         this.masterDetailService.setIndex(intIndex);
         //this.masterDetailService.setImages(this.objImageList.filter(p => p.period === strFilter));
@@ -320,6 +321,12 @@ var ImglistPage = /** @class */ (function () {
                 this.localGrid[rowNum][4] = "";
             }
             rowNum++;
+        }
+        if (this.imgYrs.length > 0) {
+            this.imgYrs = this.imgYrs.substr(0, this.imgYrs.length - 1);
+        }
+        else {
+            this.imgYrs = this.imgYrs;
         }
     };
     ImglistPage.prototype.ionViewWillEnter = function () {

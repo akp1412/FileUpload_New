@@ -193,6 +193,12 @@ export class ImglistPage implements OnInit {
 
             rowNum++;
         }
+
+        if (this.imgYrs.length > 0) {
+            this.imgYrs =  this.imgYrs.substr(0, this.imgYrs.length - 1);
+        } else {
+            this.imgYrs = this.imgYrs;
+        }
         
     }
 

@@ -16,6 +16,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { PopoverPageModule } from './popover/popover.module';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 //import { Base64 } from '@ionic-native/base64/ngx';
 
 
@@ -33,6 +34,7 @@ import { PopoverPageModule } from './popover/popover.module';
       File,
       Camera,
       PhotoViewer,
+      SocialSharing,
       ImagePicker
   ],
   bootstrap: [AppComponent]

@@ -8,6 +8,7 @@ import { Slides } from '@ionic/angular';
 import { CommunityService } from '../../app/services/community.service';
 import { AlertController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover.page';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class GalleryPage {
         private communityService: CommunityService,
         public alertController: AlertController,
         public toastCtrl: ToastController,
-        private popoverCtrl: PopoverController) {
+        private popoverCtrl: PopoverController,
+        private socialSharing: SocialSharing) {
         
         
          
@@ -76,6 +78,7 @@ export class GalleryPage {
     }
 
     slideChanged() {
+        this.closeLists();
         let currentIndex;
         this.slides.getActiveIndex().then(val => {
             currentIndex = val;
@@ -282,6 +285,7 @@ export class GalleryPage {
         
         this.slideTo(currIndex);
         this.loadingCtrl.dismiss();
+        //this.socialSharing.sh
     }
 
     loadImage(imgUrl) {
@@ -311,9 +315,68 @@ export class GalleryPage {
         toast.present();
     }
 
-    
+    share() {
 
+
+        this.slides.getActiveIndex().then(val => {
+            //this.photoViewer.show(this.objImage[val].imgParentUrl);
+            //console.log(this.objImage[val].imgParentUrl);
+
+            this.socialSharing.share("Shared from my Gallery", "", this.objImage[val].imgParentUrl, "NewImage")
+                .then((entries) => {
+                    console.log('success ' + JSON.stringify(entries));
+                })
+                .catch((error) => {
+                    alert('error ' + JSON.stringify(error));
+                });
+        });
+
+        
     }
+
+    clickMainFAB(container) {
+        let message = 'Clicked open social menu';
+        //this.insertLog(message);
+        this.toggleLists(container);
+    }
+
+    toggleLists(container) {
+        var fabButton = document.getElementById(container).querySelector('ion-fab-button');
+        var fabLists = document.getElementById(container).querySelectorAll('ion-fab-list');
+        fabButton.activated = !fabButton.activated;
+        for (var i = 0; i < fabLists.length; i++) {
+            fabLists[i].activated = !fabLists[i].activated;
+        }
+    }
+
+    closeLists() {
+        var fabs = document.querySelectorAll('ion-fab');
+        for (var i = 0; i < fabs.length; i++) {
+            fabs[i].activated = false;
+        }
+    }
+
+    insertAfter(el, referenceNode) {
+        referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+    }
+
+    insertLog(message) {
+        console.log(message);
+        var el = document.querySelector('#log');
+        const oldHTML = el.innerHTML;
+        el.innerHTML = oldHTML + '\n' + message;
+    }
+
+    add() {
+        var newEle = document.createElement('f');
+        var ref = document.querySelector('f');
+        this.insertAfter(newEle, ref);
+        this.insertLog('add');
+    }
+}
+
+
+
 
 
 
