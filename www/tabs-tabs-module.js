@@ -618,7 +618,9 @@ var HomePage = /** @class */ (function () {
             this.setImgFilter(strFilter);
         }
         else {
-            var intIndex = this.masterDetailService.getImages().filter(function (p) { return p.period === strFilter; }).findIndex(function (x) { return x.imgUrl === imgUrl; });
+            var imgName_1 = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
+            //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
+            var intIndex = this.masterDetailService.getImages().filter(function (p) { return p.period === strFilter; }).findIndex(function (x) { return x.imgName === imgName_1; });
             if (intIndex != -1) {
                 this.masterDetailService.setIndex(intIndex);
             }
@@ -665,23 +667,30 @@ var HomePage = /** @class */ (function () {
             return '';
         });
     };
+    HomePage.prototype.setBase = function (baseResponse) {
+        this.masterDetailService.setParentBase(baseResponse.baseParent);
+        this.masterDetailService.setThumbBase(baseResponse.baseThumbnail);
+    };
     HomePage.prototype.getImageList = function () {
         var _this = this;
-        this.communityService.getImageList().subscribe(function (resp) {
-            _this.masterDetailService.setImages(resp);
-            console.log(_this.masterDetailService.setImages);
-            _this.populateGrid("W1");
-            _this.populateGrid("W2");
-            _this.populateGrid("W3");
-            _this.populateGrid("W4");
-            _this.populateGrid("M1");
-            _this.populateGrid("M2");
-            _this.populateGrid("M3");
-            _this.populateGrid("Y1");
-            _this.populateGrid("Y2");
-            _this.populateGrid("Y3");
-            _this.populateGrid("Y4");
-            _this.loadingCtrl.dismiss();
+        this.communityService.getImageBaseUrls().subscribe(function (resp) {
+            _this.setBase(resp);
+            _this.communityService.getImageList().subscribe(function (resp) {
+                _this.masterDetailService.setImages(resp);
+                console.log(_this.masterDetailService.setImages);
+                _this.populateGrid("W1");
+                _this.populateGrid("W2");
+                _this.populateGrid("W3");
+                _this.populateGrid("W4");
+                _this.populateGrid("M1");
+                _this.populateGrid("M3");
+                _this.populateGrid("M2");
+                _this.populateGrid("Y1");
+                _this.populateGrid("Y2");
+                _this.populateGrid("Y3");
+                _this.populateGrid("Y4");
+                _this.loadingCtrl.dismiss();
+            });
         });
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
@@ -717,26 +726,26 @@ var HomePage = /** @class */ (function () {
         for (var i = 0; i < rowCount; i += 4) {
             this.localGrid[this.rowNum] = Array(4);
             if (localImgList[i]) {
-                this.localGrid[this.rowNum][0] = localImgList[i].imgUrl;
+                this.localGrid[this.rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
                 //this.createArrayEntry(localImgList[i].imgUrl, localImgList[i].imgParentUrl);
                 this.colNum = 0;
             }
             if (localImgList[i + 1]) {
-                this.localGrid[this.rowNum][1] = localImgList[i + 1].imgUrl;
+                this.localGrid[this.rowNum][1] = this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName;
                 this.colNum = 1;
             }
             else {
                 this.localGrid[this.rowNum][1] = "";
             }
             if (localImgList[i + 2]) {
-                this.localGrid[this.rowNum][2] = localImgList[i + 2].imgUrl;
+                this.localGrid[this.rowNum][2] = this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName;
                 this.colNum = 2;
             }
             else {
                 this.localGrid[this.rowNum][2] = "";
             }
             if (localImgList[i + 3]) {
-                this.localGrid[this.rowNum][3] = localImgList[i + 3].imgUrl;
+                this.localGrid[this.rowNum][3] = this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName;
                 this.colNum = 3;
             }
             else {

@@ -62,7 +62,7 @@ var GalleryPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n<ion-content background-color=\"black\">\r\n\r\n    <!--<ion-slides style=\"height:100vh; background:black;\" scrollbar=\"true\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">-->\r\n    <ion-slides style=\"height:100vh; background:black;\" pager=\"false\" sliderperview=\"1\" (ionSlideDidChange)=\"slideChanged()\">\r\n        <ion-slide style=\"height:100vh;\" background-color=\"red\" *ngFor=\"let img of imgUrls\">\r\n            <div class=\"swiper-zoom-container\">\r\n                <img id={{img.imgUrl}} (load)=\"loaded(img.imgUrl)\" src={{img.imgUrl}} class=\"thumb-img\" style=\" display: block;  padding:5px; height: auto; margin: auto; \" imageViewer />\r\n            </div>\r\n        </ion-slide>\r\n    </ion-slides>\r\n\r\n    <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"goback()\" color=\"light\" ion-fab mini><ion-icon name=\"ios-arrow-back\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"share()\" color=\"secondary\" ion-fab mini><ion-icon name=\"share\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <ion-fab id=\"AddToAlbum\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"hasAlbum === false\">\r\n        <ion-fab-button (click)=\"presentPopover($event)\" color=\"tertiary\" ion-fab mini><ion-icon name=\"filing\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" *ngIf=\"hasAlbum === true\">\r\n        <ion-fab-button (click)=\"removeFromAlbum()\" color=\"danger\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n    <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" >\r\n        <ion-fab-button color=\"danger\" mini>\r\n            <ion-icon name=\"more\"></ion-icon>\r\n        </ion-fab-button>\r\n        <ion-fab-list side=\"top\">\r\n            <ion-fab-button *ngIf=\"hasAlbum === true\" (click)=\"removeFromAlbum()\" color=\"secondary\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n        </ion-fab-list>\r\n    </ion-fab>\r\n\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button mini>\r\n            <ion-icon name=\"share\"></ion-icon>\r\n        </ion-fab-button>\r\n        <ion-fab-list side=\"top\">\r\n            <ion-fab-button class=\"fab-button\"><ion-icon name=\"logo-whatsapp\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button (click)=\"fab_clicked('FACEBOOK','BLA_BLA')\"><ion-icon name=\"logo-facebook\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button><ion-icon name=\"email\"></ion-icon></ion-fab-button>\r\n\r\n        </ion-fab-list>\r\n    </ion-fab>-->\r\n</ion-content>"
+module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n<ion-content background-color=\"black\">\r\n\r\n    <!--<ion-slides style=\"height:100vh; background:black;\" scrollbar=\"true\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">-->\r\n    <ion-slides style=\"height:100vh; background:black;\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">\r\n        <ion-slide style=\"height:100vh;\" background-color=\"red\" *ngFor=\"let img of imgUrls\">\r\n            <div class=\"swiper-zoom-container\">\r\n                <img id={{img.imgUrl}} (load)=\"loaded(img.imgUrl)\" src={{img.imgUrl}} class=\"thumb-img\" style=\" display: block;  padding:5px; height: auto; margin: auto; \" imageViewer />\r\n            </div>\r\n        </ion-slide>\r\n    </ion-slides>\r\n\r\n    <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"goback()\" color=\"light\" ion-fab mini><ion-icon name=\"ios-arrow-back\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"share()\" color=\"secondary\" ion-fab mini><ion-icon name=\"share\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <ion-fab id=\"AddToAlbum\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"hasAlbum === false\">\r\n        <ion-fab-button (click)=\"presentPopover($event)\" color=\"tertiary\" ion-fab mini><ion-icon name=\"filing\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" *ngIf=\"hasAlbum === true\">\r\n        <ion-fab-button (click)=\"removeFromAlbum()\" color=\"danger\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n    <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" >\r\n        <ion-fab-button color=\"danger\" mini>\r\n            <ion-icon name=\"more\"></ion-icon>\r\n        </ion-fab-button>\r\n        <ion-fab-list side=\"top\">\r\n            <ion-fab-button *ngIf=\"hasAlbum === true\" (click)=\"removeFromAlbum()\" color=\"secondary\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n        </ion-fab-list>\r\n    </ion-fab>\r\n\r\n    <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button mini>\r\n            <ion-icon name=\"share\"></ion-icon>\r\n        </ion-fab-button>\r\n        <ion-fab-list side=\"top\">\r\n            <ion-fab-button class=\"fab-button\"><ion-icon name=\"logo-whatsapp\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button (click)=\"fab_clicked('FACEBOOK','BLA_BLA')\"><ion-icon name=\"logo-facebook\"></ion-icon></ion-fab-button>\r\n            <ion-fab-button><ion-icon name=\"email\"></ion-icon></ion-fab-button>\r\n\r\n        </ion-fab-list>\r\n    </ion-fab>-->\r\n</ion-content>"
 
 /***/ }),
 
@@ -269,7 +269,7 @@ var GalleryPage = /** @class */ (function () {
         }
         for (var i = startIndex; i <= endIndex; i++) {
             if (this.imgUrls[i].imgUrl === '') {
-                this.imgUrls[i].imgUrl = this.objImage[i].imgParentUrl;
+                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() + this.objImage[i].imgParentUrl;
             }
         }
     };
@@ -299,7 +299,7 @@ var GalleryPage = /** @class */ (function () {
         });
     };
     GalleryPage.prototype.setAlbumVals = function (resp, val) {
-        this.objImage[val].imgUrl = resp.imgUrl;
+        //this.objImage[val].imgUrl = resp.imgUrl;
         this.objImage[val].imgParentUrl = resp.imgParentUrl;
         this.objImage[val].imgAlbum = resp.imgAlbum;
         if (resp.imgAlbum === '') {
@@ -308,7 +308,7 @@ var GalleryPage = /** @class */ (function () {
         else {
             this.hasAlbum = true;
         }
-        this.imgUrls[val].imgUrl = resp.imgParentUrl;
+        this.imgUrls[val].imgUrl = this.masterDetailService.getParentBase() + resp.imgParentUrl;
     };
     GalleryPage.prototype.presentAlertMultipleButtons = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -403,11 +403,11 @@ var GalleryPage = /** @class */ (function () {
             endIndex = this.objImage.length - 1;
         }
         if (this.imgUrls[currIndex].imgUrl === '') {
-            this.imgUrls[currIndex].imgUrl = this.objImage[currIndex].imgParentUrl;
+            this.imgUrls[currIndex].imgUrl = this.masterDetailService.getParentBase() + this.objImage[currIndex].imgParentUrl;
         }
         for (var i = startIndex; i <= endIndex; i++) {
             if (this.imgUrls[i].imgUrl === '') {
-                this.imgUrls[i].imgUrl = this.objImage[i].imgParentUrl;
+                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() + this.objImage[i].imgParentUrl;
             }
         }
         this.slideTo(currIndex);
@@ -450,7 +450,7 @@ var GalleryPage = /** @class */ (function () {
         this.slides.getActiveIndex().then(function (val) {
             //this.photoViewer.show(this.objImage[val].imgParentUrl);
             //console.log(this.objImage[val].imgParentUrl);
-            _this.socialSharing.share("Shared from my Gallery", "", _this.objImage[val].imgParentUrl, "NewImage")
+            _this.socialSharing.share("Shared from my Gallery", "", _this.masterDetailService.getParentBase() + _this.objImage[val].imgParentUrl, "NewImage")
                 .then(function (entries) {
                 console.log('success ' + JSON.stringify(entries));
             })

@@ -16,6 +16,8 @@ export class MasterDetailService {
     private strCurrAlbum: string = "";
     private strLastActiveAlbum: string = "";
     private IsDirty: boolean = false;
+    private strParentBase: string = "";
+    private strThumbBase: string = "";
 
     constructor() { }
 
@@ -135,7 +137,7 @@ export class MasterDetailService {
     public setImgAlbum(imgKey, resp) {
         let intIndex = this.objImages.findIndex(x => x.imgName === imgKey);
         this.objImages[intIndex].imgName = resp.imgName;
-        this.objImages[intIndex].imgUrl = resp.imgUrl;
+        //this.objImages[intIndex].imgUrl = resp.imgUrl;
         this.objImages[intIndex].imgParentUrl = resp.imgParentUrl;
         this.objImages[intIndex].period = resp.period;
         this.objImages[intIndex].imgMonth = resp.imgMonth;
@@ -155,5 +157,21 @@ export class MasterDetailService {
 
     public getIsDirty() {
         return this.IsDirty;
+    }
+
+    public setParentBase(strBase) {
+        this.strParentBase = strBase;
+    }
+
+    public setThumbBase(strBase) {
+        this.strThumbBase = strBase;
+    }
+
+    public getParentBase() {
+        return this.strParentBase;
+    }
+
+    public getThumbBase() {
+        return this.strThumbBase;
     }
 }

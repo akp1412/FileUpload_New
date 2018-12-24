@@ -23,8 +23,14 @@ export class CommunityService {
     }
 
     getImageList() {
-        return this.http.get(this.baseUrl + '/ImageUpload/').pipe(map((e: Response) => e.json()), catchError((e: Response) => throwError(e)));
+        return this.http.get(this.baseUrl + '/ImageUpload/Files/').pipe(map((e: Response) => e.json()), catchError((e: Response) => throwError(e)));
         
+
+    }
+
+    getImageBaseUrls() {
+        return this.http.get(this.baseUrl + "/ImageUpload/BaseUrls/1").pipe(map((e: Response) => e.json()), catchError((e: Response) => throwError(e)));
+
 
     }
 

@@ -250,7 +250,8 @@ var ImglistPage = /** @class */ (function () {
     };
     ImglistPage.prototype.LoadImage = function (imgUrl) {
         this.presentLoading();
-        var intIndex = this.objImage.findIndex(function (x) { return x.imgUrl === imgUrl; });
+        var imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
+        var intIndex = this.objImage.findIndex(function (x) { return x.imgName === imgName; });
         this.masterDetailService.setIndex(intIndex);
         //this.masterDetailService.setImages(this.objImageList.filter(p => p.period === strFilter));
         if (this.currFilter != "") {
@@ -279,13 +280,13 @@ var ImglistPage = /** @class */ (function () {
         for (var i = 0; i < localImgList.length; i += 5) {
             this.localGrid[rowNum] = Array(5);
             if (localImgList[i]) {
-                this.localGrid[rowNum][0] = localImgList[i].imgUrl;
+                this.localGrid[rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
             }
             if (localImgList[i + 1]) {
-                this.localGrid[rowNum][1] = localImgList[i + 1].imgUrl;
+                this.localGrid[rowNum][1] = this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -294,7 +295,7 @@ var ImglistPage = /** @class */ (function () {
                 this.localGrid[rowNum][1] = "";
             }
             if (localImgList[i + 2]) {
-                this.localGrid[rowNum][2] = localImgList[i + 2].imgUrl;
+                this.localGrid[rowNum][2] = this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -303,7 +304,7 @@ var ImglistPage = /** @class */ (function () {
                 this.localGrid[rowNum][2] = "";
             }
             if (localImgList[i + 3]) {
-                this.localGrid[rowNum][3] = localImgList[i + 3].imgUrl;
+                this.localGrid[rowNum][3] = this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -312,7 +313,7 @@ var ImglistPage = /** @class */ (function () {
                 this.localGrid[rowNum][3] = "";
             }
             if (localImgList[i + 4]) {
-                this.localGrid[rowNum][4] = localImgList[i + 4].imgUrl;
+                this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }

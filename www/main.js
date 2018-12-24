@@ -1962,7 +1962,10 @@ var CommunityService = /** @class */ (function () {
         this.baseUrl = "http://localhost:49168/api";
     }
     CommunityService.prototype.getImageList = function () {
-        return this.http.get(this.baseUrl + '/ImageUpload/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/ImageUpload/Files/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+    };
+    CommunityService.prototype.getImageBaseUrls = function () {
+        return this.http.get(this.baseUrl + "/ImageUpload/BaseUrls/1").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getCommunity = function (id) {
         return this.http.get(this.baseUrl + '/Community/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
@@ -2031,6 +2034,8 @@ var MasterDetailService = /** @class */ (function () {
         this.strCurrAlbum = "";
         this.strLastActiveAlbum = "";
         this.IsDirty = false;
+        this.strParentBase = "";
+        this.strThumbBase = "";
     }
     MasterDetailService.prototype.setUris = function (uris) {
         this.uris = uris;
@@ -2122,7 +2127,7 @@ var MasterDetailService = /** @class */ (function () {
     MasterDetailService.prototype.setImgAlbum = function (imgKey, resp) {
         var intIndex = this.objImages.findIndex(function (x) { return x.imgName === imgKey; });
         this.objImages[intIndex].imgName = resp.imgName;
-        this.objImages[intIndex].imgUrl = resp.imgUrl;
+        //this.objImages[intIndex].imgUrl = resp.imgUrl;
         this.objImages[intIndex].imgParentUrl = resp.imgParentUrl;
         this.objImages[intIndex].period = resp.period;
         this.objImages[intIndex].imgMonth = resp.imgMonth;
@@ -2138,6 +2143,18 @@ var MasterDetailService = /** @class */ (function () {
     };
     MasterDetailService.prototype.getIsDirty = function () {
         return this.IsDirty;
+    };
+    MasterDetailService.prototype.setParentBase = function (strBase) {
+        this.strParentBase = strBase;
+    };
+    MasterDetailService.prototype.setThumbBase = function (strBase) {
+        this.strThumbBase = strBase;
+    };
+    MasterDetailService.prototype.getParentBase = function () {
+        return this.strParentBase;
+    };
+    MasterDetailService.prototype.getThumbBase = function () {
+        return this.strThumbBase;
     };
     MasterDetailService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

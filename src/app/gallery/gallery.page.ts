@@ -134,7 +134,7 @@ export class GalleryPage {
 
         for (let i = startIndex; i <= endIndex; i++) {
             if (this.imgUrls[i].imgUrl === '') {
-                this.imgUrls[i].imgUrl = this.objImage[i].imgParentUrl;
+                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() +  this.objImage[i].imgParentUrl;
             }
         }
     }
@@ -174,15 +174,15 @@ export class GalleryPage {
     }
 
     setAlbumVals(resp, val) {
-        this.objImage[val].imgUrl = resp.imgUrl;
-        this.objImage[val].imgParentUrl = resp.imgParentUrl;
+        //this.objImage[val].imgUrl = resp.imgUrl;
+        this.objImage[val].imgParentUrl =  resp.imgParentUrl;
         this.objImage[val].imgAlbum = resp.imgAlbum;
         if (resp.imgAlbum === '') {
             this.hasAlbum = false;
         } else {
             this.hasAlbum = true;
         }
-        this.imgUrls[val].imgUrl = resp.imgParentUrl;
+        this.imgUrls[val].imgUrl = this.masterDetailService.getParentBase() + resp.imgParentUrl;
     }
 
     async presentAlertMultipleButtons() {
@@ -273,12 +273,12 @@ export class GalleryPage {
         }
 
         if (this.imgUrls[currIndex].imgUrl === '') {
-            this.imgUrls[currIndex].imgUrl = this.objImage[currIndex].imgParentUrl;
+            this.imgUrls[currIndex].imgUrl = this.masterDetailService.getParentBase() + this.objImage[currIndex].imgParentUrl;
         }
 
         for (let i = startIndex; i <= endIndex; i++) {
             if (this.imgUrls[i].imgUrl === '') {
-                this.imgUrls[i].imgUrl = this.objImage[i].imgParentUrl;
+                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() + this.objImage[i].imgParentUrl;
             }
             
         }
@@ -322,7 +322,7 @@ export class GalleryPage {
             //this.photoViewer.show(this.objImage[val].imgParentUrl);
             //console.log(this.objImage[val].imgParentUrl);
 
-            this.socialSharing.share("Shared from my Gallery", "", this.objImage[val].imgParentUrl, "NewImage")
+            this.socialSharing.share("Shared from my Gallery", "", this.masterDetailService.getParentBase() + this.objImage[val].imgParentUrl, "NewImage")
                 .then((entries) => {
                     console.log('success ' + JSON.stringify(entries));
                 })

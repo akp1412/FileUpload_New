@@ -9,7 +9,7 @@
 <ion-content background-color="black">
 
     <!--<ion-slides style="height:100vh; background:black;" scrollbar="true" pager="false" sliderperview="2" (ionSlideDidChange)="slideChanged()">-->
-    <ion-slides style="height:100vh; background:black;" pager="false" sliderperview="1" (ionSlideDidChange)="slideChanged()">
+    <ion-slides style="height:100vh; background:black;" pager="false" sliderperview="2" (ionSlideDidChange)="slideChanged()">
         <ion-slide style="height:100vh;" background-color="red" *ngFor="let img of imgUrls">
             <div class="swiper-zoom-container">
                 <img id={{img.imgUrl}} (load)="loaded(img.imgUrl)" src={{img.imgUrl}} class="thumb-img" style=" display: block;  padding:5px; height: auto; margin: auto; " imageViewer />

@@ -1,18 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\.git\\.vs",
+    "\\.git\\.vs\\.git",
+    "\\node_modules\\@ionic-native",
+    "\\node_modules\\@ionic-native\\social-sharing",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\about",
     "\\src\\app\\gallery",
-    "\\src\\app\\home",
-    "\\src\\app\\imglist",
-    "\\src\\app\\popover",
-    "\\src\\app\\services",
-    "\\src\\app\\tabs",
-    "\\src\\environments",
-    "\\src\\theme"
+    "\\src\\assets",
+    "\\src\\assets\\icon"
   ],
-  "SelectedNode": "\\src\\app\\home\\home.page.ts",
+  "SelectedNode": "\\src\\app\\gallery\\gallery.page.ts",
   "PreviewInSolutionExplorer": false
 }

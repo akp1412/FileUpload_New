@@ -177,7 +177,9 @@ export class HomePage {
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         } else {
-            let intIndex = this.masterDetailService.getImages().filter(p => p.period === strFilter).findIndex(x => x.imgUrl === imgUrl);
+            let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
+            //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
+            let intIndex = this.masterDetailService.getImages().filter(p => p.period === strFilter).findIndex(x => x.imgName === imgName);
             if (intIndex != -1) {
                 this.masterDetailService.setIndex(intIndex);
             } else {
@@ -238,24 +240,35 @@ export class HomePage {
 
     }
 
+    setBase(baseResponse) {
+        this.masterDetailService.setParentBase(baseResponse.baseParent);
+        this.masterDetailService.setThumbBase(baseResponse.baseThumbnail);
+    }
+
     getImageList() {
-        this.communityService.getImageList().subscribe(resp => {
-            this.masterDetailService.setImages(resp);
-            console.log(this.masterDetailService.setImages);
+
+        this.communityService.getImageBaseUrls().subscribe(resp => {
             
-            this.populateGrid("W1");
-            this.populateGrid("W2");
-            this.populateGrid("W3");
-            this.populateGrid("W4");
-            this.populateGrid("M1");
-            this.populateGrid("M2");
-            this.populateGrid("M3");
-            this.populateGrid("Y1");
-            this.populateGrid("Y2");
-            this.populateGrid("Y3");
-            this.populateGrid("Y4");
-            this.loadingCtrl.dismiss();
+            this.setBase(resp);
+            this.communityService.getImageList().subscribe(resp => {
+                this.masterDetailService.setImages(resp);
+                console.log(this.masterDetailService.setImages);
+
+                this.populateGrid("W1");
+                this.populateGrid("W2");
+                this.populateGrid("W3");
+                this.populateGrid("W4");
+                this.populateGrid("M1");
+                this.populateGrid("M3");
+                this.populateGrid("M2");
+                this.populateGrid("Y1");
+                this.populateGrid("Y2");
+                this.populateGrid("Y3");
+                this.populateGrid("Y4");
+                this.loadingCtrl.dismiss();
+            });
         });
+        
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
 
@@ -298,13 +311,13 @@ export class HomePage {
             this.localGrid[this.rowNum] = Array(4);
 
             if (localImgList[i]) {
-                this.localGrid[this.rowNum][0] = localImgList[i].imgUrl;
+                this.localGrid[this.rowNum][0] = this.masterDetailService.getThumbBase() +  localImgList[i].imgName;
                 //this.createArrayEntry(localImgList[i].imgUrl, localImgList[i].imgParentUrl);
                 this.colNum = 0;
             }
 
             if (localImgList[i + 1]) {
-                this.localGrid[this.rowNum][1] = localImgList[i + 1].imgUrl;
+                this.localGrid[this.rowNum][1] = this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName;
                 this.colNum = 1;
             }
             else {
@@ -312,7 +325,7 @@ export class HomePage {
             }
 
             if (localImgList[i + 2]) {
-                this.localGrid[this.rowNum][2] = localImgList[i + 2].imgUrl;
+                this.localGrid[this.rowNum][2] = this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName;
                 this.colNum = 2;
             }
             else {
@@ -320,7 +333,7 @@ export class HomePage {
             }
 
             if (localImgList[i + 3]) {
-                this.localGrid[this.rowNum][3] = localImgList[i + 3].imgUrl;
+                this.localGrid[this.rowNum][3] = this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName;
                 this.colNum = 3;
             }
             else {

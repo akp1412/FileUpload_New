@@ -102,9 +102,10 @@ export class ImglistPage implements OnInit {
     }
 
 
-    LoadImage(imgUrl) {
+    LoadImage(imgUrl: string) {
         this.presentLoading();
-        let intIndex = this.objImage.findIndex(x => x.imgUrl === imgUrl);
+        let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
+        let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
         this.masterDetailService.setIndex(intIndex);
         //this.masterDetailService.setImages(this.objImageList.filter(p => p.period === strFilter));
         if (this.currFilter != "") {
@@ -142,7 +143,7 @@ export class ImglistPage implements OnInit {
             this.localGrid[rowNum] = Array(5);
 
             if (localImgList[i]) {
-                this.localGrid[rowNum][0] = localImgList[i].imgUrl;
+                this.localGrid[rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -150,7 +151,7 @@ export class ImglistPage implements OnInit {
             }
 
             if (localImgList[i + 1]) {
-                this.localGrid[rowNum][1] = localImgList[i + 1].imgUrl;
+                this.localGrid[rowNum][1] = this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -160,7 +161,7 @@ export class ImglistPage implements OnInit {
             }
 
             if (localImgList[i + 2]) {
-                this.localGrid[rowNum][2] = localImgList[i + 2].imgUrl;
+                this.localGrid[rowNum][2] = this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -171,7 +172,7 @@ export class ImglistPage implements OnInit {
             }
 
             if (localImgList[i + 3]) {
-                this.localGrid[rowNum][3] = localImgList[i + 3].imgUrl;
+                this.localGrid[rowNum][3] = this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
@@ -181,7 +182,7 @@ export class ImglistPage implements OnInit {
                 this.localGrid[rowNum][3] = "";
             }
             if (localImgList[i + 4]) {
-                this.localGrid[rowNum][4] = localImgList[i + 4].imgUrl;
+                this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
