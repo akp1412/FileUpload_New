@@ -613,11 +613,11 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.LoadImage = function (imgUrl, strFilter) {
-        this.presentLoading();
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         }
         else {
+            this.presentLoading();
             var imgName_1 = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
             //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
             var intIndex = this.masterDetailService.getImages().filter(function (p) { return p.period === strFilter; }).findIndex(function (x) { return x.imgName === imgName_1; });
@@ -800,11 +800,79 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.setImgFilter = function (strFilter) {
         this.masterDetailService.setFilter(strFilter);
+        if (strFilter === "Y4") {
+            //this.loadingCtrl.dismiss();
+            this.presentPrompt(strFilter);
+        }
+        else {
+            this.presentLoading();
+            this.masterDetailService.setY4Filter("");
+            this.masterDetailService.setListMode("GALLERY");
+            this.masterDetailService.setIsDirty(false);
+            this.navCtrl.navigateForward('imglist');
+        }
         //(this.objImageList.filter(p => p.period === strFilter));
-        this.presentLoading();
-        this.masterDetailService.setListMode("GALLERY");
-        this.masterDetailService.setIsDirty(false);
-        this.navCtrl.navigateForward('imglist');
+    };
+    HomePage.prototype.presentPrompt = function (strFilter) {
+        return __awaiter(this, void 0, void 0, function () {
+            var localList, strYears, alertInputOptions, i, x, alert;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        localList = this.masterDetailService.getImages().filter(function (p) { return p.period === strFilter; });
+                        strYears = "";
+                        alertInputOptions = [];
+                        for (i = 0; i < localList.length; i++) {
+                            if (strYears.search(localList[i].imgYear + ",") === -1) {
+                                strYears = strYears + localList[i].imgYear + ",";
+                                x = {
+                                    type: 'radio',
+                                    label: localList[i].imgYear,
+                                    name: localList[i].imgYear,
+                                    value: localList[i].imgYear,
+                                    checked: i === 0 ? true : false
+                                };
+                                alertInputOptions.push(x);
+                            }
+                        }
+                        return [4 /*yield*/, this.alertController.create({
+                                header: "Too many Images. Please select an Year to refine results",
+                                inputs: alertInputOptions,
+                                buttons: [
+                                    {
+                                        text: 'Cancel',
+                                        role: 'cancel',
+                                        handler: function (data) {
+                                            console.log('Cancel clicked');
+                                        }
+                                    },
+                                    {
+                                        text: 'Open',
+                                        handler: function (data) {
+                                            _this.masterDetailService.setY4Filter(data);
+                                            _this.presentLoading();
+                                            _this.masterDetailService.setListMode("GALLERY");
+                                            _this.masterDetailService.setIsDirty(false);
+                                            _this.navCtrl.navigateForward('imglist');
+                                            //console.log(data);
+                                            //console.log(data.albumname);
+                                            //let strAlbum: string = data.albumname;
+                                            //this.masterDetailService.addAlbum(strAlbum.toUpperCase().replace("-", "_"));
+                                            //this.Albums = this.masterDetailService.getAlbums().split(",");
+                                        }
+                                    }
+                                ]
+                            })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     HomePage.prototype.addToGrid = function (imgUrl) {
         if (this.colNum < 3) {
@@ -915,7 +983,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.appendToImgList = function (newImg) {
         var newEntry = {
             "imgName": newImg.imgName,
-            "imgUrl": newImg.imgUrl,
+            //"imgUrl": newImg.imgUrl,
             "imgParentUrl": newImg.imgParentUrl,
             "period": "W1",
             "imgAlbum": "",

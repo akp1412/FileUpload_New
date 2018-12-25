@@ -24,6 +24,7 @@ export class GalleryPage {
     private grid: Array<Array<string>>;
     private objImage: any;
     private imgUrls: any[];
+    private strAlbum: string = "";
     varComId;
     displaySource; string;
     hasAlbum: boolean = false;
@@ -84,8 +85,10 @@ export class GalleryPage {
             currentIndex = val;
             if (this.objImage[val].imgAlbum === '') {
                 this.hasAlbum = false;
+                this.strAlbum = this.objImage[val].imgMonth + "-" + this.objImage[val].imgYear;
             } else {
                 this.hasAlbum = true;
+                this.strAlbum = this.objImage[val].imgAlbum;
             }
 
             if (this.imgUrls[val].loaded === "0") {
@@ -118,6 +121,8 @@ export class GalleryPage {
 
         let startIndex;
         let endIndex;
+        let startIndex_flush;
+        let endIndex_flush;
         if (currIndex < 5) {
             let startIndex = 0
         }
@@ -133,9 +138,32 @@ export class GalleryPage {
         }
 
         for (let i = startIndex; i <= endIndex; i++) {
-            if (this.imgUrls[i].imgUrl === '') {
-                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() +  this.objImage[i].imgParentUrl;
+            if (this.imgUrls[i].imgUrl === '' || this.imgUrls[i].imgUrl === 'assets/icon/Unloaded.png') {
+                this.imgUrls[i].loaded = "0";
+                this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() + this.objImage[i].imgParentUrl;
             }
+        }
+
+        if (startIndex <= 5) {
+            startIndex_flush = 0
+        } else {
+            startIndex_flush = startIndex - 5
+        }
+
+        if (endIndex + 5 >= this.objImage.length ) {
+            endIndex_flush = this.objImage.length-1
+        } else {
+            endIndex_flush = endIndex + 5
+        }
+
+        for (let i = startIndex_flush; i < startIndex; i++) {
+            this.imgUrls[i].imgUrl = 'assets/icon/Unloaded.png';
+            this.imgUrls[i].loaded = "0";
+        }
+
+        for (let i = endIndex+1; i <= endIndex_flush; i++) {
+            this.imgUrls[i].imgUrl = 'assets/icon/Unloaded.png';
+            this.imgUrls[i].loaded = "0";
         }
     }
 
@@ -231,16 +259,33 @@ export class GalleryPage {
             if (this.masterDetailService.getListMode() === "GENERAL") {
                 this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() &&  p.imgYear === this.masterDetailService.getImgFilterYear() && p.imgMonth === this.masterDetailService.getImgFilterMonth()));
             }else if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getImgFilterYear() && p.imgMonth === this.masterDetailService.getImgFilterMonth()));
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() &&  p.imgYear === this.masterDetailService.getImgFilterYear() && p.imgMonth === this.masterDetailService.getImgFilterMonth()));
+                } else {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getImgFilterYear() && p.imgMonth === this.masterDetailService.getImgFilterMonth()));
+                }                
             } else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(p => (p.imgAlbum === this.masterDetailService.getCurrAlbum() && p.imgYear === this.masterDetailService.getImgFilterYear() && p.imgMonth === this.masterDetailService.getImgFilterMonth()));
-            }
-            
+            }            
         } else {
             if (this.masterDetailService.getListMode() === "GENERAL") {
                 this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter());
             }else if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter() && p.imgAlbum === '');
+                if (this.masterDetailService.getY4Filter() === '') {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter());
+                    } else {
+                        this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter() && p.imgAlbum === '');
+                    }
+                    
+                } else {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter()  && p.imgYear === this.masterDetailService.getY4Filter());
+                    } else {
+                        this.objImage = this.masterDetailService.getImages().filter(p => p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getY4Filter());
+                    }
+                    
+                }
             } else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(p => p.imgAlbum === this.masterDetailService.getCurrAlbum());
             }
@@ -322,7 +367,7 @@ export class GalleryPage {
             //this.photoViewer.show(this.objImage[val].imgParentUrl);
             //console.log(this.objImage[val].imgParentUrl);
 
-            this.socialSharing.share("Shared from my Gallery", "", this.masterDetailService.getParentBase() + this.objImage[val].imgParentUrl, "NewImage")
+            this.socialSharing.share("Shared from my Gallery", "Awesome Image", this.masterDetailService.getParentBase() + this.objImage[val].imgParentUrl)
                 .then((entries) => {
                     console.log('success ' + JSON.stringify(entries));
                 })

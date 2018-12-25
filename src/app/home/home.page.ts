@@ -173,10 +173,11 @@ export class HomePage {
     }
 
     LoadImage(imgUrl,strFilter){
-        this.presentLoading();
+        
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         } else {
+            this.presentLoading();
             let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
             //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
             let intIndex = this.masterDetailService.getImages().filter(p => p.period === strFilter).findIndex(x => x.imgName === imgName);
@@ -370,11 +371,69 @@ export class HomePage {
     setImgFilter(strFilter) {
         
         this.masterDetailService.setFilter(strFilter);
+        if (strFilter === "Y4") {
+            //this.loadingCtrl.dismiss();
+            this.presentPrompt(strFilter);
+        } else {
+            this.presentLoading();
+            this.masterDetailService.setY4Filter("");
+            this.masterDetailService.setListMode("GALLERY");
+            this.masterDetailService.setIsDirty(false);
+            this.navCtrl.navigateForward('imglist');
+        }
         //(this.objImageList.filter(p => p.period === strFilter));
-        this.presentLoading();
-        this.masterDetailService.setListMode("GALLERY");
-        this.masterDetailService.setIsDirty(false);
-        this.navCtrl.navigateForward('imglist');
+        
+    }
+
+    async presentPrompt(strFilter) {
+
+        let localList = this.masterDetailService.getImages().filter(p => p.period === strFilter);
+        let strYears: string = "";
+        
+        let alertInputOptions: any = [];
+        for (let i = 0; i < localList.length; i++) {
+            if (strYears.search(localList[i].imgYear + ",") === -1) {
+                strYears = strYears + localList[i].imgYear + ",";
+                let x = {
+                    type: 'radio',
+                    label: localList[i].imgYear,
+                    name: localList[i].imgYear,
+                    value: localList[i].imgYear,
+                    checked: i===0?true:false
+                };
+                alertInputOptions.push(x);
+            }
+        }
+        const alert = await this.alertController.create({
+            header: "Too many Images. Please select an Year to refine results",
+            inputs: alertInputOptions,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: data => {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Open',
+                    handler: data => {
+                        this.masterDetailService.setY4Filter(data);
+                        this.presentLoading();
+                        this.masterDetailService.setListMode("GALLERY");
+                        this.masterDetailService.setIsDirty(false);
+                        this.navCtrl.navigateForward('imglist');
+                        //console.log(data);
+                        //console.log(data.albumname);
+                        //let strAlbum: string = data.albumname;
+
+                        //this.masterDetailService.addAlbum(strAlbum.toUpperCase().replace("-", "_"));
+                        //this.Albums = this.masterDetailService.getAlbums().split(",");
+                    }
+                }
+            ]
+        });
+        await alert.present();
     }
 
     addToGrid(imgUrl) {
@@ -501,7 +560,7 @@ export class HomePage {
     appendToImgList(newImg) {
         let newEntry = {
             "imgName": newImg.imgName,
-            "imgUrl": newImg.imgUrl,
+            //"imgUrl": newImg.imgUrl,
             "imgParentUrl": newImg.imgParentUrl,
             "period": "W1",
             "imgAlbum": "",

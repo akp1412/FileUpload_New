@@ -18,6 +18,8 @@ export class MasterDetailService {
     private IsDirty: boolean = false;
     private strParentBase: string = "";
     private strThumbBase: string = "";
+    private strY4Filter: string = "";
+    private blnListShowAlbums: boolean = false;
 
     constructor() { }
 
@@ -173,5 +175,17 @@ export class MasterDetailService {
 
     public getThumbBase() {
         return this.strThumbBase;
+    }
+
+    public setY4Filter(strFilter) {
+        this.strY4Filter = strFilter;
+    }
+
+    public getY4Filter() {
+        return this.strY4Filter;
+    }
+
+    public getListShowAlbum() {
+        return this.blnListShowAlbums;
     }
 }

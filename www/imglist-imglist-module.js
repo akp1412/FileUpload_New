@@ -62,7 +62,7 @@ var ImglistPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"more\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-content>\r\n    <!--<ion-item>-->\r\n        <p style=\"color: darkred;font-size:12px;\" >Current Filter: {{currFilter}}</p>\r\n    <!--</ion-item>-->\r\n        <ion-grid>\r\n            <ion-row *ngFor=\"let row of localGrid\">\r\n                <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                    <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                    <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n                    <div class=\"square\" (click)=\"LoadImage(file_uri)\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n\r\n                    <!--margin-left: auto;  margin-right: auto; vertical-align:middle;\" />-->\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>\r\n    \r\n\r\n        <!--<!--<div >\r\n            <!-- Responsive Layout with Ion Grid-->\r\n        <!--<ion-grid >\r\n            <ion-row>\r\n                <ion-col col-6 col-md-4 col-xl-3 *ngFor=\"let objImg of objImage\">\r\n                     <div class=\"image-container\" [style.background-image]=\"'url(objImg.imgUrl)'\"></div>\r\n                    <img src={{objImg.imgUrl}}>\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>-->\r\n        <!-- More Pinterest floating gallery style -->\r\n        <!--</div>-->\r\n</ion-content>\r\n"
+module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-content>\r\n    <!--<ion-item>-->\r\n        <p style=\"color: darkred;font-size:12px;\" >Current Filter: {{currFilter}}</p>\r\n    <!--</ion-item>-->\r\n        <ion-grid>\r\n            <ion-row *ngFor=\"let row of localGrid\">\r\n                <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                    <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                    <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n                    <div class=\"square\" (click)=\"LoadImage(file_uri)\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n\r\n                    <!--margin-left: auto;  margin-right: auto; vertical-align:middle;\" />-->\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>\r\n    \r\n\r\n        <!--<!--<div >\r\n            <!-- Responsive Layout with Ion Grid-->\r\n        <!--<ion-grid >\r\n            <ion-row>\r\n                <ion-col col-6 col-md-4 col-xl-3 *ngFor=\"let objImg of objImage\">\r\n                     <div class=\"image-container\" [style.background-image]=\"'url(objImg.imgUrl)'\"></div>\r\n                    <img src={{objImg.imgUrl}}>\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>-->\r\n        <!-- More Pinterest floating gallery style -->\r\n        <!--</div>-->\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -162,7 +162,22 @@ var ImglistPage = /** @class */ (function () {
         var _this = this;
         if (this.masterDetailService.getListMode() === "GALLERY") {
             this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
-            this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+            if (this.masterDetailService.getY4Filter() === '') {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
+                }
+                else {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+                }
+            }
+            else {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                }
+                else {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                }
+            }
         }
         else if (this.masterDetailService.getListMode() === "ALBUM") {
             this.strHeading = "Album: " + this.masterDetailService.getCurrAlbum();
@@ -210,9 +225,35 @@ var ImglistPage = /** @class */ (function () {
         var _this = this;
         if (strFilter === '0-0' || strFilter === '') {
             //this.objImage = this.objImage.filter(p => (p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
-            this.currFilter = "";
+            if (this.masterDetailService.getY4Filter() === '') {
+                this.currFilter = "";
+            }
+            else {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                }
+                else {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                }
+                this.currFilter = "";
+            }
             if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+                if (this.masterDetailService.getY4Filter() === '') {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
+                    }
+                    else {
+                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+                    }
+                }
+                else {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    }
+                    else {
+                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    }
+                }
             }
             else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
@@ -222,7 +263,12 @@ var ImglistPage = /** @class */ (function () {
         else {
             this.currFilter = strFilter;
             if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                }
+                else {
+                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                }
             }
             else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.imgAlbum === _this.masterDetailService.getCurrAlbum() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
@@ -275,10 +321,10 @@ var ImglistPage = /** @class */ (function () {
     };
     ImglistPage.prototype.populateGrid = function () {
         var localImgList = this.objImage;
-        this.localGrid = Array(Math.ceil(localImgList.length / 5));
+        this.localGrid = Array(Math.ceil(localImgList.length / 4));
         var rowNum = 0;
-        for (var i = 0; i < localImgList.length; i += 5) {
-            this.localGrid[rowNum] = Array(5);
+        for (var i = 0; i < localImgList.length; i += 4) {
+            this.localGrid[rowNum] = Array(4);
             if (localImgList[i]) {
                 this.localGrid[rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
@@ -312,19 +358,21 @@ var ImglistPage = /** @class */ (function () {
             else {
                 this.localGrid[rowNum][3] = "";
             }
-            if (localImgList[i + 4]) {
-                this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
-                }
-            }
-            else {
-                this.localGrid[rowNum][4] = "";
-            }
+            //if (localImgList[i + 4]) {
+            //    this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
+            //    if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
+            //        this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
+            //    }
+            //}
+            //else {
+            //    this.localGrid[rowNum][4] = "";
+            //}
             rowNum++;
         }
         if (this.imgYrs.length > 0) {
-            this.imgYrs = this.imgYrs.substr(0, this.imgYrs.length - 1);
+            if (this.imgYrs.substr(this.imgYrs.length - 1, this.imgYrs.length - 1) === ",") {
+                this.imgYrs = this.imgYrs.substr(0, this.imgYrs.length - 1);
+            }
         }
         else {
             this.imgYrs = this.imgYrs;

@@ -2036,6 +2036,8 @@ var MasterDetailService = /** @class */ (function () {
         this.IsDirty = false;
         this.strParentBase = "";
         this.strThumbBase = "";
+        this.strY4Filter = "";
+        this.blnListShowAlbums = false;
     }
     MasterDetailService.prototype.setUris = function (uris) {
         this.uris = uris;
@@ -2155,6 +2157,15 @@ var MasterDetailService = /** @class */ (function () {
     };
     MasterDetailService.prototype.getThumbBase = function () {
         return this.strThumbBase;
+    };
+    MasterDetailService.prototype.setY4Filter = function (strFilter) {
+        this.strY4Filter = strFilter;
+    };
+    MasterDetailService.prototype.getY4Filter = function () {
+        return this.strY4Filter;
+    };
+    MasterDetailService.prototype.getListShowAlbum = function () {
+        return this.blnListShowAlbums;
     };
     MasterDetailService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

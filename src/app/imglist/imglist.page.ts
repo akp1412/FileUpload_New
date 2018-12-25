@@ -34,7 +34,21 @@ export class ImglistPage implements OnInit {
 
         if (this.masterDetailService.getListMode() === "GALLERY") {
             this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
-            this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === ''));
+            if (this.masterDetailService.getY4Filter() === '') {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() ));
+                } else {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === ''));
+                }
+                
+            } else {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() &&  p.imgYear === this.masterDetailService.getY4Filter()));
+                } else {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getY4Filter()));
+                }
+                
+            }
         } else if (this.masterDetailService.getListMode() === "ALBUM") {
             this.strHeading = "Album: " + this.masterDetailService.getCurrAlbum();
             this.objImage = this.masterDetailService.getImages().filter(p => p.imgAlbum === this.masterDetailService.getCurrAlbum());
@@ -71,10 +85,34 @@ export class ImglistPage implements OnInit {
     filterList(strFilter) {
         if (strFilter === '0-0' || strFilter === '') {
             //this.objImage = this.objImage.filter(p => (p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
-            this.currFilter = "";
+            if (this.masterDetailService.getY4Filter() === '') {
+                this.currFilter = "";
+            } else {
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgYear === this.masterDetailService.getY4Filter()));
+                } else {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getY4Filter()));
+                }
+                this.currFilter = "";
+                
+            }
+            
 
             if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === ''));
+                if (this.masterDetailService.getY4Filter() === '') {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() ));
+                    } else {
+                        this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === ''));
+                    }
+                } else {
+                    if (this.masterDetailService.getListShowAlbum()) {
+                        this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgYear === this.masterDetailService.getY4Filter()));
+                    } else {
+                        this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === this.masterDetailService.getY4Filter()));
+                    }
+
+                }
             } else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(p => p.imgAlbum === this.masterDetailService.getCurrAlbum());
             }
@@ -84,7 +122,12 @@ export class ImglistPage implements OnInit {
         } else {
             this.currFilter = strFilter;
             if (this.masterDetailService.getListMode() === "GALLERY") {
-                this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
+                if (this.masterDetailService.getListShowAlbum()) {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
+                } else {
+                    this.objImage = this.masterDetailService.getImages().filter(p => (p.period === this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
+                }
+                
             } else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.objImage = this.masterDetailService.getImages().filter(p => (p.imgAlbum === this.masterDetailService.getCurrAlbum() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));;
             }
@@ -134,13 +177,13 @@ export class ImglistPage implements OnInit {
 
         let localImgList = this.objImage;
 
-        this.localGrid = Array(Math.ceil(localImgList.length / 5));
+        this.localGrid = Array(Math.ceil(localImgList.length / 4));
 
         let rowNum = 0;
 
-        for (let i = 0; i < localImgList.length; i += 5) {
+        for (let i = 0; i < localImgList.length; i += 4) {
 
-            this.localGrid[rowNum] = Array(5);
+            this.localGrid[rowNum] = Array(4);
 
             if (localImgList[i]) {
                 this.localGrid[rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
@@ -181,22 +224,25 @@ export class ImglistPage implements OnInit {
             else {
                 this.localGrid[rowNum][3] = "";
             }
-            if (localImgList[i + 4]) {
-                this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
-                }
+            //if (localImgList[i + 4]) {
+            //    this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
+            //    if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
+            //        this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
+            //    }
                 
-            }
-            else {
-                this.localGrid[rowNum][4] = "";
-            }
+            //}
+            //else {
+            //    this.localGrid[rowNum][4] = "";
+            //}
 
             rowNum++;
         }
 
         if (this.imgYrs.length > 0) {
-            this.imgYrs =  this.imgYrs.substr(0, this.imgYrs.length - 1);
+            if (this.imgYrs.substr(this.imgYrs.length - 1, this.imgYrs.length - 1) === ",") {
+                this.imgYrs = this.imgYrs.substr(0, this.imgYrs.length - 1);
+            }
+            
         } else {
             this.imgYrs = this.imgYrs;
         }
