@@ -187,7 +187,7 @@ var ImglistPage = /** @class */ (function () {
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
-        this.loadingCtrl.dismiss();
+        this.loadingCtrl.dismiss('done');
     };
     ImglistPage.prototype.presentPopover = function (ev) {
         return __awaiter(this, void 0, void 0, function () {
@@ -283,13 +283,18 @@ var ImglistPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Busy...',
-                            duration: 3000
+                            message: 'Busy...'
+                            //,duration: 3000
                         })];
                     case 1:
                         loading = _a.sent();
-                        return [4 /*yield*/, loading.present()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, loading.present().then(function (val) {
+                                console.log(val);
+                                loading.dismiss();
+                            })];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });

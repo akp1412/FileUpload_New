@@ -149,13 +149,20 @@ var AboutPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Busy...',
-                            duration: 3000
+                            message: 'Busy...'
+                            //,duration: 3000
                         })];
                     case 1:
                         loading = _a.sent();
-                        return [4 /*yield*/, loading.present()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                        //return await loading.present();
+                        return [4 /*yield*/, loading.present().then(function (val) {
+                                console.log(val);
+                                loading.dismiss();
+                            })];
+                    case 2:
+                        //return await loading.present();
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });
@@ -925,13 +932,20 @@ var HomePage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Busy...',
-                            duration: 3000
+                            message: 'Busy...'
+                            //,duration: 3000
                         })];
                     case 1:
                         loading = _a.sent();
-                        return [4 /*yield*/, loading.present()];
-                    case 2: return [2 /*return*/, _a.sent()];
+                        //return await loading.present();
+                        return [4 /*yield*/, loading.present().then(function (val) {
+                                console.log(val);
+                                loading.dismiss();
+                            })];
+                    case 2:
+                        //return await loading.present();
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });

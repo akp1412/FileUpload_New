@@ -59,7 +59,7 @@ export class ImglistPage implements OnInit {
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
-        this.loadingCtrl.dismiss();
+        this.loadingCtrl.dismiss('done');
        
     }
 
@@ -138,10 +138,13 @@ export class ImglistPage implements OnInit {
 
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
-            message: 'Busy...',
-            duration: 3000
+            message: 'Busy...'
+            //,duration: 3000
         });
-        return await loading.present();
+        await loading.present().then(val => {
+            console.log(val);
+            loading.dismiss();
+        });
     }
 
 

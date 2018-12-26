@@ -81,9 +81,7 @@ export class HomePage {
         //this.getImageList();
         
     }
-
     
-
     async presentImageSOurceOptions() {
         const alert = await this.alertController.create({
             header: 'Input Required!',
@@ -497,10 +495,14 @@ export class HomePage {
 
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
-            message: 'Busy...',
-            duration: 3000
+            message: 'Busy...'
+            //,duration: 3000
         });
-        return await loading.present();
+        //return await loading.present();
+        await loading.present().then(val => {
+            console.log(val);
+            loading.dismiss();
+        });
     }
 
     getDateTime() {
