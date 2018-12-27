@@ -1,41 +1,32 @@
-<ion-list width="100%" *ngIf="displayMode==='GALLERY'">
-    
-    <ion-item>
-        <ion-select placeholder="Select a Month" [(ngModel)]="filterBy" interface="popover">
-            <ion-select-option *ngFor="let opt of selectOptions" value={{opt}}>{{opt}}</ion-select-option>
+<ion-content>
+    <ion-list width="100%" *ngIf="displayMode==='GALLERY'">
+
+        <ion-item>
+            <ion-select placeholder="Select a Month" [(ngModel)]="filterBy" interface="popover">
+                <ion-select-option *ngFor="let opt of selectOptions" value={{opt}}>{{opt}}</ion-select-option>
+
+            </ion-select>
+        </ion-item>
+               
+        <ion-grid width="100%">
+            <ion-row>
+                <ion-col>
+                    <ion-button expand="block" (click)="filter()">Filter</ion-button>
+                </ion-col>
+
+                <ion-col>
+                    <ion-button expand="block" (click)="close()">Cancel</ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="filterBy !=''">
+                <ion-col>
+                    <ion-button expand="block" (click)="clear()">Clear Filter</ion-button>
+                </ion-col>
+            </ion-row>
             
-        </ion-select>
-    </ion-item>
-   
-   
-        
-    <ion-grid width="100%">
-
-
-        <ion-row>
-            <ion-col>
-                <ion-button expand="block" (click)="filter()">Filter</ion-button>
-            </ion-col>
-
-            <ion-col>
-                <ion-button expand="block" (click)="close()">Cancel</ion-button>
-            </ion-col>
-        </ion-row>
-        <ion-row *ngIf="filterBy !=''">
-            <ion-col>
-                <ion-button expand="block" (click)="clear()">Clear Filter</ion-button>
-            </ion-col>
-        </ion-row>
-        <!--<ion-row>
-            <ion-col>
-                <ion-item>
-                    <ion-label>Exclude Albums</ion-label>
-                    <ion-toggle id="excludeAlbums" [(ngModel)]="excludeAlbums" checked={{excludeAlbums}}></ion-toggle>
-                </ion-item>
-            </ion-col>
-        </ion-row>-->
-    </ion-grid>
-</ion-list>
+        </ion-grid>
+    </ion-list>
+</ion-content>
 <ion-content id="content" class="radio-test outer-content">
     <ion-list *ngIf="displayMode==='ALBUM'">
         <ion-radio-group [(ngModel)]="currAlbum">

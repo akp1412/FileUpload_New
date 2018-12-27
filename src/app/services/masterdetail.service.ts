@@ -20,6 +20,7 @@ export class MasterDetailService {
     private strThumbBase: string = "";
     private strY4Filter: string = "";
     private blnListShowAlbums: boolean = false;
+    public filteredImgList: any;
 
     constructor() { }
 
@@ -187,5 +188,9 @@ export class MasterDetailService {
 
     public getListShowAlbum() {
         return this.blnListShowAlbums;
+    }
+
+    public setFilteredImgList(imgList) {
+        this.filteredImgList = imgList;
     }
 }

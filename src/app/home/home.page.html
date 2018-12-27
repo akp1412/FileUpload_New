@@ -17,7 +17,9 @@
                             <ion-grid>
                                 <ion-row *ngFor="let row of grid_W1">
                                     <ion-col *ngFor="let file_uri of row" style="padding:2px;">
-                                        <div class="square" (click)="LoadImage(file_uri,'W1')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                        
+                                            <div class="square" (click)="LoadImage(file_uri,'W1')" [style.background-image]="'url(' + file_uri + ')'"></div>
+                                        
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>

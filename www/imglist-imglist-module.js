@@ -62,7 +62,7 @@ var ImglistPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-content>\r\n    <!--<ion-item>-->\r\n        <p style=\"color: darkred;font-size:12px;\" >Current Filter: {{currFilter}}</p>\r\n    <!--</ion-item>-->\r\n        <ion-grid>\r\n            <ion-row *ngFor=\"let row of localGrid\">\r\n                <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                    <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                    <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n                    <div class=\"square\" (click)=\"LoadImage(file_uri)\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n\r\n                    <!--margin-left: auto;  margin-right: auto; vertical-align:middle;\" />-->\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>\r\n    \r\n\r\n        <!--<!--<div >\r\n            <!-- Responsive Layout with Ion Grid-->\r\n        <!--<ion-grid >\r\n            <ion-row>\r\n                <ion-col col-6 col-md-4 col-xl-3 *ngFor=\"let objImg of objImage\">\r\n                     <div class=\"image-container\" [style.background-image]=\"'url(objImg.imgUrl)'\"></div>\r\n                    <img src={{objImg.imgUrl}}>\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>-->\r\n        <!-- More Pinterest floating gallery style -->\r\n        <!--</div>-->\r\n</ion-content>\r\n"
+module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-content>\r\n    <!--<ion-item>-->\r\n        <p style=\"color: darkred;font-size:12px;\" >Current Filter: {{currFilter}}</p>\r\n    <!--</ion-item>-->\r\n        <ion-grid>\r\n            <ion-row *ngFor=\"let row of localGrid\">\r\n                <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\" >\r\n                    <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                    <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n                    \r\n                        <div (click)=\"LoadImage(file_uri.index)\" class=\"square\" [style.background-image]=\"'url(' + file_uri.url + ')'\"></div>\r\n                        <!--<img class=\"image_error\" src={{file_uri.url}} (load)=\"loaded(file_uri.url)\">-->\r\n\r\n\r\n                        <!--margin-left: auto;  margin-right: auto; vertical-align:middle;\" />-->\r\n                    </ion-col>\r\n            </ion-row>\r\n        </ion-grid>\r\n    \r\n\r\n        <!--<!--<div >\r\n            <!-- Responsive Layout with Ion Grid-->\r\n        <!--<ion-grid >\r\n            <ion-row>\r\n                <ion-col col-6 col-md-4 col-xl-3 *ngFor=\"let objImg of objImage\">\r\n                     <div class=\"image-container\" [style.background-image]=\"'url(objImg.imgUrl)'\"></div>\r\n                    <img src={{objImg.imgUrl}}>\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>-->\r\n        <!-- More Pinterest floating gallery style -->\r\n        <!--</div>-->\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -73,7 +73,7 @@ module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-but
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".square {\n  width: 100%;\n  padding-bottom: 100%;\n  background-color: black;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaW1nbGlzdC9DOlxcVXNlcnNcXGFtaXQucGF1bFxcRmlsZVVwbG9hZC9zcmNcXGFwcFxcaW1nbGlzdFxcaW1nbGlzdC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFXO0VBQ1gscUJBQW9CO0VBQ3BCLHdCQUF1QjtFQUN2Qix5QkFBd0I7RUFDeEIsNkJBQTRCO0VBQzVCLDRCQUEyQixFQUU5QiIsImZpbGUiOiJzcmMvYXBwL2ltZ2xpc3QvaW1nbGlzdC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3F1YXJlIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgcGFkZGluZy1ib3R0b206IDEwMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcclxuICAgIGJhY2tncm91bmQtc2l6ZTogY29udGFpbjtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgICBcclxufVxyXG4iXX0= */"
+module.exports = ".square {\n  width: 100%;\n  padding-bottom: 100%;\n  background-color: black;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center; }\n\n.image_error {\n  display: none; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaW1nbGlzdC9DOlxcVXNlcnNcXGFtaXQucGF1bFxcRmlsZVVwbG9hZC9zcmNcXGFwcFxcaW1nbGlzdFxcaW1nbGlzdC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFXO0VBQ1gscUJBQW9CO0VBQ3BCLHdCQUF1QjtFQUN2Qix5QkFBd0I7RUFDeEIsNkJBQTRCO0VBQzVCLDRCQUEyQixFQUU5Qjs7QUFDRDtFQUNJLGNBQWEsRUFDaEIiLCJmaWxlIjoic3JjL2FwcC9pbWdsaXN0L2ltZ2xpc3QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNxdWFyZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMDAlO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XHJcbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xyXG4gICAgXHJcbn1cclxuLmltYWdlX2Vycm9yIHtcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -156,38 +156,39 @@ var ImglistPage = /** @class */ (function () {
         this.imgYrs = '';
         this.strHeading = "";
         this.blnDidLeave = false;
+        this.loadedImages = 0;
     }
     ImglistPage.prototype.ngOnInit = function () {
-        //this.presentLoading();
         var _this = this;
+        //await this.presentLoading();
         if (this.masterDetailService.getListMode() === "GALLERY") {
             this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
             if (this.masterDetailService.getY4Filter() === '') {
                 if (this.masterDetailService.getListShowAlbum()) {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
                 }
                 else {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
                 }
             }
             else {
                 if (this.masterDetailService.getListShowAlbum()) {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
                 }
                 else {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
                 }
             }
         }
         else if (this.masterDetailService.getListMode() === "ALBUM") {
             this.strHeading = "Album: " + this.masterDetailService.getCurrAlbum();
-            this.objImage = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
+            this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
         }
         this.populateGrid();
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
-        this.loadingCtrl.dismiss('done');
+        //this.loadingCtrl.dismiss();
     };
     ImglistPage.prototype.presentPopover = function (ev) {
         return __awaiter(this, void 0, void 0, function () {
@@ -223,40 +224,41 @@ var ImglistPage = /** @class */ (function () {
     };
     ImglistPage.prototype.filterList = function (strFilter) {
         var _this = this;
+        //this.presentLoading();
         if (strFilter === '0-0' || strFilter === '') {
-            //this.objImage = this.objImage.filter(p => (p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
+            //this.masterDetailService.filteredImgList = this.masterDetailService.filteredImgList.filter(p => (p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]));
             if (this.masterDetailService.getY4Filter() === '') {
                 this.currFilter = "";
             }
             else {
                 if (this.masterDetailService.getListShowAlbum()) {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
                 }
                 else {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
                 }
                 this.currFilter = "";
             }
             if (this.masterDetailService.getListMode() === "GALLERY") {
                 if (this.masterDetailService.getY4Filter() === '') {
                     if (this.masterDetailService.getListShowAlbum()) {
-                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
+                        this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
                     }
                     else {
-                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
+                        this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === ''); });
                     }
                 }
                 else {
                     if (this.masterDetailService.getListShowAlbum()) {
-                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                        this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgYear === _this.masterDetailService.getY4Filter()); });
                     }
                     else {
-                        this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
+                        this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgYear === _this.masterDetailService.getY4Filter()); });
                     }
                 }
             }
             else if (this.masterDetailService.getListMode() === "ALBUM") {
-                this.objImage = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
+                this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
             }
             this.populateGrid();
         }
@@ -264,18 +266,19 @@ var ImglistPage = /** @class */ (function () {
             this.currFilter = strFilter;
             if (this.masterDetailService.getListMode() === "GALLERY") {
                 if (this.masterDetailService.getListShowAlbum()) {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
                 }
                 else {
-                    this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                    this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter() && p.imgAlbum === '' && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
                 }
             }
             else if (this.masterDetailService.getListMode() === "ALBUM") {
-                this.objImage = this.masterDetailService.getImages().filter(function (p) { return (p.imgAlbum === _this.masterDetailService.getCurrAlbum() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
+                this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.imgAlbum === _this.masterDetailService.getCurrAlbum() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
                 ;
             }
             this.populateGrid();
         }
+        //this.loadingCtrl.dismiss();
     };
     ImglistPage.prototype.presentLoading = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -283,14 +286,14 @@ var ImglistPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'Busy...'
-                            //,duration: 3000
+                            message: 'Busy...',
+                            duration: 3000
                         })];
                     case 1:
                         loading = _a.sent();
                         return [4 /*yield*/, loading.present().then(function (val) {
                                 console.log(val);
-                                loading.dismiss();
+                                //loading.dismiss();
                             })];
                     case 2:
                         _a.sent();
@@ -299,69 +302,118 @@ var ImglistPage = /** @class */ (function () {
             });
         });
     };
-    ImglistPage.prototype.LoadImage = function (imgUrl) {
-        this.presentLoading();
-        var imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
-        var intIndex = this.objImage.findIndex(function (x) { return x.imgName === imgName; });
-        this.masterDetailService.setIndex(intIndex);
-        //this.masterDetailService.setImages(this.objImageList.filter(p => p.period === strFilter));
-        if (this.currFilter != "") {
-            this.masterDetailService.setImgFilterMonth(this.currFilter.split("-")[0]);
-            this.masterDetailService.setImgFilterYear(this.currFilter.split("-")[1]);
+    ImglistPage.prototype.LoadImage = function (localIndex) {
+        //this.presentLoading();
+        if (localIndex === '') {
+            console.log('shooting blanks');
         }
         else {
-            this.masterDetailService.setImgFilterMonth('');
-            this.masterDetailService.setImgFilterYear('');
+            //let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
+            //let intIndex = this.masterDetailService.filteredImgList.findIndex(x => x.imgName === imgName);
+            var intIndex = localIndex;
+            this.masterDetailService.setIndex(intIndex);
+            //this.masterDetailService.setImages(this.masterDetailService.filteredImgListList.filter(p => p.period === strFilter));
+            if (this.currFilter != "") {
+                this.masterDetailService.setImgFilterMonth(this.currFilter.split("-")[0]);
+                this.masterDetailService.setImgFilterYear(this.currFilter.split("-")[1]);
+            }
+            else {
+                this.masterDetailService.setImgFilterMonth('');
+                this.masterDetailService.setImgFilterYear('');
+            }
+            this.blnDidLeave = true;
+            this.masterDetailService.setFilteredImgList(this.masterDetailService.filteredImgList);
+            this.navCtrl.navigateForward('gallery');
+            //this.photoViewer.show(this.masterDetailService.filteredImgListList.filter(p => p.imgUrl === imgUrl)[0].imgParentUrl);
         }
-        this.blnDidLeave = true;
-        this.navCtrl.navigateForward('gallery');
-        //this.photoViewer.show(this.objImageList.filter(p => p.imgUrl === imgUrl)[0].imgParentUrl);
     };
     ImglistPage.prototype.goback = function () {
-        this.objImage = [];
+        this.masterDetailService.filteredImgList = [];
         this.localGrid = [];
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
         this.navCtrl.goBack();
     };
+    ImglistPage.prototype.ionViewWillEnter = function () {
+        console.log("ionViewWillEnter");
+        console.log(this.masterDetailService.filteredImgList.length);
+        console.log(this.blnDidLeave);
+        if (this.blnDidLeave && this.masterDetailService.getIsDirty()) {
+            //this.presentLoading();
+            this.filterList(this.currFilter);
+            this.blnDidLeave = false;
+            this.masterDetailService.setIsDirty(false);
+            //this.populateGrid();
+            //this.loadingCtrl.dismiss();
+        }
+    };
+    ImglistPage.prototype.loaded = function (imgUrl) {
+        this.loadedImages++;
+    };
+    ImglistPage.prototype.ionViewDidEnter = function () {
+        console.log("view loaded with " + this.loadedImages + " images");
+        this.loadingCtrl.dismiss();
+    };
     ImglistPage.prototype.populateGrid = function () {
-        var localImgList = this.objImage;
+        //this.presentLoading();
+        var localImgList = this.masterDetailService.filteredImgList;
         this.localGrid = Array(Math.ceil(localImgList.length / 4));
         var rowNum = 0;
         for (var i = 0; i < localImgList.length; i += 4) {
             this.localGrid[rowNum] = Array(4);
             if (localImgList[i]) {
-                this.localGrid[rowNum][0] = this.masterDetailService.getThumbBase() + localImgList[i].imgName;
+                this.localGrid[rowNum][0] = {
+                    "url": this.masterDetailService.getThumbBase() + localImgList[i].imgName,
+                    "index": i
+                };
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
             }
             if (localImgList[i + 1]) {
-                this.localGrid[rowNum][1] = this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName;
+                this.localGrid[rowNum][1] = {
+                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName,
+                    "index": i + 1
+                };
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
             }
             else {
-                this.localGrid[rowNum][1] = "";
+                this.localGrid[rowNum][1] = {
+                    "url": "",
+                    "index": ""
+                };
             }
             if (localImgList[i + 2]) {
-                this.localGrid[rowNum][2] = this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName;
+                this.localGrid[rowNum][2] = {
+                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName,
+                    "index": i + 2
+                };
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
             }
             else {
-                this.localGrid[rowNum][2] = "";
+                this.localGrid[rowNum][2] = {
+                    "url": "",
+                    "index": ""
+                };
             }
             if (localImgList[i + 3]) {
-                this.localGrid[rowNum][3] = this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName;
+                this.localGrid[rowNum][3] = {
+                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName,
+                    "index": i + 3
+                };
                 if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
                     this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
                 }
             }
             else {
-                this.localGrid[rowNum][3] = "";
+                this.localGrid[rowNum][3] = {
+                    "url": "",
+                    "index": ""
+                };
             }
             //if (localImgList[i + 4]) {
             //    this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
@@ -382,19 +434,7 @@ var ImglistPage = /** @class */ (function () {
         else {
             this.imgYrs = this.imgYrs;
         }
-    };
-    ImglistPage.prototype.ionViewWillEnter = function () {
-        console.log("ionViewWillEnter");
-        console.log(this.objImage.length);
-        console.log(this.blnDidLeave);
-        if (this.blnDidLeave && this.masterDetailService.getIsDirty()) {
-            this.presentLoading();
-            this.filterList(this.currFilter);
-            this.blnDidLeave = false;
-            this.masterDetailService.setIsDirty(false);
-            //this.populateGrid();
-            this.loadingCtrl.dismiss();
-        }
+        //this.loadingCtrl.dismiss()
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('popoverContent', { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),

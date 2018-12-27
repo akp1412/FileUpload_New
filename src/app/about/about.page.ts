@@ -22,23 +22,26 @@ export class AboutPage {
 
     }
 
-    async presentLoading() {
+    async presentLoading(strAlbum) {
         const loading = await this.loadingCtrl.create({
-            message: 'Busy...'
+            message: 'loading images...'
             //,duration: 3000
         });
         //return await loading.present();
         await loading.present().then(val => {
-            console.log(val);
-            loading.dismiss();
+            this.loadImgLIst(strAlbum);
         });
     }
 
-    loadAlbum(strAlbum) {
-        this.presentLoading();
+    loadImgLIst(strAlbum) {
         this.masterDetailService.setCurrAlbum(strAlbum);
         this.masterDetailService.setListMode("ALBUM");
         this.navCtrl.navigateForward('imglist');
+    }
+
+    loadAlbum(strAlbum) {
+        this.presentLoading(strAlbum);
+        
     }
 
     addAlbum() {

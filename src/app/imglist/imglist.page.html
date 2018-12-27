@@ -31,14 +31,16 @@
     <!--</ion-item>-->
         <ion-grid>
             <ion-row *ngFor="let row of localGrid">
-                <ion-col *ngFor="let file_uri of row" style="padding:2px;">
+                <ion-col *ngFor="let file_uri of row" style="padding:2px;" >
                     <!-- <img src="{{file_uri}}" (click)="LoadImage(file_uri)" style="width:100%; display: block;-->
                     <!--<div class="square" (click)="LoadImage(file_uri)" style="background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)"></div>-->
-                    <div class="square" (click)="LoadImage(file_uri)" [style.background-image]="'url(' + file_uri + ')'"></div>
+                    
+                        <div (click)="LoadImage(file_uri.index)" class="square" [style.background-image]="'url(' + file_uri.url + ')'"></div>
+                        <!--<img class="image_error" src={{file_uri.url}} (load)="loaded(file_uri.url)">-->
 
 
-                    <!--margin-left: auto;  margin-right: auto; vertical-align:middle;" />-->
-                </ion-col>
+                        <!--margin-left: auto;  margin-right: auto; vertical-align:middle;" />-->
+                    </ion-col>
             </ion-row>
         </ion-grid>
     

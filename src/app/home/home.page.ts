@@ -61,6 +61,7 @@ export class HomePage {
         ) { }
 
     public images: Array<string>;
+    private cntImagetoLoad: any = 0;
     private grid: Array<Array<string>>;
     private localGrid: Array<Array<string>>;
     private grid_W1: Array<Array<string>>;
@@ -175,7 +176,7 @@ export class HomePage {
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         } else {
-            this.presentLoading();
+            //this.presentLoading();
             let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
             //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
             let intIndex = this.masterDetailService.getImages().filter(p => p.period === strFilter).findIndex(x => x.imgName === imgName);
@@ -211,9 +212,11 @@ export class HomePage {
                 console.log(file_uris);
                 this.masterDetailService.setUris(file_uris);
                 //this.navCtrl.navigateForward('gallery');
+                this.cntImagetoLoad = file_uris.length;
+                this.presentLoading();
                 for (let i = 0; i < file_uris.length; i++) {
-
-                    this.presentLoading();
+                    this.cntImagetoLoad--;
+                    
                     this.getBase64String(file_uris[i]);
                     
                     
@@ -373,16 +376,31 @@ export class HomePage {
             //this.loadingCtrl.dismiss();
             this.presentPrompt(strFilter);
         } else {
-            this.presentLoading();
             this.masterDetailService.setY4Filter("");
-            this.masterDetailService.setListMode("GALLERY");
-            this.masterDetailService.setIsDirty(false);
-            this.navCtrl.navigateForward('imglist');
+            this.presentListLoading();
+            //this.masterDetailService.setListMode("GALLERY");
+            //this.masterDetailService.setIsDirty(false);
+            //this.navCtrl.navigateForward('imglist');
+            
         }
         //(this.objImageList.filter(p => p.period === strFilter));
         
     }
 
+    async presentListLoading() {
+        const loading = await this.loadingCtrl.create({
+            message: 'Busy...'
+            //,duration: 3000
+        });
+        //return await loading.present();
+        await loading.present().then(val => {
+            console.log(val);
+            this.masterDetailService.setListMode("GALLERY");
+            this.masterDetailService.setIsDirty(false);
+            this.navCtrl.navigateForward('imglist');
+            //loading.dismiss();
+        });
+    }
     async presentPrompt(strFilter) {
 
         let localList = this.masterDetailService.getImages().filter(p => p.period === strFilter);
@@ -417,10 +435,10 @@ export class HomePage {
                     text: 'Open',
                     handler: data => {
                         this.masterDetailService.setY4Filter(data);
-                        this.presentLoading();
-                        this.masterDetailService.setListMode("GALLERY");
-                        this.masterDetailService.setIsDirty(false);
-                        this.navCtrl.navigateForward('imglist');
+                        this.presentListLoading();
+                        //this.masterDetailService.setListMode("GALLERY");
+                        //this.masterDetailService.setIsDirty(false);
+                        //this.navCtrl.navigateForward('imglist');
                         //console.log(data);
                         //console.log(data.albumname);
                         //let strAlbum: string = data.albumname;
@@ -476,6 +494,7 @@ export class HomePage {
 
             
             this.presentLoading();
+            this.cntImagetoLoad = 0;
             this.getBase64String(imageData);
 
 
@@ -501,7 +520,7 @@ export class HomePage {
         //return await loading.present();
         await loading.present().then(val => {
             console.log(val);
-            loading.dismiss();
+            //loading.dismiss();
         });
     }
 
@@ -547,8 +566,11 @@ export class HomePage {
                 this.base64Image = "";
                 console.log(data['_body']);
                 this.appendToImgList(JSON.parse(data['_body']));
-                this.loadingCtrl.dismiss();
-                this.presentToast("Image uploaded successfully");
+                if (this.cntImagetoLoad === 0) {
+                    this.loadingCtrl.dismiss();
+                    this.presentToast("Image uploaded successfully");
+                }
+                
                
              }, error => {
                  console.log(error);
