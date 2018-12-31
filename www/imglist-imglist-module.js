@@ -62,7 +62,7 @@ var ImglistPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-content>\r\n    <!--<ion-item>-->\r\n        <p style=\"color: darkred;font-size:12px;\" >Current Filter: {{currFilter}}</p>\r\n    <!--</ion-item>-->\r\n        <ion-grid>\r\n            <ion-row *ngFor=\"let row of localGrid\">\r\n                <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\" >\r\n                    <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                    <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n                    \r\n                        <div (click)=\"LoadImage(file_uri.index)\" class=\"square\" [style.background-image]=\"'url(' + file_uri.url + ')'\"></div>\r\n                        <!--<img class=\"image_error\" src={{file_uri.url}} (load)=\"loaded(file_uri.url)\">-->\r\n\r\n\r\n                        <!--margin-left: auto;  margin-right: auto; vertical-align:middle;\" />-->\r\n                    </ion-col>\r\n            </ion-row>\r\n        </ion-grid>\r\n    \r\n\r\n        <!--<!--<div >\r\n            <!-- Responsive Layout with Ion Grid-->\r\n        <!--<ion-grid >\r\n            <ion-row>\r\n                <ion-col col-6 col-md-4 col-xl-3 *ngFor=\"let objImg of objImage\">\r\n                     <div class=\"image-container\" [style.background-image]=\"'url(objImg.imgUrl)'\"></div>\r\n                    <img src={{objImg.imgUrl}}>\r\n                </ion-col>\r\n            </ion-row>\r\n        </ion-grid>-->\r\n        <!-- More Pinterest floating gallery style -->\r\n        <!--</div>-->\r\n</ion-content>\r\n"
+module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n        <ion-buttons slot=\"end\">\r\n            <button ion-button icon-only (click)=\"presentPopover($event)\">\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n        <ion-button color=\"primary\" (click)=\"goback()\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"arrow-back\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{strHeading}}</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n        <ion-button  color=\"primary\" (click)=\"presentPopover($event)\">\r\n            <ion-icon color=\"light\" slot=\"icon-only\" name=\"funnel\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n\r\n<ion-toolbar>\r\n    <!--<ion-item>-->\r\n    <!--<ion-buttons slot=\"start\">\r\n        <ion-button color=\"light\" (click)=\"loadPrevPage()\" [disabled]= \"loadPrevDisabled()\">\r\n            <ion-icon color=\"primary\" slot=\"icon-only\" name=\"skip-backward\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>-->\r\n    <p style=\"color: darkred;font-size:12px;\">Current Filter: {{viewString}}</p>\r\n    <!--<ion-buttons slot=\"end\">\r\n        <ion-button color=\"light\" (click)=\"loadNextPage()\" [disabled]= \"disableLoadNext()\">\r\n            <ion-icon color=\"primary\" slot=\"icon-only\" name=\"skip-forward\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>-->\r\n        <!--</ion-item>-->\r\n</ion-toolbar>\r\n<ion-content>\r\n    <div class=\"swiper-container\">\r\n    <ion-slides   pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">\r\n\r\n        <ion-slide style=\"align-items: flex-start;\" *ngFor=\"let slide of localGrid\">\r\n            \r\n            <ion-grid style=\"width:100%;\">\r\n                    <!--<ion-row *ngFor=\"let row of localGrid\">-->\r\n                    <ion-row *ngFor=\"let row of slide\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <!-- <img src=\"{{file_uri}}\" (click)=\"LoadImage(file_uri)\" style=\"width:100%; display: block;-->\r\n                            <!--<div class=\"square\" (click)=\"LoadImage(file_uri)\" style=\"background-image: url(https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/APP-01-04-2016-150909.png)\"></div>-->\r\n\r\n                            <div (click)=\"LoadImage(file_uri.index)\" class=\"square\" [style.background-image]=\"'url(' + file_uri.url + ')'\"></div>\r\n                            <!--<img class=\"image_error\" src={{file_uri.url}} (load)=\"loaded(file_uri.url)\">-->\r\n\r\n                        </ion-col>\r\n                        \r\n                    </ion-row>\r\n            </ion-grid>\r\n            \r\n        </ion-slide>\r\n     </ion-slides>\r\n    </div>\r\n\r\n           \r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -144,6 +144,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var ImglistPage = /** @class */ (function () {
     function ImglistPage(navCtrl, photoViewer, route, masterDetailService, loadingCtrl, popoverCtrl) {
         this.navCtrl = navCtrl;
@@ -154,10 +155,38 @@ var ImglistPage = /** @class */ (function () {
         this.popoverCtrl = popoverCtrl;
         this.galleryType = 'regular';
         this.imgYrs = '';
+        this.currFilter = "";
         this.strHeading = "";
         this.blnDidLeave = false;
         this.loadedImages = 0;
+        this.showingFrom = 0;
+        this.showingUpto = 0;
+        this.arrShowingFrom = [];
+        this.arrShowingUpto = [];
+        this.viewString = "";
+        this.noOfSlides = 0;
+        this.slidePadding = 2;
+        this.nowSlideEndIndex = 0;
+        this.slideOpts = {
+            autoHeight: 'true'
+        };
     }
+    ImglistPage.prototype.loadPrevDisabled = function () {
+        if (this.showingFrom === 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    ImglistPage.prototype.disableLoadNext = function () {
+        if (this.showingUpto < this.masterDetailService.filteredImgList.length - 1) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
     ImglistPage.prototype.ngOnInit = function () {
         var _this = this;
         //await this.presentLoading();
@@ -184,7 +213,13 @@ var ImglistPage = /** @class */ (function () {
             this.strHeading = "Album: " + this.masterDetailService.getCurrAlbum();
             this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
         }
-        this.populateGrid();
+        for (var i = 0; i < this.masterDetailService.filteredImgList.length; i++) {
+            if (this.imgYrs.search(this.masterDetailService.filteredImgList[i].imgMonth + '-' + this.masterDetailService.filteredImgList[i].imgYear) === -1) {
+                this.imgYrs = this.imgYrs.concat(this.masterDetailService.filteredImgList[i].imgMonth + '-' + this.masterDetailService.filteredImgList[i].imgYear + ",");
+            }
+        }
+        //this.populateGrid(0);
+        this.populateSlides();
         this.currFilter = "";
         this.masterDetailService.setImgFilterMonth("");
         this.masterDetailService.setImgFilterYear("");
@@ -260,7 +295,8 @@ var ImglistPage = /** @class */ (function () {
             else if (this.masterDetailService.getListMode() === "ALBUM") {
                 this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return p.imgAlbum === _this.masterDetailService.getCurrAlbum(); });
             }
-            this.populateGrid();
+            //this.populateGrid(0);
+            this.populateSlides();
         }
         else {
             this.currFilter = strFilter;
@@ -276,7 +312,8 @@ var ImglistPage = /** @class */ (function () {
                 this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.imgAlbum === _this.masterDetailService.getCurrAlbum() && p.imgMonth === strFilter.split("-")[0] && p.imgYear === strFilter.split("-")[1]); });
                 ;
             }
-            this.populateGrid();
+            //this.populateGrid(0);
+            this.populateSlides();
         }
         //this.loadingCtrl.dismiss();
     };
@@ -354,76 +391,98 @@ var ImglistPage = /** @class */ (function () {
         console.log("view loaded with " + this.loadedImages + " images");
         this.loadingCtrl.dismiss();
     };
-    ImglistPage.prototype.populateGrid = function () {
+    ImglistPage.prototype.populateGrid = function (startIndex) {
         //this.presentLoading();
         var localImgList = this.masterDetailService.filteredImgList;
-        this.localGrid = Array(Math.ceil(localImgList.length / 4));
         var rowNum = 0;
-        for (var i = 0; i < localImgList.length; i += 4) {
-            this.localGrid[rowNum] = Array(4);
-            if (localImgList[i]) {
-                this.localGrid[rowNum][0] = {
-                    "url": this.masterDetailService.getThumbBase() + localImgList[i].imgName,
-                    "index": i
-                };
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
+        var endIndex;
+        if (startIndex + this.masterDetailService.getImagesPerPage() <= localImgList.length) {
+            endIndex = startIndex + this.masterDetailService.getImagesPerPage() - 1;
+        }
+        else {
+            endIndex = localImgList.length - 1;
+        }
+        this.localGrid = [];
+        this.localGrid = Array(Math.ceil((endIndex - startIndex + 1) / this.masterDetailService.getImgGridCols()));
+        for (var i = 0; i < endIndex - startIndex + 1; i += this.masterDetailService.getImgGridCols()) {
+            this.localGrid[rowNum] = Array(this.masterDetailService.getImgGridCols());
+            for (var j = 0; j < this.masterDetailService.getImgGridCols(); j++) {
+                if (localImgList[startIndex + i + j]) {
+                    this.localGrid[rowNum][j] = {
+                        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + j].imgName,
+                        "index": startIndex + i + j
+                    };
                 }
-            }
-            if (localImgList[i + 1]) {
-                this.localGrid[rowNum][1] = {
-                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 1].imgName,
-                    "index": i + 1
-                };
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
+                else {
+                    this.localGrid[rowNum][j] = {
+                        "url": "",
+                        "index": ""
+                    };
                 }
+                ////if (localImgList[startIndex + i]) {
+                ////    this.localGrid[rowNum][0] = {
+                ////        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i].imgName,
+                ////        "index": startIndex + i
+                ////    }
+                ////    //if (this.imgYrs.search(localImgList[startIndex + i].imgMonth + '-' + localImgList[startIndex + i].imgYear) === -1) {
+                ////    //    this.imgYrs = this.imgYrs.concat(localImgList[startIndex + i].imgMonth + '-' + localImgList[startIndex + i].imgYear + ",");
+                ////    //}
+                ////}
+                ////if (localImgList[startIndex + i + 1]) {
+                ////    this.localGrid[rowNum][1] = {
+                ////        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + 1].imgName,
+                ////        "index": startIndex + i + 1
+                ////    }
+                ////    //if (this.imgYrs.search(localImgList[startIndex + i + 1].imgMonth + '-' + localImgList[startIndex + i + 1].imgYear) === -1) {
+                ////    //    this.imgYrs = this.imgYrs.concat(localImgList[startIndex + i + 1].imgMonth + '-' + localImgList[startIndex + i + 1].imgYear + ",");
+                ////    //}
+                ////}
+                ////else {
+                ////    this.localGrid[rowNum][1] = {
+                ////        "url": "",
+                ////        "index": ""
+                ////    }
+                ////}
+                ////if (localImgList[startIndex + i + 2]) {
+                ////    this.localGrid[rowNum][2] = {
+                ////        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + 2].imgName,
+                ////        "index": startIndex + i + 2
+                ////    }
+                ////    //if (this.imgYrs.search(localImgList[startIndex + i + 2].imgMonth + '-' + localImgList[startIndex + i + 2].imgYear) === -1) {
+                ////    //    this.imgYrs = this.imgYrs.concat(localImgList[startIndex + i + 2].imgMonth + '-' + localImgList[startIndex + i + 3].imgYear + ",");
+                ////    //}
+                ////}
+                ////else {
+                ////    this.localGrid[rowNum][2] = {
+                ////        "url": "",
+                ////        "index": ""
+                ////    }
+                ////}
+                ////if (localImgList[startIndex + i + 3]) {
+                ////    this.localGrid[rowNum][3] = {
+                ////        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + 3].imgName,
+                ////        "index": startIndex + i + 3
+                ////    }
+                ////    //if (this.imgYrs.search(localImgList[startIndex + i + 3].imgMonth + '-' + localImgList[startIndex + i + 3].imgYear) === -1) {
+                ////    //    this.imgYrs = this.imgYrs.concat(localImgList[startIndex + i + 3].imgMonth + '-' + localImgList[startIndex + i + 3].imgYear + ",");
+                ////    //}
+                ////}
+                ////else {
+                ////    this.localGrid[rowNum][3] = {
+                ////        "url": "",
+                ////        "index": ""
+                ////    }
+                ////}
+                //if (localImgList[i + 4]) {
+                //    this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
+                //    if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
+                //        this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
+                //    }
+                //}
+                //else {
+                //    this.localGrid[rowNum][4] = "";
+                //}
             }
-            else {
-                this.localGrid[rowNum][1] = {
-                    "url": "",
-                    "index": ""
-                };
-            }
-            if (localImgList[i + 2]) {
-                this.localGrid[rowNum][2] = {
-                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 2].imgName,
-                    "index": i + 2
-                };
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
-                }
-            }
-            else {
-                this.localGrid[rowNum][2] = {
-                    "url": "",
-                    "index": ""
-                };
-            }
-            if (localImgList[i + 3]) {
-                this.localGrid[rowNum][3] = {
-                    "url": this.masterDetailService.getThumbBase() + localImgList[i + 3].imgName,
-                    "index": i + 3
-                };
-                if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-                    this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
-                }
-            }
-            else {
-                this.localGrid[rowNum][3] = {
-                    "url": "",
-                    "index": ""
-                };
-            }
-            //if (localImgList[i + 4]) {
-            //    this.localGrid[rowNum][4] = this.masterDetailService.getThumbBase() + localImgList[i + 4].imgName;
-            //    if (this.imgYrs.search(localImgList[i].imgMonth + '-' + localImgList[i].imgYear) === -1) {
-            //        this.imgYrs = this.imgYrs.concat(localImgList[i].imgMonth + '-' + localImgList[i].imgYear + ",");
-            //    }
-            //}
-            //else {
-            //    this.localGrid[rowNum][4] = "";
-            //}
             rowNum++;
         }
         if (this.imgYrs.length > 0) {
@@ -434,8 +493,163 @@ var ImglistPage = /** @class */ (function () {
         else {
             this.imgYrs = this.imgYrs;
         }
+        this.showingFrom = startIndex;
+        this.showingUpto = endIndex;
+        if (this.currFilter === "") {
+            this.viewString = "(none) :   (" + (this.showingFrom + 1) + " to " + (this.showingUpto + 1) + " of " + localImgList.length + " )";
+        }
+        else {
+            this.viewString = this.currFilter + " :   ( " + (this.showingFrom + 1) + " to " + (this.showingUpto + 1) + " of " + localImgList.length + " )";
+        }
         //this.loadingCtrl.dismiss()
     };
+    ImglistPage.prototype.populateSlide = function (startIndex, slideIndex) {
+        //this.presentLoading();
+        var localImgList = this.masterDetailService.filteredImgList;
+        var localSlideGrid = [];
+        var rowNum = 0;
+        var endIndex;
+        if (startIndex + this.masterDetailService.getImagesPerPage() <= localImgList.length) {
+            endIndex = startIndex + this.masterDetailService.getImagesPerPage() - 1;
+        }
+        else {
+            endIndex = localImgList.length - 1;
+        }
+        //this.localGrid = [];
+        localSlideGrid = Array(Math.ceil((endIndex - startIndex + 1) / this.masterDetailService.getImgGridCols()));
+        for (var i = 0; i < endIndex - startIndex + 1; i += this.masterDetailService.getImgGridCols()) {
+            localSlideGrid[rowNum] = Array(this.masterDetailService.getImgGridCols());
+            for (var j = 0; j < this.masterDetailService.getImgGridCols(); j++) {
+                if (localImgList[startIndex + i + j]) {
+                    localSlideGrid[rowNum][j] = {
+                        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + j].imgName,
+                        "index": startIndex + i + j
+                    };
+                }
+                else {
+                    localSlideGrid[rowNum][j] = {
+                        "url": "",
+                        "index": ""
+                    };
+                }
+            }
+            rowNum++;
+        }
+        if (this.imgYrs.length > 0) {
+            if (this.imgYrs.substr(this.imgYrs.length - 1, this.imgYrs.length - 1) === ",") {
+                this.imgYrs = this.imgYrs.substr(0, this.imgYrs.length - 1);
+            }
+        }
+        else {
+            this.imgYrs = this.imgYrs;
+        }
+        //this.arrshowingFrom = startIndex;
+        this.nowSlideEndIndex = endIndex;
+        if (this.currFilter === "") {
+            this.viewString = "(none) :   (" + (this.showingFrom + 1) + " to " + (this.showingUpto + 1) + " of " + localImgList.length + " )";
+        }
+        else {
+            this.viewString = this.currFilter + " :   ( " + (this.showingFrom + 1) + " to " + (this.showingUpto + 1) + " of " + localImgList.length + " )";
+        }
+        //this.loadingCtrl.dismiss()
+        return localSlideGrid;
+    };
+    ImglistPage.prototype.populateSlides = function () {
+        if (this.masterDetailService.filteredImgList.length > 200) {
+            this.noOfSlides = Math.ceil(200 / this.masterDetailService.getImagesPerPage());
+        }
+        else {
+            this.noOfSlides = Math.ceil(this.masterDetailService.filteredImgList.length / this.masterDetailService.getImagesPerPage());
+        }
+        this.slidePadding = Math.floor(this.noOfSlides / 2);
+        this.localGrid = [];
+        this.arrShowingFrom = [];
+        this.arrShowingUpto = [];
+        this.localGrid = Array(this.noOfSlides);
+        this.arrShowingFrom = Array(this.noOfSlides);
+        this.arrShowingUpto = Array(this.noOfSlides);
+        for (var i = 0; i < this.noOfSlides; i++) {
+            if (i == 0) {
+                this.arrShowingFrom[i] = 0;
+            }
+            else {
+                this.arrShowingFrom[i] = i * this.masterDetailService.getImagesPerPage();
+            }
+            this.localGrid[i] = this.populateSlide(this.arrShowingFrom[i], i);
+            this.arrShowingUpto[i] = this.nowSlideEndIndex;
+        }
+        if (this.currFilter === "") {
+            this.viewString = "(none) :   (" + (this.arrShowingFrom[0] + 1) + " to " + (this.arrShowingUpto[0] + 1) + " of " + this.masterDetailService.filteredImgList.length + " )";
+        }
+        else {
+            this.viewString = this.currFilter + " :   ( " + (this.arrShowingFrom[0] + 1) + " to " + (this.arrShowingUpto[0] + 1) + " of " + this.masterDetailService.filteredImgList.length + " )";
+        }
+    };
+    ImglistPage.prototype.slideChanged = function () {
+        var _this = this;
+        var currentIndex;
+        this.slides.getPreviousIndex().then(function (prevInd) {
+            _this.slides.getActiveIndex().then(function (val) {
+                currentIndex = val;
+                if (_this.currFilter === "") {
+                    _this.viewString = "(none) :   (" + (_this.arrShowingFrom[val] + 1) + " to " + (_this.arrShowingUpto[val] + 1) + " of " + _this.masterDetailService.filteredImgList.length + " )";
+                }
+                else {
+                    _this.viewString = _this.currFilter + " :   ( " + (_this.arrShowingFrom[val] + 1) + " to " + (_this.arrShowingUpto[val] + 1) + " of " + _this.masterDetailService.filteredImgList.length + " )";
+                }
+                _this.reloadMore(val, prevInd);
+            });
+        });
+    };
+    ImglistPage.prototype.loadPrevPage = function () {
+        this.populateGrid(this.showingFrom - this.masterDetailService.getImagesPerPage());
+    };
+    ImglistPage.prototype.loadNextPage = function () {
+        this.populateGrid(this.showingFrom + this.masterDetailService.getImagesPerPage());
+    };
+    ImglistPage.prototype.reloadMore = function (currIndex, prevIndex) {
+        if (this.masterDetailService.filteredImgList.length > this.noOfSlides * this.masterDetailService.getImagesPerPage()) {
+            if ((currIndex > prevIndex) && currIndex + this.slidePadding >= this.noOfSlides) {
+                var localShowingFrom = this.arrShowingFrom[this.noOfSlides - 1] + this.masterDetailService.getImagesPerPage();
+                if (localShowingFrom < this.masterDetailService.filteredImgList.length) {
+                    //this.arrShowingFrom[this.noOfSlides - 1] =
+                    this.localGrid.shift();
+                    this.localGrid.push(this.populateSlide(localShowingFrom, this.noOfSlides - 1));
+                    this.arrShowingFrom.shift();
+                    this.arrShowingFrom.push(localShowingFrom);
+                    this.arrShowingUpto.shift();
+                    this.arrShowingUpto.push(this.nowSlideEndIndex);
+                    this.slideTo(currIndex - 1);
+                }
+            }
+            else if ((currIndex < prevIndex) && currIndex < this.slidePadding) {
+                var localShowingFrom = this.arrShowingFrom[0] - this.masterDetailService.getImagesPerPage();
+                if (localShowingFrom >= 0) {
+                    this.localGrid.pop();
+                    this.localGrid.unshift(this.populateSlide(localShowingFrom, 0));
+                    this.arrShowingFrom.pop();
+                    this.arrShowingFrom.unshift(localShowingFrom);
+                    this.arrShowingUpto.pop();
+                    this.arrShowingUpto.unshift(this.nowSlideEndIndex);
+                    this.slideTo(currIndex + 1);
+                }
+            }
+        }
+    };
+    ImglistPage.prototype.slideTo = function (index) {
+        console.log('pushed to:' + index);
+        if (this.currFilter === "") {
+            this.viewString = "(none) :   (" + (this.arrShowingFrom[index] + 1) + " to " + (this.arrShowingUpto[index] + 1) + " of " + this.masterDetailService.filteredImgList.length + " )";
+        }
+        else {
+            this.viewString = this.currFilter + " :   ( " + (this.arrShowingFrom[index] + 1) + " to " + (this.arrShowingUpto[index] + 1) + " of " + this.masterDetailService.filteredImgList.length + " )";
+        }
+        this.slides.slideTo(index, 0, false);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"]),
+        __metadata("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"])
+    ], ImglistPage.prototype, "slides", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('popoverContent', { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])

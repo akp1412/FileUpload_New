@@ -402,7 +402,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n\r\n<!--<div class=\"swiper-container\">-->\r\n    <!--<div class=\"swiper-wrapper\">-->\r\n    <!--<ion-slides pager=\"false\" autoHeight=\"true\" (ionSlideDidChange)=\"slideDidChange()\" (ionSlideWillChange)=\"slideWillChange()\" [ngStyle]=\"{ 'height': slideIndex===0 ? 'auto' : '100vh' }\">-->\r\n    <!--<ion-slides ion-fixed pager=\"false\" [options]=\"slideOpts\" (ionSlideDidChange)=\"slideDidChange()\" [ngStyle]=\"{ 'height': slideIndex===1 ? '100vh': 'auto' }\">\r\n       \r\n            <ion-slide>-->\r\n                <!--<ion-content>-->\r\n\r\n                <ion-grid style=\"width:100%;\">\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">This Week</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        \r\n                                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                        \r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color: darkred;font-size:12px;\">Last Week</ion-label>\r\n                            </ion-item>\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">2 Weeks Ago</ion-label>\r\n                            </ion-item>\r\n\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">3 Week Ago</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W4\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">Last Month</ion-label>\r\n                            </ion-item>\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">2 Month Ago</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">Earlier this Year</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y1')\">1 Year ago </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y2')\">2 Years ago </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y3')\">3 Years ago </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y4')\">Older... </ion-label>\r\n                            </ion-item>\r\n\r\n\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y4\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n\r\n                <!--</ion-content>-->\r\n\r\n          <!--  </ion-slide>-->\r\n        <!--</ion-content>-->\r\n\r\n\r\n            <!--<ion-slide >\r\n               \r\n                <h2> Album SLide</h2>\r\n               \r\n            </ion-slide>\r\n\r\n</ion-slides>\r\n        </div>-->\r\n\r\n<ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n    <ion-fab-button color=\"secondary\" (click)=\"LoadSourceOptions()\" ion-fab mini><ion-icon name=\"add\"></ion-icon></ion-fab-button>\r\n</ion-fab>\r\n</ion-content>"
+module.exports = "<ion-content>\r\n    <ion-refresher (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n    <!--<div class=\"swiper-container\">-->\r\n    <!--<div class=\"swiper-wrapper\">-->\r\n    <!--<ion-slides pager=\"false\" autoHeight=\"true\" (ionSlideDidChange)=\"slideDidChange()\" (ionSlideWillChange)=\"slideWillChange()\" [ngStyle]=\"{ 'height': slideIndex===0 ? 'auto' : '100vh' }\">-->\r\n    <!--<ion-slides ion-fixed pager=\"false\" [options]=\"slideOpts\" (ionSlideDidChange)=\"slideDidChange()\" [ngStyle]=\"{ 'height': slideIndex===1 ? '100vh': 'auto' }\">\r\n\r\n            <ion-slide>-->\r\n    <!--<ion-content>-->\r\n\r\n    <ion-grid style=\"width:100%;\">\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">This Week</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color: darkred;font-size:12px;\">Last Week</ion-label>\r\n                </ion-item>\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">2 Weeks Ago</ion-label>\r\n                </ion-item>\r\n\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">3 Week Ago</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W4\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">Last Month</ion-label>\r\n                </ion-item>\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">2 Month Ago</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">Earlier this Year</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y1')\">1 Year ago </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y2')\">2 Years ago </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y3')\">3 Years ago </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y4')\">Older... </ion-label>\r\n                </ion-item>\r\n\r\n\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y4\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n    <!--</ion-content>-->\r\n    <!--  </ion-slide>-->\r\n    <!--</ion-content>-->\r\n    <!--<ion-slide >\r\n\r\n                    <h2> Album SLide</h2>\r\n\r\n                </ion-slide>\r\n\r\n    </ion-slides>\r\n            </div>-->\r\n\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button color=\"secondary\" (click)=\"LoadSourceOptions()\" ion-fab mini><ion-icon name=\"add\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <!--<ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button color=\"secondary\" (click)=\"presentAlertSettings()\" ion-fab mini><ion-icon name=\"settings\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n</ion-content>"
 
 /***/ }),
 
@@ -438,6 +438,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/image-picker/ngx */ "./node_modules/@ionic-native/image-picker/ngx/index.js");
 /* harmony import */ var _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -496,8 +497,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, transfer, camera, file, loadingCtrl, toastCtrl, httpClient, communityService, photoViewer, alertController, imagePicker, masterDetailService, route) {
+    function HomePage(navCtrl, transfer, camera, file, loadingCtrl, toastCtrl, httpClient, communityService, photoViewer, alertController, imagePicker, masterDetailService, route, storage) {
         this.navCtrl = navCtrl;
         this.transfer = transfer;
         this.camera = camera;
@@ -511,6 +513,7 @@ var HomePage = /** @class */ (function () {
         this.imagePicker = imagePicker;
         this.masterDetailService = masterDetailService;
         this.route = route;
+        this.storage = storage;
         this.newImgArray = [];
         this.slideIndex = 0;
         this.slideOpts = {
@@ -519,9 +522,49 @@ var HomePage = /** @class */ (function () {
         this.cntImagetoLoad = 0;
     }
     HomePage.prototype.ngOnInit = function () {
+        var _this = this;
         this.slideIndex = 0;
-        this.presentAlertMultipleButtons();
+        //this.presentAlertMultipleButtons();
         //this.getImageList();
+        this.storage.get('serviceVersion').then(function (val) {
+            if (val != null) {
+                console.log(val);
+                if (val === "P") {
+                    _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                }
+                else if (val === "A") {
+                    _this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+                }
+                else if (val === "B") {
+                    _this.communityService.baseUrl = "http://localhost:49168/api";
+                }
+                _this.presentLoading();
+                _this.getImageList();
+            }
+            else {
+                _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                _this.presentLoading();
+                _this.getImageList();
+            }
+        });
+        this.storage.get('imgPerRow').then(function (val) {
+            if (val != null) {
+                console.log(val);
+                _this.masterDetailService.setImgGridCols(parseInt(val));
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
+        this.storage.get('rowsPerPage').then(function (val) {
+            if (val != null) {
+                console.log(val);
+                _this.masterDetailService.setImgGridRows(parseInt(val));
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
     };
     HomePage.prototype.presentImageSOurceOptions = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -659,7 +702,6 @@ var HomePage = /** @class */ (function () {
             _this.cntImagetoLoad = file_uris.length;
             _this.presentLoading();
             for (var i = 0; i < file_uris.length; i++) {
-                _this.cntImagetoLoad--;
                 _this.getBase64String(file_uris[i]);
             }
             //////this.getImageList();
@@ -776,6 +818,7 @@ var HomePage = /** @class */ (function () {
             this.localGrid[4][3] = 'assets/icon/more.png';
         }
         if (periodFilter === 'W1') {
+            this.grid_W1 = [];
             this.grid_W1 = this.localGrid;
         }
         else if (periodFilter === 'W2') {
@@ -946,7 +989,7 @@ var HomePage = /** @class */ (function () {
         };
         this.camera.getPicture(options).then(function (imageData) {
             _this.presentLoading();
-            _this.cntImagetoLoad = 0;
+            _this.cntImagetoLoad = 1;
             _this.getBase64String(imageData);
             //this.file.resolveLocalFilesystemUrl(imageData).then(oneFile => {
             //    this.imageFileName = oneFile.name;
@@ -1020,8 +1063,10 @@ var HomePage = /** @class */ (function () {
             _this.base64Image = "";
             console.log(data['_body']);
             _this.appendToImgList(JSON.parse(data['_body']));
+            _this.cntImagetoLoad--;
             if (_this.cntImagetoLoad === 0) {
                 _this.loadingCtrl.dismiss();
+                _this.populateGrid("W1");
                 _this.presentToast("Image uploaded successfully");
             }
         }, function (error) {
@@ -1089,6 +1134,65 @@ var HomePage = /** @class */ (function () {
             this.loadingCtrl.dismiss();
         }
     };
+    HomePage.prototype.presentAlertSettings = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var alertController, alert;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        alertController = document.querySelector('ion-alert-controller');
+                        return [4 /*yield*/, alertController.componentOnReady()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, alertController.create({
+                                header: 'App Settings',
+                                inputs: [
+                                    {
+                                        name: 'imgPerRow',
+                                        value: this.masterDetailService.getImgGridCols(),
+                                        placeholder: 'Images per Row'
+                                    },
+                                    {
+                                        name: 'imgRowsPerPage',
+                                        value: this.masterDetailService.getImgGridRows(),
+                                        placeholder: 'Grid rows per page'
+                                    }
+                                ],
+                                buttons: [
+                                    {
+                                        text: 'Cancel',
+                                        role: 'cancel',
+                                        cssClass: 'secondary',
+                                        handler: function () {
+                                            console.log('Confirm Cancel');
+                                        }
+                                    }, {
+                                        text: 'Ok',
+                                        handler: function (data) {
+                                            console.log('Confirm Ok');
+                                            _this.masterDetailService.setImgGridCols(parseInt(data.imgPerRow));
+                                            _this.masterDetailService.setImgGridRows(parseInt(data.imgRowsPerPage));
+                                        }
+                                    }
+                                ]
+                            })];
+                    case 2:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 3: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    HomePage.prototype.doRefresh = function (refresher) {
+        console.log('Begin async operation', refresher);
+        this.ngOnInit();
+        setTimeout(function () {
+            console.log('Async operation has ended');
+            refresher.target.complete();
+        }, 2000);
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"]),
         __metadata("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"])
@@ -1115,7 +1219,7 @@ var HomePage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
             _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_8__["ImagePicker"],
             _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_9__["MasterDetailService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"], _ionic_storage__WEBPACK_IMPORTED_MODULE_11__["Storage"]])
     ], HomePage);
     return HomePage;
 }());

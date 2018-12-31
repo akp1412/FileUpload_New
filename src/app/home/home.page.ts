@@ -14,7 +14,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { ViewChild } from '@angular/core';
 import { Slides, Slide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-
+import { Storage } from '@ionic/storage';
 
 
 
@@ -57,7 +57,7 @@ export class HomePage {
         public alertController: AlertController,
         private imagePicker: ImagePicker,
         private masterDetailService: MasterDetailService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute, private storage: Storage
         ) { }
 
     public images: Array<string>;
@@ -78,8 +78,54 @@ export class HomePage {
 
     ngOnInit() {
         this.slideIndex = 0;
-        this.presentAlertMultipleButtons();
+        //this.presentAlertMultipleButtons();
         //this.getImageList();
+        this.storage.get('serviceVersion').then(val => {
+            if (val != null) {
+                console.log(val);
+                if (val === "P") {
+                    this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    
+                } else if (val === "A") {
+                    this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+                } else if (val === "B") {
+                    this.communityService.baseUrl = "http://localhost:49168/api";
+                }
+                this.presentLoading();
+                this.getImageList();
+            }
+            else {
+                this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                this.presentLoading();
+                this.getImageList();
+            }
+        });
+
+
+        this.storage.get('imgPerRow').then(val => {
+            if (val != null) {
+                console.log(val);
+                this.masterDetailService.setImgGridCols(parseInt(val));
+                
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
+
+        this.storage.get('rowsPerPage').then(val => {
+            if (val != null) {
+                console.log(val);
+                this.masterDetailService.setImgGridRows(parseInt(val));
+                
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
+
+       
+        
         
     }
     
@@ -215,7 +261,7 @@ export class HomePage {
                 this.cntImagetoLoad = file_uris.length;
                 this.presentLoading();
                 for (let i = 0; i < file_uris.length; i++) {
-                    this.cntImagetoLoad--;
+                    
                     
                     this.getBase64String(file_uris[i]);
                     
@@ -354,7 +400,10 @@ export class HomePage {
         if (localImgList.length > 20) {
             this.localGrid[4][3] = 'assets/icon/more.png';
         }
-        if (periodFilter === 'W1') { this.grid_W1 = this.localGrid }
+        if (periodFilter === 'W1') {
+            this.grid_W1 = [];
+            this.grid_W1 = this.localGrid;
+        }
         else if (periodFilter === 'W2') { this.grid_W2 = this.localGrid }
         else if (periodFilter === 'W3') { this.grid_W3 = this.localGrid }
         else if (periodFilter === 'W4') { this.grid_W4 = this.localGrid }
@@ -401,6 +450,7 @@ export class HomePage {
             //loading.dismiss();
         });
     }
+
     async presentPrompt(strFilter) {
 
         let localList = this.masterDetailService.getImages().filter(p => p.period === strFilter);
@@ -494,7 +544,7 @@ export class HomePage {
 
             
             this.presentLoading();
-            this.cntImagetoLoad = 0;
+            this.cntImagetoLoad = 1;
             this.getBase64String(imageData);
 
 
@@ -566,9 +616,12 @@ export class HomePage {
                 this.base64Image = "";
                 console.log(data['_body']);
                 this.appendToImgList(JSON.parse(data['_body']));
+                this.cntImagetoLoad--;
                 if (this.cntImagetoLoad === 0) {
                     this.loadingCtrl.dismiss();
+                    this.populateGrid("W1");
                     this.presentToast("Image uploaded successfully");
+                    
                 }
                 
                
@@ -639,6 +692,55 @@ export class HomePage {
             this.masterDetailService.setIsDirty(false);
             this.loadingCtrl.dismiss();
         }
+    }
+
+    async  presentAlertSettings() {
+    const alertController = document.querySelector('ion-alert-controller');
+    await alertController.componentOnReady();
+    const alert = await alertController.create({
+        header: 'App Settings',
+        inputs: [
+            {
+                name: 'imgPerRow',
+                value: this.masterDetailService.getImgGridCols(),
+                placeholder: 'Images per Row'
+            },
+            {
+                name: 'imgRowsPerPage',
+                value: this.masterDetailService.getImgGridRows(),
+                placeholder: 'Grid rows per page'
+            }
+        ],
+        buttons: [
+            {
+                text: 'Cancel',
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {
+                    console.log('Confirm Cancel')
+                }
+            }, {
+                text: 'Ok',
+                handler: data => {
+                    console.log('Confirm Ok')
+                                       
+                    this.masterDetailService.setImgGridCols(parseInt(data.imgPerRow));
+                    this.masterDetailService.setImgGridRows(parseInt(data.imgRowsPerPage));
+                }
+            }
+        ]
+    });
+    return await alert.present();
+    }
+
+    doRefresh(refresher) {
+        console.log('Begin async operation', refresher);
+        this.ngOnInit();
+
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            refresher.target.complete();
+        }, 2000);
     }
 }
 

@@ -32,6 +32,7 @@ export class GalleryPage {
     blnAutoSlideChange: boolean = false;
     noOfSLides: any = 11;
     slidePadding: any = 5;
+    blnFirstImage: boolean = false;
     
 
     constructor(private navCtrl: NavController,
@@ -103,7 +104,7 @@ export class GalleryPage {
     async presentLoading() {
         const loading = await this.loadingCtrl.create({
             message: 'Busy...',
-            duration: 9000
+            duration: 3000
         });
         return await loading.present();
     }
@@ -116,10 +117,18 @@ export class GalleryPage {
         return await loading.present();
     }
 
+    async presentLongishLoading() {
+        const loading = await this.loadingCtrl.create({
+            message: 'Busy...',
+            duration: 10000
+        });
+        return await loading.present();
+    }
+
     loaded(imgIndex) {
-        this.imgUrls[this.imgUrls.findIndex(p => p.imgUrl === imgIndex)].loaded = "1";
+        this.imgUrls[imgIndex - this.firstSlideIndex].loaded = "1";
         this.slides.getActiveIndex().then(val => {
-            if (this.imgUrls.findIndex(p => p.imgUrl === imgIndex) === val) {
+            if (this.imgUrls[val].loaded === "1") {
                 this.loadingCtrl.dismiss();
             }
         });
@@ -213,12 +222,14 @@ export class GalleryPage {
                             if (this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl != 'assets/icon/imgDeleted.jpg') {
                                 newUrl = {
                                     "imgUrl": this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl,
-                                    "loaded": "0"
+                                    "loaded": "0",
+                                    "index": this.firstSlideIndex + this.noOfSLides
                                 }
                             } else {
                                 newUrl = {
                                     "imgUrl": this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl,
-                                    "loaded": "0"
+                                    "loaded": "0",
+                                    "index": this.firstSlideIndex + this.noOfSLides
                                 }
                             }
                             
@@ -238,12 +249,14 @@ export class GalleryPage {
                             if (this.masterDetailService.filteredImgList[this.firstSlideIndex -1].imgParentUrl != 'assets/icon/imgDeleted.jpg') {
                                 newUrl = {
                                     "imgUrl": this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex - 1].imgParentUrl,
-                                    "loaded": "0"
+                                    "loaded": "0",
+                                    "index": this.firstSlideIndex -1
                                 }
                             } else {
                                 newUrl = {
                                     "imgUrl": this.masterDetailService.filteredImgList[this.firstSlideIndex - 1].imgParentUrl,
-                                    "loaded": "0"
+                                    "loaded": "0",
+                                    "index": this.firstSlideIndex - 1
                                 }
                             }
 
@@ -263,8 +276,7 @@ export class GalleryPage {
 
         //this.imgUrls.
     }
-
-
+    
     slideTo(index) {
         
         if (this.masterDetailService.filteredImgList[this.firstSlideIndex + index].imgAlbum != '') {
@@ -272,7 +284,15 @@ export class GalleryPage {
         }
         console.log('pushed to:' + index);
         if (this.imgUrls[index].loaded === "0") {
-            this.presentLoading();
+            if (this.blnFirstImage) {
+                this.presentLongishLoading();
+                this.blnFirstImage = false;
+            } else {
+                this.presentLoading();
+            }
+            
+        } else {
+            this.loadingCtrl.dismiss();
         }
         this.slides.slideTo(index,0,false);
     }
@@ -561,7 +581,7 @@ export class GalleryPage {
         //    }
 
         //}
-
+        this.blnFirstImage = true;
         this.slideTo(currIndex - this.firstSlideIndex);
         this.loadingCtrl.dismiss();
         //this.socialSharing.sh
@@ -601,7 +621,7 @@ export class GalleryPage {
             //this.photoViewer.show(this.masterDetailService.filteredImgList[val].imgParentUrl);
             //console.log(this.masterDetailService.filteredImgList[val].imgParentUrl);
             this.presentLongLoading();
-            this.socialSharing.share("Shared from my Gallery", "Awesome Image", this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgParentUrl)
+            this.socialSharing.share("Shared from AtoZ Gallery", "Awesome Image", this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgParentUrl)
                 .then((entries) => {
                     console.log('success ' + JSON.stringify(entries));
                     this.loadingCtrl.dismiss();

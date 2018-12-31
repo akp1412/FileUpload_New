@@ -21,6 +21,9 @@ export class MasterDetailService {
     private strY4Filter: string = "";
     private blnListShowAlbums: boolean = false;
     public filteredImgList: any;
+    private imagesPerPage: any = 200;
+    private imgGridRows: any = 5;
+    private imgGridCols: any = 4;
 
     constructor() { }
 
@@ -192,5 +195,25 @@ export class MasterDetailService {
 
     public setFilteredImgList(imgList) {
         this.filteredImgList = imgList;
+    }
+
+    public getImagesPerPage() {
+        return this.imgGridRows * this.imgGridCols;
+    }
+
+    public getImgGridCols() {
+        return this.imgGridCols;
+    }
+
+    public setImgGridCols(count) {
+        this.imgGridCols = count;
+    }
+
+    public getImgGridRows() {
+        return this.imgGridRows;
+    }
+
+    public setImgGridRows(count) {
+        this.imgGridRows = count;
     }
 }

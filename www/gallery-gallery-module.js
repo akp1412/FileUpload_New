@@ -62,7 +62,7 @@ var GalleryPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n<ion-content background-color=\"black\">\r\n   \r\n    <!--<div align=\"center\" style=\"background-color:black;color:white;\">{{strAlbum}}</div>-->\r\n        <!--<ion-slides style=\"height:100vh; background:black;\" scrollbar=\"true\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">-->\r\n        <ion-slides style=\"height:100vh; background:black;\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">\r\n\r\n            <ion-slide style=\"height:100vh;\" background-color=\"red\" *ngFor=\"let img of imgUrls\">\r\n\r\n                <div class=\"swiper-zoom-container\">\r\n                    <img  title={{strAlbum}} id={{img.imgUrl}} (load)=\"loaded(img.imgUrl)\" src={{img.imgUrl}} class=\"thumb-img\" style=\" display: block;  padding:5px; height: auto; margin: auto; \" imageViewer />\r\n\r\n                </div>\r\n            </ion-slide>\r\n        </ion-slides>\r\n\r\n        <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"goback()\" color=\"light\" ion-fab mini><ion-icon name=\"ios-arrow-back\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"share()\" color=\"secondary\" ion-fab mini><ion-icon name=\"share\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <ion-fab id=\"AddToAlbum\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"hasAlbum === false\">\r\n            <ion-fab-button (click)=\"presentPopover($event)\" color=\"tertiary\" ion-fab mini><ion-icon name=\"filing\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n        </ion-fab>-->\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" *ngIf=\"hasAlbum === true\">\r\n            <ion-fab-button (click)=\"removeFromAlbum()\" color=\"danger\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n        </ion-fab>-->\r\n        <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n            <ion-fab-button color=\"danger\" mini>\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </ion-fab-button>\r\n            <ion-fab-list side=\"bottom\">\r\n                <ion-fab-button *ngIf=\"hasAlbum === true\" (click)=\"removeFromAlbum()\" color=\"secondary\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n            </ion-fab-list>\r\n        </ion-fab>\r\n\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button mini>\r\n                <ion-icon name=\"share\"></ion-icon>\r\n            </ion-fab-button>\r\n            <ion-fab-list side=\"top\">\r\n                <ion-fab-button class=\"fab-button\"><ion-icon name=\"logo-whatsapp\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button (click)=\"fab_clicked('FACEBOOK','BLA_BLA')\"><ion-icon name=\"logo-facebook\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button><ion-icon name=\"email\"></ion-icon></ion-fab-button>\r\n\r\n            </ion-fab-list>\r\n        </ion-fab>-->\r\n</ion-content>"
+module.exports = "<!--<ion-header>\r\n    <ion-toolbar>\r\n        <ion-back-button (click)=\"goback()\" slot=\"start\"></ion-back-button>\r\n        <ion-title>Gallery</ion-title>\r\n    </ion-toolbar>\r\n\r\n</ion-header>-->\r\n<!--text-center  class=\"vertical-align-content\"-->\r\n<ion-content background-color=\"black\">\r\n   \r\n    <!--<div align=\"center\" style=\"background-color:black;color:white;\">{{strAlbum}}</div>-->\r\n        <!--<ion-slides style=\"height:100vh; background:black;\" scrollbar=\"true\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">-->\r\n        <ion-slides style=\"height:100vh; background:black;\" pager=\"false\" sliderperview=\"2\" (ionSlideDidChange)=\"slideChanged()\">\r\n\r\n            <ion-slide style=\"height:100vh;\" background-color=\"red\" *ngFor=\"let img of imgUrls\">\r\n\r\n                <div class=\"swiper-zoom-container\">\r\n                    <img  title={{strAlbum}} id={{img.imgUrl}} (load)=\"loaded(img.index)\" src={{img.imgUrl}} class=\"thumb-img\" style=\" display: block;  padding:5px; height: auto; margin: auto; \" imageViewer />\r\n\r\n                </div>\r\n            </ion-slide>\r\n        </ion-slides>\r\n\r\n        <ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"goback()\" color=\"light\" ion-fab mini><ion-icon name=\"ios-arrow-back\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"share()\" color=\"secondary\" ion-fab mini><ion-icon name=\"share\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <ion-fab id=\"AddToAlbum\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"hasAlbum === false\">\r\n            <ion-fab-button (click)=\"presentPopover($event)\" color=\"tertiary\" ion-fab mini><ion-icon name=\"filing\"></ion-icon></ion-fab-button>\r\n        </ion-fab>\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n            <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n        </ion-fab>-->\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\" *ngIf=\"hasAlbum === true\">\r\n            <ion-fab-button (click)=\"removeFromAlbum()\" color=\"danger\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n        </ion-fab>-->\r\n        <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n            <ion-fab-button color=\"danger\" mini>\r\n                <ion-icon name=\"more\"></ion-icon>\r\n            </ion-fab-button>\r\n            <ion-fab-list side=\"bottom\">\r\n                <ion-fab-button *ngIf=\"hasAlbum === true\" (click)=\"removeFromAlbum()\" color=\"secondary\" ion-fab mini><ion-icon name=\"remove\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button (click)=\"deleteImage()\" color=\"danger\" ion-fab mini><ion-icon name=\"ios-trash\"></ion-icon></ion-fab-button>\r\n            </ion-fab-list>\r\n        </ion-fab>\r\n\r\n        <!--<ion-fab vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\r\n            <ion-fab-button mini>\r\n                <ion-icon name=\"share\"></ion-icon>\r\n            </ion-fab-button>\r\n            <ion-fab-list side=\"top\">\r\n                <ion-fab-button class=\"fab-button\"><ion-icon name=\"logo-whatsapp\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button (click)=\"fab_clicked('FACEBOOK','BLA_BLA')\"><ion-icon name=\"logo-facebook\"></ion-icon></ion-fab-button>\r\n                <ion-fab-button><ion-icon name=\"email\"></ion-icon></ion-fab-button>\r\n\r\n            </ion-fab-list>\r\n        </ion-fab>-->\r\n</ion-content>"
 
 /***/ }),
 
@@ -168,6 +168,7 @@ var GalleryPage = /** @class */ (function () {
         this.blnAutoSlideChange = false;
         this.noOfSLides = 11;
         this.slidePadding = 5;
+        this.blnFirstImage = false;
     }
     GalleryPage.prototype.goback = function () {
         if (this.masterDetailService.getIsDirty() && this.masterDetailService.getListMode() != 'GENERAL') {
@@ -248,7 +249,7 @@ var GalleryPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
                             message: 'Busy...',
-                            duration: 9000
+                            duration: 3000
                         })];
                     case 1:
                         loading = _a.sent();
@@ -275,11 +276,28 @@ var GalleryPage = /** @class */ (function () {
             });
         });
     };
+    GalleryPage.prototype.presentLongishLoading = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var loading;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadingCtrl.create({
+                            message: 'Busy...',
+                            duration: 10000
+                        })];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     GalleryPage.prototype.loaded = function (imgIndex) {
         var _this = this;
-        this.imgUrls[this.imgUrls.findIndex(function (p) { return p.imgUrl === imgIndex; })].loaded = "1";
+        this.imgUrls[imgIndex - this.firstSlideIndex].loaded = "1";
         this.slides.getActiveIndex().then(function (val) {
-            if (_this.imgUrls.findIndex(function (p) { return p.imgUrl === imgIndex; }) === val) {
+            if (_this.imgUrls[val].loaded === "1") {
                 _this.loadingCtrl.dismiss();
             }
         });
@@ -360,13 +378,15 @@ var GalleryPage = /** @class */ (function () {
                         if (this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl != 'assets/icon/imgDeleted.jpg') {
                             newUrl = {
                                 "imgUrl": this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl,
-                                "loaded": "0"
+                                "loaded": "0",
+                                "index": this.firstSlideIndex + this.noOfSLides
                             };
                         }
                         else {
                             newUrl = {
                                 "imgUrl": this.masterDetailService.filteredImgList[this.firstSlideIndex + this.noOfSLides].imgParentUrl,
-                                "loaded": "0"
+                                "loaded": "0",
+                                "index": this.firstSlideIndex + this.noOfSLides
                             };
                         }
                         this.imgUrls.shift();
@@ -384,13 +404,15 @@ var GalleryPage = /** @class */ (function () {
                         if (this.masterDetailService.filteredImgList[this.firstSlideIndex - 1].imgParentUrl != 'assets/icon/imgDeleted.jpg') {
                             newUrl = {
                                 "imgUrl": this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[this.firstSlideIndex - 1].imgParentUrl,
-                                "loaded": "0"
+                                "loaded": "0",
+                                "index": this.firstSlideIndex - 1
                             };
                         }
                         else {
                             newUrl = {
                                 "imgUrl": this.masterDetailService.filteredImgList[this.firstSlideIndex - 1].imgParentUrl,
-                                "loaded": "0"
+                                "loaded": "0",
+                                "index": this.firstSlideIndex - 1
                             };
                         }
                         this.imgUrls.unshift(newUrl);
@@ -411,7 +433,16 @@ var GalleryPage = /** @class */ (function () {
         }
         console.log('pushed to:' + index);
         if (this.imgUrls[index].loaded === "0") {
-            this.presentLoading();
+            if (this.blnFirstImage) {
+                this.presentLongishLoading();
+                this.blnFirstImage = false;
+            }
+            else {
+                this.presentLoading();
+            }
+        }
+        else {
+            this.loadingCtrl.dismiss();
         }
         this.slides.slideTo(index, 0, false);
     };
@@ -690,6 +721,7 @@ var GalleryPage = /** @class */ (function () {
         //        this.imgUrls[i].imgUrl = this.masterDetailService.getParentBase() + this.masterDetailService.filteredImgList[i].imgParentUrl;
         //    }
         //}
+        this.blnFirstImage = true;
         this.slideTo(currIndex - this.firstSlideIndex);
         this.loadingCtrl.dismiss();
         //this.socialSharing.sh
@@ -731,7 +763,7 @@ var GalleryPage = /** @class */ (function () {
             //this.photoViewer.show(this.masterDetailService.filteredImgList[val].imgParentUrl);
             //console.log(this.masterDetailService.filteredImgList[val].imgParentUrl);
             _this.presentLongLoading();
-            _this.socialSharing.share("Shared from my Gallery", "Awesome Image", _this.masterDetailService.getParentBase() + _this.masterDetailService.filteredImgList[_this.firstSlideIndex + val].imgParentUrl)
+            _this.socialSharing.share("Shared from AtoZ Gallery", "Awesome Image", _this.masterDetailService.getParentBase() + _this.masterDetailService.filteredImgList[_this.firstSlideIndex + val].imgParentUrl)
                 .then(function (entries) {
                 console.log('success ' + JSON.stringify(entries));
                 _this.loadingCtrl.dismiss();

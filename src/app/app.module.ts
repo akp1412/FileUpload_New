@@ -17,13 +17,15 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { PopoverPageModule } from './popover/popover.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { FormsModule } from '@angular/forms';
+
 //import { Base64 } from '@ionic-native/base64/ngx';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpModule, PopoverPageModule],
+    imports: [FormsModule,BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpModule, PopoverPageModule],
   providers: [
     StatusBar,
     SplashScreen,

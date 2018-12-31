@@ -1623,7 +1623,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n"
+module.exports = "<!--<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>-->\r\n<ion-app>\r\n    <ion-menu>\r\n        <ion-header>\r\n            <ion-toolbar>\r\n                <ion-title>Settings</ion-title>\r\n            </ion-toolbar>\r\n        </ion-header>\r\n        <ion-content padding>\r\n            <!--<ion-list>\r\n        <ion-menu-toggle *ngFor=\"let p of appPages\">\r\n            <ion-item [routerLink]=\"p.url\" [routerDirection]=\"'forward'\">\r\n                <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n                <ion-label>{{p.title}}</ion-label>\r\n            </ion-item>\r\n        </ion-menu-toggle>\r\n    </ion-list>-->\r\n            <form id=\"page-form1\">\r\n                <ion-label color=\"primary\">Credentials</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"tertiary\" position=\"stacked\">User Name</ion-label>\r\n                    <ion-input type=\"text\" name=\"username\" [(ngModel)]=\"UserID\"></ion-input>\r\n                </ion-item>\r\n\r\n                <ion-item>\r\n                    <ion-label color=\"tertiary\" position=\"stacked\">Password</ion-label>\r\n                    <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"password\"></ion-input>\r\n                </ion-item>\r\n                <br />\r\n                <div>  </div>\r\n                <ion-label color=\"primary\">Image Grid display settings</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Images per line</ion-label>\r\n                    <ion-input type=\"number\" name=\"imgPerRow\" [(ngModel)]=\"imgPerRow\"></ion-input>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Rows per page</ion-label>\r\n                    <ion-input type=\"number\" name=\"rowsPerPage\" [(ngModel)]=\"rowsPerPage\"></ion-input>\r\n                </ion-item>\r\n                <br />\r\n                <div>  </div>\r\n                <ion-label color=\"primary\">Service version</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Select Service version</ion-label>\r\n                    <ion-select  name=\"serviceVersion\" [(ngModel)]=\"serviceVersion\">\r\n                        <ion-select-option value=\"P\">Production</ion-select-option>\r\n                        <ion-select-option value=\"A\">Android</ion-select-option>\r\n                        <ion-select-option value=\"B\">Browser</ion-select-option>\r\n                    </ion-select>\r\n                    \r\n                </ion-item>\r\n                <div padding>\r\n                    <ion-button size=\"large\" (click)=\"saveSetting()\" expand=\"block\">Save</ion-button>\r\n                </div>\r\n            </form>\r\n        </ion-content>\r\n\r\n    </ion-menu>\r\n    <ion-router-outlet main></ion-router-outlet>\r\n\r\n</ion-app>"
 
 /***/ }),
 
@@ -1643,6 +1643,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _services_community_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/community.service */ "./src/app/services/community.service.ts");
 /* harmony import */ var _services_masterdetail_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1658,11 +1659,32 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    function AppComponent(platform, splashScreen, statusBar, storage, navCtrl) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.storage = storage;
+        this.navCtrl = navCtrl;
+        this.appPages = [
+            {
+                title: 'My Communities',
+                url: '/mycommunities',
+                icon: 'contacts'
+            },
+            {
+                title: 'Add Community',
+                url: '/about',
+                icon: 'add'
+            }
+        ];
+        this.UserID = "";
+        this.password = "";
+        this.imgPerRow = 4;
+        this.rowsPerPage = 5;
+        this.serviceVersion = "P";
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -1670,7 +1692,60 @@ var AppComponent = /** @class */ (function () {
         this.platform.ready().then(function () {
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
+            _this.storage.get('UserID').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.UserID = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('password').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.password = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('imgPerRow').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.imgPerRow = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('rowsPerPage').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.rowsPerPage = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('serviceVersion').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.serviceVersion = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
         });
+    };
+    AppComponent.prototype.saveSetting = function () {
+        this.storage.set('UserID', this.UserID);
+        this.storage.set('password', this.password);
+        this.storage.set('imgPerRow', this.imgPerRow);
+        this.storage.set('rowsPerPage', this.rowsPerPage);
+        this.storage.set('serviceVersion', this.serviceVersion);
+        this.navCtrl.navigateForward('');
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1680,7 +1755,8 @@ var AppComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_2__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -1716,12 +1792,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/image-picker/ngx */ "./node_modules/@ionic-native/image-picker/ngx/index.js");
 /* harmony import */ var _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./popover/popover.module */ "./src/app/popover/popover.module.ts");
 /* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1747,7 +1825,7 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_12__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"], _angular_http__WEBPACK_IMPORTED_MODULE_11__["HttpModule"], _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__["PopoverPageModule"]],
+            imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormsModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_12__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"], _angular_http__WEBPACK_IMPORTED_MODULE_11__["HttpModule"], _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__["PopoverPageModule"]],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
@@ -1833,7 +1911,7 @@ var PopoverPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n    <ion-list width=\"100%\" *ngIf=\"displayMode==='GALLERY'\">\r\n\r\n        <ion-item>\r\n            <ion-select placeholder=\"Select a Month\" [(ngModel)]=\"filterBy\" interface=\"popover\">\r\n                <ion-select-option *ngFor=\"let opt of selectOptions\" value={{opt}}>{{opt}}</ion-select-option>\r\n\r\n            </ion-select>\r\n        </ion-item>\r\n               \r\n        <ion-grid width=\"100%\">\r\n            <ion-row>\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"filter()\">Filter</ion-button>\r\n                </ion-col>\r\n\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"close()\">Cancel</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            <ion-row *ngIf=\"filterBy !=''\">\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"clear()\">Clear Filter</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            \r\n        </ion-grid>\r\n    </ion-list>\r\n</ion-content>\r\n<ion-content id=\"content\" class=\"radio-test outer-content\">\r\n    <ion-list *ngIf=\"displayMode==='ALBUM'\">\r\n        <ion-radio-group [(ngModel)]=\"currAlbum\">\r\n            <ion-item-divider>\r\n                <ion-label>Choose an Album</ion-label>\r\n            </ion-item-divider>\r\n            <ion-list>\r\n                <ion-item *ngFor=\"let opt of selectOptions\">\r\n                    <ion-label>{{opt}}</ion-label>\r\n                    <ion-radio slot=\"end\" value={{opt}}></ion-radio>\r\n                </ion-item>\r\n\r\n\r\n            </ion-list>\r\n        </ion-radio-group>\r\n        <ion-button expand=\"block\" (click)=\"AddToAlbum()\">Add to Album</ion-button>\r\n    </ion-list>\r\n    \r\n</ion-content>\r\n"
+module.exports = "<ion-content>\r\n    <ion-list width=\"100%\" *ngIf=\"displayMode==='GALLERY'\">\r\n\r\n        <ion-item>\r\n            <ion-select placeholder=\"Select a Month\" [(ngModel)]=\"filterBy\" interface=\"popover\">\r\n                <ion-select-option *ngFor=\"let opt of selectOptions\" value={{opt}}>{{opt}}</ion-select-option>\r\n\r\n            </ion-select>\r\n        </ion-item>\r\n               \r\n        <ion-grid width=\"100%\">\r\n            <ion-row>\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"filter()\">Filter</ion-button>\r\n                </ion-col>\r\n\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"close()\">Cancel</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            <ion-row *ngIf=\"filterBy !=''\">\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"clear()\">Clear Filter</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            \r\n        </ion-grid>\r\n    </ion-list>\r\n</ion-content>\r\n<ion-content id=\"content\" class=\"radio-test outer-content\">\r\n    <ion-list *ngIf=\"displayMode==='ALBUM'\">\r\n        <ion-radio-group [(ngModel)]=\"currAlbum\">\r\n            <ion-item-divider>\r\n                <ion-label>Choose an Album</ion-label>\r\n            </ion-item-divider>\r\n            <ion-list>\r\n                <ion-item *ngFor=\"let opt of selectOptions\">\r\n                    <ion-label>{{opt}}</ion-label>\r\n                    <ion-radio slot=\"end\" value={{opt}}></ion-radio>\r\n                </ion-item>\r\n\r\n\r\n            </ion-list>\r\n        </ion-radio-group>\r\n        <ion-button expand=\"block\" (click)=\"AddToAlbum()\">Add to Album</ion-button>\r\n    </ion-list>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -2038,6 +2116,9 @@ var MasterDetailService = /** @class */ (function () {
         this.strThumbBase = "";
         this.strY4Filter = "";
         this.blnListShowAlbums = false;
+        this.imagesPerPage = 200;
+        this.imgGridRows = 5;
+        this.imgGridCols = 4;
     }
     MasterDetailService.prototype.setUris = function (uris) {
         this.uris = uris;
@@ -2169,6 +2250,21 @@ var MasterDetailService = /** @class */ (function () {
     };
     MasterDetailService.prototype.setFilteredImgList = function (imgList) {
         this.filteredImgList = imgList;
+    };
+    MasterDetailService.prototype.getImagesPerPage = function () {
+        return this.imgGridRows * this.imgGridCols;
+    };
+    MasterDetailService.prototype.getImgGridCols = function () {
+        return this.imgGridCols;
+    };
+    MasterDetailService.prototype.setImgGridCols = function (count) {
+        this.imgGridCols = count;
+    };
+    MasterDetailService.prototype.getImgGridRows = function () {
+        return this.imgGridRows;
+    };
+    MasterDetailService.prototype.setImgGridRows = function (count) {
+        this.imgGridRows = count;
     };
     MasterDetailService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
