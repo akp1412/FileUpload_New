@@ -340,21 +340,28 @@ export class HomePage {
         this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
         this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             this.communityService.getImageList().subscribe(resp => {
-                this.masterDetailService.setImages(resp);
-                console.log(this.masterDetailService.setImages);
+                try {
+                    this.masterDetailService.setImages(resp);
+                    console.log(this.masterDetailService.setImages);
 
-                this.populateGrid("W1");
-                this.populateGrid("W2");
-                this.populateGrid("W3");
-                this.populateGrid("W4");
-                this.populateGrid("M1");
-                this.populateGrid("M3");
-                this.populateGrid("M2");
-                this.populateGrid("Y1");
-                this.populateGrid("Y2");
-                this.populateGrid("Y3");
-                this.populateGrid("Y4");
-                this.loadingCtrl.dismiss();
+                    this.populateGrid("W1");
+                    this.populateGrid("W2");
+                    this.populateGrid("W3");
+                    this.populateGrid("W4");
+                    this.populateGrid("M1");
+                    this.populateGrid("M3");
+                    this.populateGrid("M2");
+                    this.populateGrid("Y1");
+                    this.populateGrid("Y2");
+                    this.populateGrid("Y3");
+                    this.populateGrid("Y4");
+                    this.loadingCtrl.dismiss();
+                } catch (err) {
+                    this.blnLoadingDismissed = true;
+                    this.loadingCtrl.dismiss();
+                    this.presentAlertLoadError(err);
+                }
+                
             }, err => {
                 this.blnLoadingDismissed = true;
                 this.loadingCtrl.dismiss();

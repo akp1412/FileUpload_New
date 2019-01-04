@@ -36,7 +36,7 @@ export class ImglistPage implements OnInit {
     slidePadding: any = 2;
     nowSlideEndIndex: any = 0;
     slideOpts = {
-        autoHeight: 'true'
+        direction: 'horizontal'
     };
 
     constructor(private navCtrl: NavController, private photoViewer: PhotoViewer, private route: ActivatedRoute, private masterDetailService: MasterDetailService, public loadingCtrl: LoadingController,

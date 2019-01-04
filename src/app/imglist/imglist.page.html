@@ -42,7 +42,7 @@
 </ion-toolbar>
 <ion-content>
     <div class="swiper-container">
-    <ion-slides   pager="false" sliderperview="2" (ionSlideDidChange)="slideChanged()">
+    <ion-slides   pager="false" sliderperview="2" (ionSlideDidChange)="slideChanged()" [options]="slideOpts">
 
         <ion-slide style="align-items: flex-start;" *ngFor="let slide of localGrid">
             
