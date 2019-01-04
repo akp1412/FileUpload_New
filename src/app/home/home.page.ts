@@ -334,9 +334,11 @@ export class HomePage {
 
     getImageList() {
         console.log(this.getDateTime());
-        this.communityService.getImageBaseUrls().subscribe(resp => {
+        ////this.communityService.getImageBaseUrls().subscribe(resp => {
             
-            this.setBase(resp);
+        ////    this.setBase(resp);
+        this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
+        this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             this.communityService.getImageList().subscribe(resp => {
                 this.masterDetailService.setImages(resp);
                 console.log(this.masterDetailService.setImages);
@@ -358,11 +360,11 @@ export class HomePage {
                 this.loadingCtrl.dismiss();
                 this.presentAlertLoadError(err);
             });
-        }, err => {
-            this.blnLoadingDismissed = true;
-            this.loadingCtrl.dismiss();
-            this.presentAlertLoadError(err);
-            });
+        ////}, err => {
+        ////    this.blnLoadingDismissed = true;
+        ////    this.loadingCtrl.dismiss();
+        ////    this.presentAlertLoadError(err);
+        ////    });
         
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
