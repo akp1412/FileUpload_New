@@ -66,6 +66,7 @@ export class HomePage {
     slidesMoving: boolean;
     slidesHeight: any;
     slideIndex: any = 0;
+    blnLoadingDismissed: boolean = false;
     slideOpts = {
         autoHeight: 'true'
     };
@@ -110,7 +111,7 @@ export class HomePage {
         //    if (val != null) {
         //        console.log(val);
         //        if (val === "P") {
-        //            this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+        //            this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                     
         //        } else if (val === "A") {
         //            this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -121,7 +122,7 @@ export class HomePage {
         //        this.getImageList();
         //    }
         //    else {
-        //        this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+        //        this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
         //        this.presentLoading();
         //        this.getImageList();
         //    }
@@ -227,7 +228,7 @@ export class HomePage {
                     text: 'Production',
                     handler: () => {
                         // this.navCtrl.navigateForward('add_news');
-                        this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                        this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                         this.presentLoading();
                         this.getImageList();
                         //this.slides.options = this.slideOpts;
@@ -353,10 +354,12 @@ export class HomePage {
                 this.populateGrid("Y4");
                 this.loadingCtrl.dismiss();
             }, err => {
+                this.blnLoadingDismissed = true;
                 this.loadingCtrl.dismiss();
                 this.presentAlertLoadError(err);
             });
         }, err => {
+            this.blnLoadingDismissed = true;
             this.loadingCtrl.dismiss();
             this.presentAlertLoadError(err);
             });
@@ -371,17 +374,10 @@ export class HomePage {
             header: 'Load Error!',
             message: strMessage,
             buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: (blah) => {
-                        console.log('Confirm Cancel: blah');
-                    }
-                }, {
-                    text: 'Remove',
+                 {
+                    text: 'OK',
                     handler: () => {
-                        this.AddToAlbum("APP");
+                        
                     }
                 }
 
@@ -638,6 +634,10 @@ export class HomePage {
         });
         //return await loading.present();
         await loading.present().then(val => {
+            if (this.blnLoadingDismissed) {
+                this.blnLoadingDismissed = false;
+                loading.dismiss();
+            }
             console.log(val);
             //loading.dismiss();
         });
