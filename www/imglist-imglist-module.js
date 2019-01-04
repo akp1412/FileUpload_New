@@ -191,7 +191,7 @@ var ImglistPage = /** @class */ (function () {
         var _this = this;
         //await this.presentLoading();
         if (this.masterDetailService.getListMode() === "GALLERY") {
-            this.strHeading = "Gallery: " + this.masterDetailService.getFilter();
+            this.strHeading = "Gallery: " + this.masterDetailService.getFilter() + " " + this.masterDetailService.getY4Filter();
             if (this.masterDetailService.getY4Filter() === '') {
                 if (this.masterDetailService.getListShowAlbum()) {
                     this.masterDetailService.filteredImgList = this.masterDetailService.getImages().filter(function (p) { return (p.period === _this.masterDetailService.getFilter()); });
@@ -521,10 +521,18 @@ var ImglistPage = /** @class */ (function () {
             localSlideGrid[rowNum] = Array(this.masterDetailService.getImgGridCols());
             for (var j = 0; j < this.masterDetailService.getImgGridCols(); j++) {
                 if (localImgList[startIndex + i + j]) {
-                    localSlideGrid[rowNum][j] = {
-                        "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + j].imgName,
-                        "index": startIndex + i + j
-                    };
+                    if (localImgList[startIndex + i + j].imgName != 'assets/icon/imgDeleted.jpg') {
+                        localSlideGrid[rowNum][j] = {
+                            "url": this.masterDetailService.getThumbBase() + localImgList[startIndex + i + j].imgName,
+                            "index": startIndex + i + j
+                        };
+                    }
+                    else {
+                        localSlideGrid[rowNum][j] = {
+                            "url": localImgList[startIndex + i + j].imgName,
+                            "index": startIndex + i + j
+                        };
+                    }
                 }
                 else {
                     localSlideGrid[rowNum][j] = {
@@ -584,6 +592,7 @@ var ImglistPage = /** @class */ (function () {
         else {
             this.viewString = this.currFilter + " :   ( " + (this.arrShowingFrom[0] + 1) + " to " + (this.arrShowingUpto[0] + 1) + " of " + this.masterDetailService.filteredImgList.length + " )";
         }
+        this.slideTo(0);
     };
     ImglistPage.prototype.slideChanged = function () {
         var _this = this;

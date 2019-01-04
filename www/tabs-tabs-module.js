@@ -711,8 +711,17 @@ var HomePage = /** @class */ (function () {
         var _this = this;
         var fileName = imageUri.split('/').pop();
         var path = imageUri.substring(0, imageUri.lastIndexOf("/") + 1);
+        //var window: any;
+        //window.resolveLocalFileSystemURI(imageUri, (fileEntry) => {
+        //    fileEntry.getMetadata((metadata) => {
+        //        console.log("image size : " + metadata.size);
+        //        console.log("image date : " + metadata.modificationTime);
+        //    });
+        //});
         this.file.readAsDataURL(path, fileName)
             .then(function (base64File) {
+            //const cameraDetail = <CameraDetail>JSON.parse(base64File.replace("data:image/jpeg;base64,", ''));
+            //const exifData = <CameraExifDetail>JSON.parse(cameraDetail.json_metadata);
             _this.base64Image = base64File.replace("data:image/jpeg;base64,", '');
             _this.uploadFile();
         })
@@ -727,6 +736,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.getImageList = function () {
         var _this = this;
+        console.log(this.getDateTime());
         this.communityService.getImageBaseUrls().subscribe(function (resp) {
             _this.setBase(resp);
             _this.communityService.getImageList().subscribe(function (resp) {
@@ -1029,12 +1039,21 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.getDateTime = function () {
         var currentdate = new Date();
-        var datetime = currentdate.toISOString().split("T")[0].split("-")[0] +
-            +currentdate.toISOString().split("T")[0].split("-")[1] +
-            +currentdate.toISOString().split("T")[0].split("-")[2] + "-"
-            + currentdate.toISOString().split("T")[1].split(":")[0] +
-            +currentdate.toISOString().split("T")[1].split(":")[1] +
-            +currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
+        var strMonth = currentdate.toISOString().split("T")[0].split("-")[1].padStart(2, "0");
+        var strDay = currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0");
+        //let datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString() +
+        //    +strMonth +
+        //    + currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0") + "-"
+        //    + currentdate.toISOString().split("T")[1].split(":")[0] +
+        //    + currentdate.toISOString().split("T")[1].split(":")[1] +
+        //    + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
+        //    + "-" + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[1].replace("Z", "");
+        var datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString()
+            + currentdate.toISOString().split("T")[0].split("-")[1].padStart(2, "0")
+            + currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0") + "-"
+            + currentdate.toISOString().split("T")[1].split(":")[0]
+            + currentdate.toISOString().split("T")[1].split(":")[1]
+            + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
             + "-" + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[1].replace("Z", "");
         return datetime;
     };

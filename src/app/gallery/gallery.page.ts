@@ -26,7 +26,7 @@ export class GalleryPage {
     private imgUrls: any[];
     private strAlbum: string = "";
     varComId;
-    displaySource; string;
+    displaySource: string;
     hasAlbum: boolean = false;
     firstSlideIndex: any = 0;
     blnAutoSlideChange: boolean = false;
@@ -145,7 +145,7 @@ export class GalleryPage {
                     this.strAlbum = this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgMonth + "-" + this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgYear;
                 } else {
                     this.hasAlbum = true;
-                    this.strAlbum = this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgAlbum;
+                    this.strAlbum = this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgAlbum + " : " + this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgMonth + "-" + this.masterDetailService.filteredImgList[this.firstSlideIndex + val].imgYear;
                 }
 
                 if (this.imgUrls[val].loaded === "0") {
@@ -582,6 +582,18 @@ export class GalleryPage {
 
         //}
         this.blnFirstImage = true;
+
+        let currentIndex = currIndex - this.firstSlideIndex;
+
+        if (this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgAlbum === '') {
+            this.hasAlbum = false;
+            this.strAlbum = this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgMonth + "-" + this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgYear;
+        } else {
+            this.hasAlbum = true;
+            this.strAlbum = this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgAlbum + " : " + this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgMonth + "-" + this.masterDetailService.filteredImgList[this.firstSlideIndex + currentIndex].imgYear;
+        }
+
+        
         this.slideTo(currIndex - this.firstSlideIndex);
         this.loadingCtrl.dismiss();
         //this.socialSharing.sh

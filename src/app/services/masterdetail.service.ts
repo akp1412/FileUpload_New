@@ -97,7 +97,8 @@ export class MasterDetailService {
 
     public setImgDeleted(imgName) {
         let listIndex = this.objImages.findIndex(p => p.imgName === imgName);
-        this.objImages[listIndex].imgUrl = 'assets/icon/imgDeleted.jpg';
+        //this.objImages[listIndex].imgUrl = 'assets/icon/imgDeleted.jpg';
+        this.objImages[listIndex].imgName = 'assets/icon/imgDeleted.jpg';
         this.objImages[listIndex].imgParentUrl = 'assets/icon/imgDeleted.jpg';
         this.IsDirty = true;
     }

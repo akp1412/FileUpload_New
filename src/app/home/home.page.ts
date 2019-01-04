@@ -16,7 +16,32 @@ import { Slides, Slide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
+interface CameraDetail {
+    filename: string;
+    json_metadata: string;
+}
 
+interface CameraExifDetail {
+    aperture: string;
+    datetime: string;
+    exposureTime: string;
+    flash: string;
+    focalLength: string;
+    gpsAltitude: string;
+    gpsAltitudeRef: string;
+    gpsDateStamp: string;
+    gpsLatitude: string;
+    gpsLatitudeRef: string;
+    gpsLongitude: string;
+    gpsLongitudeRef: string;
+    gpsProcessingMethod: string;
+    gpsTimestamp: string;
+    iso: string;
+    make: string;
+    model: string;
+    orientation: string;
+    whiteBalance: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -275,16 +300,28 @@ export class HomePage {
     getBase64String(imageUri) {
         let fileName = imageUri.split('/').pop();
         let path = imageUri.substring(0, imageUri.lastIndexOf("/") + 1);
-
+        //var window: any;
+        //window.resolveLocalFileSystemURI(imageUri, (fileEntry) => {
+        //    fileEntry.getMetadata((metadata) => {
+        //        console.log("image size : " + metadata.size);
+        //        console.log("image date : " + metadata.modificationTime);
+        //    });
+        //});
         this.file.readAsDataURL(path, fileName)
             .then(base64File => {
+                //const cameraDetail = <CameraDetail>JSON.parse(base64File.replace("data:image/jpeg;base64,", ''));
+
+                //const exifData = <CameraExifDetail>JSON.parse(cameraDetail.json_metadata);
+
                 this.base64Image = base64File.replace("data:image/jpeg;base64,",'');
                 this.uploadFile();
+                
             })
             .catch(() => {
                 console.log('Error reading file');
                 return '';
             })
+        
 
     }
 
@@ -294,7 +331,7 @@ export class HomePage {
     }
 
     getImageList() {
-
+        console.log(this.getDateTime());
         this.communityService.getImageBaseUrls().subscribe(resp => {
             
             this.setBase(resp);
@@ -575,12 +612,23 @@ export class HomePage {
     }
 
     getDateTime() {
-        var currentdate = new Date();
-        var datetime = currentdate.toISOString().split("T")[0].split("-")[0] + 
-            + currentdate.toISOString().split("T")[0].split("-")[1] +
-             + currentdate.toISOString().split("T")[0].split("-")[2] + "-"
-            + currentdate.toISOString().split("T")[1].split(":")[0] + 
-            + currentdate.toISOString().split("T")[1].split(":")[1] + 
+        let currentdate = new Date();
+        let strMonth: String = currentdate.toISOString().split("T")[0].split("-")[1].padStart(2, "0");
+        let strDay: String = currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0");
+
+        //let datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString() +
+        //    +strMonth +
+        //    + currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0") + "-"
+        //    + currentdate.toISOString().split("T")[1].split(":")[0] +
+        //    + currentdate.toISOString().split("T")[1].split(":")[1] +
+        //    + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
+        //    + "-" + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[1].replace("Z", "");
+
+        let datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString() 
+            + currentdate.toISOString().split("T")[0].split("-")[1].padStart(2,"0") 
+            + currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0") + "-"
+            + currentdate.toISOString().split("T")[1].split(":")[0] 
+            + currentdate.toISOString().split("T")[1].split(":")[1]  
             + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
             + "-" + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[1].replace("Z","");
         return datetime;
