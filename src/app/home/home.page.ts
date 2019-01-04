@@ -103,28 +103,29 @@ export class HomePage {
 
     ngOnInit() {
         this.slideIndex = 0;
-        //this.presentAlertMultipleButtons();
+        this.presentAlertMultipleButtons();
         //this.getImageList();
-        this.storage.get('serviceVersion').then(val => {
-            if (val != null) {
-                console.log(val);
-                if (val === "P") {
-                    this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+
+        //this.storage.get('serviceVersion').then(val => {
+        //    if (val != null) {
+        //        console.log(val);
+        //        if (val === "P") {
+        //            this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                     
-                } else if (val === "A") {
-                    this.communityService.baseUrl = "http://10.0.2.2:49168/api";
-                } else if (val === "B") {
-                    this.communityService.baseUrl = "http://localhost:49168/api";
-                }
-                this.presentLoading();
-                this.getImageList();
-            }
-            else {
-                this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
-                this.presentLoading();
-                this.getImageList();
-            }
-        });
+        //        } else if (val === "A") {
+        //            this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+        //        } else if (val === "B") {
+        //            this.communityService.baseUrl = "http://localhost:49168/api";
+        //        }
+        //        this.presentLoading();
+        //        this.getImageList();
+        //    }
+        //    else {
+        //        this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+        //        this.presentLoading();
+        //        this.getImageList();
+        //    }
+        //});
 
 
         this.storage.get('imgPerRow').then(val => {
