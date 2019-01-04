@@ -352,12 +352,43 @@ export class HomePage {
                 this.populateGrid("Y3");
                 this.populateGrid("Y4");
                 this.loadingCtrl.dismiss();
+            }, err => {
+                this.loadingCtrl.dismiss();
+                this.presentAlertLoadError(err);
             });
-        });
+        }, err => {
+            this.loadingCtrl.dismiss();
+            this.presentAlertLoadError(err);
+            });
         
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
 
+    }
+
+    async presentAlertLoadError(strMessage) {
+        const alert = await this.alertController.create({
+            header: 'Load Error!',
+            message: strMessage,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    }
+                }, {
+                    text: 'Remove',
+                    handler: () => {
+                        this.AddToAlbum("APP");
+                    }
+                }
+
+            ]
+        });
+
+        await alert.present();
     }
 
     getGridIndex(imgUrl,strFilter) {
