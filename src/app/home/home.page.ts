@@ -131,27 +131,27 @@ export class HomePage {
         });
 
 
-        this.storage.get('imgPerRow').then(val => {
-            if (val != null) {
-                console.log(val);
-                this.masterDetailService.setImgGridCols(parseInt(val));
+        //this.storage.get('imgPerRow').then(val => {
+        //    if (val != null) {
+        //        console.log(val);
+        //        this.masterDetailService.setImgGridCols(parseInt(val));
                 
-            }
-            else {
-                //this.navCtrl.navigateForward('login');
-            }
-        });
+        //    }
+        //    else {
+        //        //this.navCtrl.navigateForward('login');
+        //    }
+        //});
 
-        this.storage.get('rowsPerPage').then(val => {
-            if (val != null) {
-                console.log(val);
-                this.masterDetailService.setImgGridRows(parseInt(val));
+        //this.storage.get('rowsPerPage').then(val => {
+        //    if (val != null) {
+        //        console.log(val);
+        //        this.masterDetailService.setImgGridRows(parseInt(val));
                 
-            }
-            else {
-                //this.navCtrl.navigateForward('login');
-            }
-        });
+        //    }
+        //    else {
+        //        //this.navCtrl.navigateForward('login');
+        //    }
+        //});
 
        
         
@@ -335,7 +335,7 @@ export class HomePage {
     }
 
     getImageList() {
-        console.log(this.getDateTime());
+        //console.log(this.getDateTime());
         this.presentAlertLoadError("Getting Base Urls");
         this.communityService.getImageBaseUrls().subscribe(resp => {
             this.presentAlertLoadError("Base Urls Received");
