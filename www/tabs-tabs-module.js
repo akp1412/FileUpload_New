@@ -516,6 +516,7 @@ var HomePage = /** @class */ (function () {
         this.storage = storage;
         this.newImgArray = [];
         this.slideIndex = 0;
+        this.blnLoadingDismissed = false;
         this.slideOpts = {
             autoHeight: 'true'
         };
@@ -530,7 +531,7 @@ var HomePage = /** @class */ (function () {
             if (val != null) {
                 console.log(val);
                 if (val === "P") {
-                    _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                 }
                 else if (val === "A") {
                     _this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -542,7 +543,7 @@ var HomePage = /** @class */ (function () {
                 _this.getImageList();
             }
             else {
-                _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                 _this.presentLoading();
                 _this.getImageList();
             }
@@ -646,7 +647,7 @@ var HomePage = /** @class */ (function () {
                                     text: 'Production',
                                     handler: function () {
                                         // this.navCtrl.navigateForward('add_news');
-                                        _this.communityService.baseUrl = " https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                                        _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                                         _this.presentLoading();
                                         _this.getImageList();
                                         //this.slides.options = this.slideOpts;
@@ -739,25 +740,68 @@ var HomePage = /** @class */ (function () {
         console.log(this.getDateTime());
         this.communityService.getImageBaseUrls().subscribe(function (resp) {
             _this.setBase(resp);
+            //this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
+            //this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             _this.communityService.getImageList().subscribe(function (resp) {
-                _this.masterDetailService.setImages(resp);
-                console.log(_this.masterDetailService.setImages);
-                _this.populateGrid("W1");
-                _this.populateGrid("W2");
-                _this.populateGrid("W3");
-                _this.populateGrid("W4");
-                _this.populateGrid("M1");
-                _this.populateGrid("M3");
-                _this.populateGrid("M2");
-                _this.populateGrid("Y1");
-                _this.populateGrid("Y2");
-                _this.populateGrid("Y3");
-                _this.populateGrid("Y4");
+                try {
+                    _this.masterDetailService.setImages(resp);
+                    console.log(_this.masterDetailService.setImages);
+                    _this.populateGrid("W1");
+                    _this.populateGrid("W2");
+                    _this.populateGrid("W3");
+                    _this.populateGrid("W4");
+                    _this.populateGrid("M1");
+                    _this.populateGrid("M3");
+                    _this.populateGrid("M2");
+                    _this.populateGrid("Y1");
+                    _this.populateGrid("Y2");
+                    _this.populateGrid("Y3");
+                    _this.populateGrid("Y4");
+                    _this.loadingCtrl.dismiss();
+                }
+                catch (err) {
+                    _this.blnLoadingDismissed = true;
+                    _this.loadingCtrl.dismiss();
+                    _this.presentAlertLoadError(err);
+                }
+            }, function (err) {
+                _this.blnLoadingDismissed = true;
                 _this.loadingCtrl.dismiss();
+                _this.presentAlertLoadError(err);
             });
+        }, function (err) {
+            _this.blnLoadingDismissed = true;
+            _this.loadingCtrl.dismiss();
+            _this.presentAlertLoadError(err);
         });
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
+    };
+    HomePage.prototype.presentAlertLoadError = function (strMessage) {
+        return __awaiter(this, void 0, void 0, function () {
+            var alert;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: 'Load Error!',
+                            message: strMessage,
+                            buttons: [
+                                {
+                                    text: 'OK',
+                                    handler: function () {
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     HomePage.prototype.getGridIndex = function (imgUrl, strFilter) {
         var localGrid;
@@ -1016,6 +1060,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.presentLoading = function () {
         return __awaiter(this, void 0, void 0, function () {
             var loading;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingCtrl.create({
@@ -1026,6 +1071,10 @@ var HomePage = /** @class */ (function () {
                         loading = _a.sent();
                         //return await loading.present();
                         return [4 /*yield*/, loading.present().then(function (val) {
+                                if (_this.blnLoadingDismissed) {
+                                    _this.blnLoadingDismissed = false;
+                                    loading.dismiss();
+                                }
                                 console.log(val);
                                 //loading.dismiss();
                             })];
@@ -1100,12 +1149,12 @@ var HomePage = /** @class */ (function () {
             //"imgUrl": newImg.imgUrl,
             "imgParentUrl": newImg.imgParentUrl,
             "period": "W1",
-            "imgAlbum": "",
-            "imgYear": this.getDatePart("Y"),
-            "imgMonth": this.getDatePart("M")
+            "imgAlbum": newImg.imgAlbum,
+            "imgYear": newImg.imgYear,
+            "imgMonth": newImg.imgMonth
         };
         this.masterDetailService.pushImage(newEntry);
-        this.populateGrid("W1");
+        //this.populateGrid("W1");
     };
     HomePage.prototype.presentToast = function (msg) {
         return __awaiter(this, void 0, void 0, function () {

@@ -104,29 +104,29 @@ export class HomePage {
 
     ngOnInit() {
         this.slideIndex = 0;
-        this.presentAlertMultipleButtons();
+        //this.presentAlertMultipleButtons();
         //this.getImageList();
 
-        //this.storage.get('serviceVersion').then(val => {
-        //    if (val != null) {
-        //        console.log(val);
-        //        if (val === "P") {
-        //            this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+        this.storage.get('serviceVersion').then(val => {
+            if (val != null) {
+                console.log(val);
+                if (val === "P") {
+                    this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                     
-        //        } else if (val === "A") {
-        //            this.communityService.baseUrl = "http://10.0.2.2:49168/api";
-        //        } else if (val === "B") {
-        //            this.communityService.baseUrl = "http://localhost:49168/api";
-        //        }
-        //        this.presentLoading();
-        //        this.getImageList();
-        //    }
-        //    else {
-        //        this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
-        //        this.presentLoading();
-        //        this.getImageList();
-        //    }
-        //});
+                } else if (val === "A") {
+                    this.communityService.baseUrl = "http://10.0.2.2:49168/api";
+                } else if (val === "B") {
+                    this.communityService.baseUrl = "http://localhost:49168/api";
+                }
+                this.presentLoading();
+                this.getImageList();
+            }
+            else {
+                this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                this.presentLoading();
+                this.getImageList();
+            }
+        });
 
 
         this.storage.get('imgPerRow').then(val => {
@@ -334,11 +334,11 @@ export class HomePage {
 
     getImageList() {
         console.log(this.getDateTime());
-        ////this.communityService.getImageBaseUrls().subscribe(resp => {
+        this.communityService.getImageBaseUrls().subscribe(resp => {
             
-        ////    this.setBase(resp);
-        this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
-        this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
+            this.setBase(resp);
+        //this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
+        //this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             this.communityService.getImageList().subscribe(resp => {
                 try {
                     this.masterDetailService.setImages(resp);
@@ -367,11 +367,11 @@ export class HomePage {
                 this.loadingCtrl.dismiss();
                 this.presentAlertLoadError(err);
             });
-        ////}, err => {
-        ////    this.blnLoadingDismissed = true;
-        ////    this.loadingCtrl.dismiss();
-        ////    this.presentAlertLoadError(err);
-        ////    });
+        }, err => {
+            this.blnLoadingDismissed = true;
+            this.loadingCtrl.dismiss();
+            this.presentAlertLoadError(err);
+            });
         
         //this.objcommunity = this.communityService.getCommunity(id);
         //console.log(this.objcommunity);
@@ -729,13 +729,13 @@ export class HomePage {
             //"imgUrl": newImg.imgUrl,
             "imgParentUrl": newImg.imgParentUrl,
             "period": "W1",
-            "imgAlbum": "",
-            "imgYear": this.getDatePart("Y"),
-            "imgMonth": this.getDatePart("M")
+            "imgAlbum": newImg.imgAlbum,
+            "imgYear": newImg.imgYear,
+            "imgMonth": newImg.imgMonth
         };
 
         this.masterDetailService.pushImage(newEntry);
-        this.populateGrid("W1");
+        //this.populateGrid("W1");
     }
 
     async presentToast(msg) {
