@@ -106,7 +106,7 @@ export class HomePage {
         this.slideIndex = 0;
         //this.presentAlertMultipleButtons();
         //this.getImageList();
-        this.presentAlertLoadError("Checking Service Version");
+        //this.presentAlertLoadError("Checking Service Version");
         this.storage.get('serviceVersion').then(val => {
             if (val != null) {
                 console.log(val);
@@ -118,40 +118,40 @@ export class HomePage {
                 } else if (val === "B") {
                     this.communityService.baseUrl = "http://localhost:49168/api";
                 }
-                this.presentAlertLoadError("Service Version Set");
-                //this.presentLoading();
+                //this.presentAlertLoadError("Service Version Set");
+                this.presentLoading();
                 this.getImageList();
             }
             else {
-                this.presentAlertLoadError("Service Version not found using default");
+                //this.presentAlertLoadError("Service Version not found using default");
                 this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
-                //this.presentLoading();
+                this.presentLoading();
                 this.getImageList();
             }
         });
 
 
-        //this.storage.get('imgPerRow').then(val => {
-        //    if (val != null) {
-        //        console.log(val);
-        //        this.masterDetailService.setImgGridCols(parseInt(val));
+        this.storage.get('imgPerRow').then(val => {
+            if (val != null) {
+                console.log(val);
+                this.masterDetailService.setImgGridCols(parseInt(val));
                 
-        //    }
-        //    else {
-        //        //this.navCtrl.navigateForward('login');
-        //    }
-        //});
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
 
-        //this.storage.get('rowsPerPage').then(val => {
-        //    if (val != null) {
-        //        console.log(val);
-        //        this.masterDetailService.setImgGridRows(parseInt(val));
+        this.storage.get('rowsPerPage').then(val => {
+            if (val != null) {
+                console.log(val);
+                this.masterDetailService.setImgGridRows(parseInt(val));
                 
-        //    }
-        //    else {
-        //        //this.navCtrl.navigateForward('login');
-        //    }
-        //});
+            }
+            else {
+                //this.navCtrl.navigateForward('login');
+            }
+        });
 
        
         
@@ -335,17 +335,17 @@ export class HomePage {
     }
 
     getImageList() {
-        //console.log(this.getDateTime());
-        this.presentAlertLoadError("Getting Base Urls");
+        console.log(this.getDateTime());
+        //this.presentAlertLoadError("Getting Base Urls");
         this.communityService.getImageBaseUrls().subscribe(resp => {
-            this.presentAlertLoadError("Base Urls Received");
+            //this.presentAlertLoadError("Base Urls Received");
             this.setBase(resp);
-            this.presentAlertLoadError("Getting Images");
+            //this.presentAlertLoadError("Getting Images");
         //this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
         //this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             this.communityService.getImageList().subscribe(resp => {
                 try {
-                    this.presentAlertLoadError("Images Received");
+                    //this.presentAlertLoadError("Images Received");
                     this.masterDetailService.setImages(resp);
                     console.log(this.masterDetailService.setImages);
 
@@ -659,8 +659,8 @@ export class HomePage {
 
     getDateTime() {
         let currentdate = new Date();
-        let strMonth: String = currentdate.toISOString().split("T")[0].split("-")[1].padStart(2, "0");
-        let strDay: String = currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0");
+        //let strMonth: String = currentdate.toISOString().split("T")[0].split("-")[1].padStart(2, "0");
+        //let strDay: String = currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0");
 
         //let datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString() +
         //    +strMonth +
@@ -671,8 +671,8 @@ export class HomePage {
         //    + "-" + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[1].replace("Z", "");
 
         let datetime = currentdate.toISOString().split("T")[0].split("-")[0].toString() 
-            + currentdate.toISOString().split("T")[0].split("-")[1].padStart(2,"0") 
-            + currentdate.toISOString().split("T")[0].split("-")[2].padStart(2, "0") + "-"
+            + currentdate.toISOString().split("T")[0].split("-")[1] 
+            + currentdate.toISOString().split("T")[0].split("-")[2] + "-"
             + currentdate.toISOString().split("T")[1].split(":")[0] 
             + currentdate.toISOString().split("T")[1].split(":")[1]  
             + currentdate.toISOString().split("T")[1].split(":")[2].split(".")[0]
