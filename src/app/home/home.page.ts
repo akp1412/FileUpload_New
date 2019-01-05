@@ -106,7 +106,7 @@ export class HomePage {
         this.slideIndex = 0;
         //this.presentAlertMultipleButtons();
         //this.getImageList();
-
+        this.presentAlertLoadError("Checking Service Version");
         this.storage.get('serviceVersion').then(val => {
             if (val != null) {
                 console.log(val);
@@ -118,12 +118,14 @@ export class HomePage {
                 } else if (val === "B") {
                     this.communityService.baseUrl = "http://localhost:49168/api";
                 }
-                this.presentLoading();
+                this.presentAlertLoadError("Service Version Set");
+                //this.presentLoading();
                 this.getImageList();
             }
             else {
+                this.presentAlertLoadError("Service Version not found using default");
                 this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
-                this.presentLoading();
+                //this.presentLoading();
                 this.getImageList();
             }
         });
@@ -334,13 +336,16 @@ export class HomePage {
 
     getImageList() {
         console.log(this.getDateTime());
+        this.presentAlertLoadError("Getting Base Urls");
         this.communityService.getImageBaseUrls().subscribe(resp => {
-            
+            this.presentAlertLoadError("Base Urls Received");
             this.setBase(resp);
+            this.presentAlertLoadError("Getting Images");
         //this.masterDetailService.setParentBase("https://s3-us-west-2.amazonaws.com/azcommunityimages/");
         //this.masterDetailService.setThumbBase("https://s3-us-west-2.amazonaws.com/azcommunityimages//Thumbnails/");
             this.communityService.getImageList().subscribe(resp => {
                 try {
+                    this.presentAlertLoadError("Images Received");
                     this.masterDetailService.setImages(resp);
                     console.log(this.masterDetailService.setImages);
 
