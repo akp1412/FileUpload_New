@@ -5,12 +5,10 @@
     "\\src\\app",
     "\\src\\app\\about",
     "\\src\\app\\gallery",
+    "\\src\\app\\home",
     "\\src\\app\\imglist",
-    "\\src\\app\\popover",
-    "\\src\\app\\services",
-    "\\src\\assets",
-    "\\src\\assets\\icon"
+    "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\imglist\\imglist.page.html",
+  "SelectedNode": "\\src\\app\\home\\home.page.ts",
   "PreviewInSolutionExplorer": false
 }

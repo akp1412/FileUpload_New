@@ -22,7 +22,7 @@ export class AboutPage {
 
     }
 
-    async presentLoading(strAlbum) {
+    async presentAlbumLoading(strAlbum) {
         const loading = await this.loadingCtrl.create({
             message: 'loading images...'
             //,duration: 3000
@@ -40,7 +40,7 @@ export class AboutPage {
     }
 
     loadAlbum(strAlbum) {
-        this.presentLoading(strAlbum);
+        this.presentAlbumLoading(strAlbum);
         
     }
 

@@ -1,32 +1,33 @@
-<ion-tabs>
 
+<ion-tabs>
+    
   <ion-tab tab="Gallery">
     <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
   <ion-tab tab="Albums">
     <ion-router-outlet name="about"></ion-router-outlet>
   </ion-tab>
-  <!--<ion-tab tab="contact">
-    <ion-router-outlet name="contact"></ion-router-outlet>
-  </ion-tab>-->
-
+  
   <ion-tab-bar slot="top" translucent="true" color="primary">
+      <ion-menu-button contextmenu="settings" color="light"></ion-menu-button>
+      <ion-tab-button tab="Gallery" href="/tabs/(home:home)">
+          <ion-icon name="film"></ion-icon>
+          <ion-label>Gallery</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="Gallery" href="/tabs/(home:home)">
-      <ion-icon name="film"></ion-icon>
-      <ion-label>Gallery</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="Albums" href="/tabs/(about:about)">
+          <ion-icon name="albums"></ion-icon>
+          <ion-label>Albums</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="Albums" href="/tabs/(about:about)">
-      <ion-icon name="albums"></ion-icon>
-      <ion-label>Albums</ion-label>
-    </ion-tab-button>
 
-    <!--<ion-tab-button tab="contact" href="/tabs/(contact:contact)">
-      <ion-icon name="contacts"></ion-icon>
-      <ion-label>Contact</ion-label>
-    </ion-tab-button>-->
 
   </ion-tab-bar>
 
 </ion-tabs>
+
+<!--<super-tabs>
+    <super-tab [root]="home" title="Gallery" icon="home"></super-tab>
+    <super-tab [root]="about" title="Albums" icon="film"></super-tab>
+</super-tabs>-->
+    

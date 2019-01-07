@@ -2,8 +2,8 @@
     <ion-list width="100%" *ngIf="displayMode==='GALLERY'">
 
         <ion-item>
-            <ion-select placeholder="Select a Month" [(ngModel)]="filterBy" interface="popover">
-                <ion-select-option *ngFor="let opt of selectOptions" value={{opt}}>{{opt}}</ion-select-option>
+            <ion-select placeholder="Select a Month" [(ngModel)]="filterBy" interface="popover" [value]="filterBy">
+                <ion-select-option *ngFor="let opt of selectOptions" [value]="opt">{{opt}}</ion-select-option>
 
             </ion-select>
         </ion-item>

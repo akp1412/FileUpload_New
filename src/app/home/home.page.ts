@@ -70,6 +70,9 @@ export class HomePage {
     slideOpts = {
         autoHeight: 'true'
     };
+    //Album Slide specific
+    Albums: string[] = [];
+    /////////////////////
 
     constructor(public navCtrl: NavController,
         private transfer: FileTransfer,
@@ -101,6 +104,11 @@ export class HomePage {
     private grid_Y2: Array<Array<string>>;
     private grid_Y3: Array<Array<string>>;
     private grid_Y4: Array<Array<string>>;
+    private strM3Qualifier: string;
+    private strY1Qualifier: string;
+    private strY2Qualifier: string;
+    private strY3Qualifier: string;
+
 
     ngOnInit() {
         this.slideIndex = 0;
@@ -348,6 +356,9 @@ export class HomePage {
                     //this.presentAlertLoadError("Images Received");
                     this.masterDetailService.setImages(resp);
                     console.log(this.masterDetailService.setImages);
+                    ///////ALBUM PAGE//////////////
+                    this.Albums = this.masterDetailService.getAlbums().split(",");
+                    ///////////////////////////////
 
                     this.populateGrid("W1");
                     this.populateGrid("W2");
@@ -488,11 +499,25 @@ export class HomePage {
         else if (periodFilter === 'W4') { this.grid_W4 = this.localGrid }
         else if (periodFilter === 'M1') { this.grid_M1 = this.localGrid }
         else if (periodFilter === 'M2') { this.grid_M2 = this.localGrid }
-        else if (periodFilter === 'M3') { this.grid_M3 = this.localGrid }
-        else if (periodFilter === 'Y1') { this.grid_Y1 = this.localGrid }
-        else if (periodFilter === 'Y2') { this.grid_Y2 = this.localGrid }
-        else if (periodFilter === 'Y3') { this.grid_Y3 = this.localGrid }
-        else if (periodFilter === 'Y4') { this.grid_Y4 = this.localGrid }
+        else if (periodFilter === 'M3') {
+            this.strM3Qualifier = localImgList[0].imgYear;
+            this.grid_M3 = this.localGrid;
+        }
+        else if (periodFilter === 'Y1') {
+            this.strY1Qualifier = localImgList[0].imgYear;
+            this.grid_Y1 = this.localGrid;
+        }
+        else if (periodFilter === 'Y2') {
+            this.strY2Qualifier = localImgList[0].imgYear;
+            this.grid_Y2 = this.localGrid;
+        }
+        else if (periodFilter === 'Y3') {
+            this.strY3Qualifier = localImgList[0].imgYear;
+            this.grid_Y3 = this.localGrid;
+        }
+        else if (periodFilter === 'Y4') {
+            this.grid_Y4 = this.localGrid;
+        }
 
         this.rowNum--;
     }
@@ -763,6 +788,9 @@ export class HomePage {
         this.slides.getActiveIndex().then(val => {
             let slideIndex: number = val;
             this.slideIndex = val;
+            //if (this.slideIndex === 1) {
+            //    this.Albums = this.masterDetailService.getAlbums().split(",");
+            //}
             //let currentSlide: Element = this.slides
             //let slideNumbers : number = this.slides.length();
             //if (slideIndex === 1) {
@@ -835,6 +863,67 @@ export class HomePage {
             console.log('Async operation has ended');
             refresher.target.complete();
         }, 2000);
+    }
+
+    /////////////////////ALBUM PAGE SPECIFIC//////////////////////
+
+    async presentAlbumLoading(strAlbum) {
+        const loading = await this.loadingCtrl.create({
+            message: 'loading images...'
+            //,duration: 3000
+        });
+        //return await loading.present();
+        await loading.present().then(val => {
+            this.loadImgLIst(strAlbum);
+        });
+    }
+
+    loadImgLIst(strAlbum) {
+        this.masterDetailService.setCurrAlbum(strAlbum);
+        this.masterDetailService.setListMode("ALBUM");
+        this.navCtrl.navigateForward('imglist');
+    }
+
+    loadAlbum(strAlbum) {
+        this.presentAlbumLoading(strAlbum);
+
+    }
+
+    addAlbum() {
+        this.presentAlbumPrompt();
+    }
+
+    async presentAlbumPrompt() {
+        const alert = await this.alertController.create({
+            header: "Add Album",
+            inputs: [
+                {
+                    name: 'albumname',
+                    placeholder: 'Album Name'
+                }
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: data => {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Create',
+                    handler: data => {
+                        console.log(data);
+                        console.log(data.albumname);
+                        let strAlbum: string = data.albumname;
+
+                        this.masterDetailService.addAlbum(strAlbum.toUpperCase().replace("-", "_"));
+                        this.Albums = this.masterDetailService.getAlbums().split(",");
+                    }
+                }
+            ]
+        });
+        await alert.present();
     }
 }
 

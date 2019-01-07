@@ -1,22 +1,16 @@
 <!--<ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>-->
+
 <ion-app>
-    <ion-menu>
+    <ion-menu side="start" menuId="settings">
         <ion-header>
             <ion-toolbar>
                 <ion-title>Settings</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content padding>
-            <!--<ion-list>
-        <ion-menu-toggle *ngFor="let p of appPages">
-            <ion-item [routerLink]="p.url" [routerDirection]="'forward'">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <ion-label>{{p.title}}</ion-label>
-            </ion-item>
-        </ion-menu-toggle>
-    </ion-list>-->
+            
             <form id="page-form1">
                 <ion-label color="primary">Credentials</ion-label>
                 <ion-item>
@@ -44,7 +38,7 @@
                 <ion-label color="primary">Service version</ion-label>
                 <ion-item>
                     <ion-label color="secondary" position="stacked">Select Service version</ion-label>
-                    <ion-select  name="serviceVersion" [(ngModel)]="serviceVersion">
+                    <ion-select  name="serviceVersion" [(ngModel)]="serviceVersion" [value]="serviceVersion">
                         <ion-select-option value="P">Production</ion-select-option>
                         <ion-select-option value="A">Android</ion-select-option>
                         <ion-select-option value="B">Browser</ion-select-option>

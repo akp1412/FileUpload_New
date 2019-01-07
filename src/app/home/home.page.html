@@ -1,14 +1,20 @@
+    
+        
+            <!--<ion-menu-button  contextmenu="settings"></ion-menu-button>-->
+        
+
 <ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <!--<div class="swiper-container">-->
-    <!--<div class="swiper-wrapper">-->
+    <!--<div class="swiper-container">
+        <!--<div class="swiper-wrapper">-->
     <!--<ion-slides pager="false" autoHeight="true" (ionSlideDidChange)="slideDidChange()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{ 'height': slideIndex===0 ? 'auto' : '100vh' }">-->
-    <!--<ion-slides ion-fixed pager="false" [options]="slideOpts" (ionSlideDidChange)="slideDidChange()" [ngStyle]="{ 'height': slideIndex===1 ? '100vh': 'auto' }">
+    <!--<ion-slides ion-fixed pager="false" [options]="slideOpts" (ionSlideDidChange)="slideDidChange()">
 
-            <ion-slide>-->
-    <!--<ion-content>-->
+        <ion-slide>-->
+    
+
 
     <ion-grid style="width:100%;">
         <ion-row>
@@ -96,7 +102,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label style="color:darkred;font-size:12px;">2 Month Ago</ion-label>
+                    <ion-label style="color:darkred;font-size:12px;">2 Months Ago</ion-label>
                 </ion-item>
                 <ion-grid>
                     <ion-row *ngFor="let row of grid_M2">
@@ -111,7 +117,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label style="color:darkred;font-size:12px;">Earlier this Year</ion-label>
+                    <ion-label style="color:darkred;font-size:12px;">Earlier in : {{strM3Qualifier}}</ion-label>
                 </ion-item>
                 <ion-grid>
                     <ion-row *ngFor="let row of grid_M3">
@@ -126,7 +132,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y1')">1 Year ago </ion-label>
+                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y1')">Year: {{strY1Qualifier}} </ion-label>
                 </ion-item>
                 <ion-grid>
                     <ion-row *ngFor="let row of grid_Y1">
@@ -142,7 +148,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y2')">2 Years ago </ion-label>
+                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y2')">Year: {{strY2Qualifier}} </ion-label>
                 </ion-item>
                 <ion-grid>
                     <ion-row *ngFor="let row of grid_Y2">
@@ -157,7 +163,7 @@
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y3')">3 Years ago </ion-label>
+                    <ion-label style="color:darkred;font-size:12px;" (click)="setImgFilter('Y3')">Year: {{strY3Qualifier}} </ion-label>
                 </ion-item>
                 <ion-grid>
                     <ion-row *ngFor="let row of grid_Y3">
@@ -189,17 +195,25 @@
         </ion-row>
     </ion-grid>
 
-    <!--</ion-content>-->
-    <!--  </ion-slide>-->
-    <!--</ion-content>-->
-    <!--<ion-slide >
 
-                    <h2> Album SLide</h2>
+    <!--</ion-slide>
 
-                </ion-slide>
+            <ion-slide>
 
-    </ion-slides>
-            </div>-->
+                    <ion-grid class="MyGrid">
+                        <ion-row wrap>
+                            <ion-col *ngFor="let album of Albums">
+                                <img (click)="loadAlbum(album)" src="assets/icon/albums.jpg" />
+                                <ion-label align="center">{{album}}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+            </ion-slide>
+
+        </ion-slides>
+    </div>-->
 
     <ion-fab vertical="top" horizontal="end" slot="fixed">
         <ion-fab-button color="secondary" (click)="LoadSourceOptions()" ion-fab mini><ion-icon name="add"></ion-icon></ion-fab-button>
