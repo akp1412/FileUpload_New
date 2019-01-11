@@ -7,8 +7,10 @@
     "\\src\\app\\gallery",
     "\\src\\app\\home",
     "\\src\\app\\imglist",
-    "\\src\\app\\services"
+    "\\src\\app\\popover",
+    "\\src\\app\\services",
+    "\\src\\app\\tabs"
   ],
-  "SelectedNode": "\\src\\app\\home\\home.page.ts",
+  "SelectedNode": "\\src\\app\\gallery\\gallery.page.html",
   "PreviewInSolutionExplorer": false
 }

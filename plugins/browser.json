@@ -42,6 +42,9 @@
     },
     "cordova-plugin-telerik-imagepicker": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "com.darktalker.cordova.screenshot": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {}

@@ -306,6 +306,14 @@ module.exports = [
         "clobbers": [
             "plugins.imagePicker"
         ]
+    },
+    {
+        "file": "plugins/com.darktalker.cordova.screenshot/www/Screenshot.js",
+        "id": "com.darktalker.cordova.screenshot.screenshot",
+        "pluginId": "com.darktalker.cordova.screenshot",
+        "merges": [
+            "navigator.screenshot"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -322,7 +330,8 @@ module.exports.metadata =
     "cordova-plugin-ionic-webview": "2.2.5",
     "com-sarriaroman-photoviewer": "1.1.18",
     "com-badrit-base64": "0.2.0",
-    "cordova-plugin-telerik-imagepicker": "2.2.2"
+    "cordova-plugin-telerik-imagepicker": "2.2.2",
+    "com.darktalker.cordova.screenshot": "0.1.5"
 }
 // BOTTOM OF METADATA
 });

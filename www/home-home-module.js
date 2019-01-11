@@ -1,350 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tabs-tabs-module"],{
-
-/***/ "./src/app/about/about.module.ts":
-/*!***************************************!*\
-  !*** ./src/app/about/about.module.ts ***!
-  \***************************************/
-/*! exports provided: AboutPageModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutPageModule", function() { return AboutPageModule; });
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _about_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./about.page */ "./src/app/about/about.page.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-var AboutPageModule = /** @class */ (function () {
-    function AboutPageModule() {
-    }
-    AboutPageModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-            imports: [
-                _ionic_angular__WEBPACK_IMPORTED_MODULE_0__["IonicModule"],
-                _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild([{ path: '', component: _about_page__WEBPACK_IMPORTED_MODULE_5__["AboutPage"] }])
-            ],
-            declarations: [_about_page__WEBPACK_IMPORTED_MODULE_5__["AboutPage"]]
-        })
-    ], AboutPageModule);
-    return AboutPageModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/about/about.page.html":
-/*!***************************************!*\
-  !*** ./src/app/about/about.page.html ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\r\n\r\n<ion-content>\r\n\r\n    <ion-grid class=\"MyGrid\">\r\n        <ion-row wrap>\r\n            <ion-col  *ngFor=\"let album of Albums\" >\r\n                <img (click)=\"loadAlbum(album)\" src=\"assets/icon/albums.jpg\" />\r\n                <ion-label align=\"center\">{{album}}</ion-label>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n</ion-content>\r\n<ion-footer>\r\n    <ion-toolbar>\r\n        <ion-buttons>\r\n            <ion-button (click)=\"addAlbum()\">\r\n                <ion-icon slot=\"start\" name=\"add\"></ion-icon>\r\n                Add Album\r\n            </ion-button>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n</ion-footer>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/about/about.page.scss":
-/*!***************************************!*\
-  !*** ./src/app/about/about.page.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".MyGrid {\n  --ion-grid-columns: 2; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWJvdXQvQzpcXFVzZXJzXFxhbWl0LnBhdWxcXEZpbGVVcGxvYWQvc3JjXFxhcHBcXGFib3V0XFxhYm91dC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxzQkFBbUIsRUFDdEIiLCJmaWxlIjoic3JjL2FwcC9hYm91dC9hYm91dC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuTXlHcmlkIHtcclxuICAgIC0taW9uLWdyaWQtY29sdW1uczogMjtcclxufVxyXG4iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/about/about.page.ts":
-/*!*************************************!*\
-  !*** ./src/app/about/about.page.ts ***!
-  \*************************************/
-/*! exports provided: AboutPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutPage", function() { return AboutPage; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../app/services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-var AboutPage = /** @class */ (function () {
-    function AboutPage(navCtrl, masterDetailService, alertController, loadingCtrl) {
-        this.navCtrl = navCtrl;
-        this.masterDetailService = masterDetailService;
-        this.alertController = alertController;
-        this.loadingCtrl = loadingCtrl;
-        this.Albums = [];
-    }
-    AboutPage.prototype.ngOnInit = function () {
-        this.Albums = this.masterDetailService.getAlbums().split(",");
-    };
-    AboutPage.prototype.presentLoading = function (strAlbum) {
-        return __awaiter(this, void 0, void 0, function () {
-            var loading;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadingCtrl.create({
-                            message: 'loading images...'
-                            //,duration: 3000
-                        })];
-                    case 1:
-                        loading = _a.sent();
-                        //return await loading.present();
-                        return [4 /*yield*/, loading.present().then(function (val) {
-                                _this.loadImgLIst(strAlbum);
-                            })];
-                    case 2:
-                        //return await loading.present();
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    AboutPage.prototype.loadImgLIst = function (strAlbum) {
-        this.masterDetailService.setCurrAlbum(strAlbum);
-        this.masterDetailService.setListMode("ALBUM");
-        this.navCtrl.navigateForward('imglist');
-    };
-    AboutPage.prototype.loadAlbum = function (strAlbum) {
-        this.presentLoading(strAlbum);
-    };
-    AboutPage.prototype.addAlbum = function () {
-        this.presentPrompt();
-    };
-    AboutPage.prototype.presentPrompt = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var alert;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.alertController.create({
-                            header: "Add Album",
-                            inputs: [
-                                {
-                                    name: 'albumname',
-                                    placeholder: 'Album Name'
-                                }
-                            ],
-                            buttons: [
-                                {
-                                    text: 'Cancel',
-                                    role: 'cancel',
-                                    handler: function (data) {
-                                        console.log('Cancel clicked');
-                                    }
-                                },
-                                {
-                                    text: 'Create',
-                                    handler: function (data) {
-                                        console.log(data);
-                                        console.log(data.albumname);
-                                        var strAlbum = data.albumname;
-                                        _this.masterDetailService.addAlbum(strAlbum.toUpperCase().replace("-", "_"));
-                                        _this.Albums = _this.masterDetailService.getAlbums().split(",");
-                                    }
-                                }
-                            ]
-                        })];
-                    case 1:
-                        alert = _a.sent();
-                        return [4 /*yield*/, alert.present()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    AboutPage = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-about',
-            template: __webpack_require__(/*! ./about.page.html */ "./src/app/about/about.page.html"),
-            styles: [__webpack_require__(/*! ./about.page.scss */ "./src/app/about/about.page.scss")]
-        }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"],
-            _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_2__["MasterDetailService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"]])
-    ], AboutPage);
-    return AboutPage;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/contact/contact.module.ts":
-/*!*******************************************!*\
-  !*** ./src/app/contact/contact.module.ts ***!
-  \*******************************************/
-/*! exports provided: ContactPageModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactPageModule", function() { return ContactPageModule; });
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _contact_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contact.page */ "./src/app/contact/contact.page.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-var ContactPageModule = /** @class */ (function () {
-    function ContactPageModule() {
-    }
-    ContactPageModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-            imports: [
-                _ionic_angular__WEBPACK_IMPORTED_MODULE_0__["IonicModule"],
-                _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild([{ path: '', component: _contact_page__WEBPACK_IMPORTED_MODULE_5__["ContactPage"] }])
-            ],
-            declarations: [_contact_page__WEBPACK_IMPORTED_MODULE_5__["ContactPage"]]
-        })
-    ], ContactPageModule);
-    return ContactPageModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/contact/contact.page.html":
-/*!*******************************************!*\
-  !*** ./src/app/contact/contact.page.html ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      Dont Contact\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-list-header>\r\n      <ion-label>\r\n        Follow us on Twitter\r\n      </ion-label>\r\n    </ion-list-header>\r\n    <ion-item>\r\n      <ion-label>\r\n        <ion-icon name=\"logo-ionic\" slot=\"start\"></ion-icon>\r\n        @ionicframework\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-content>"
-
-/***/ }),
-
-/***/ "./src/app/contact/contact.page.scss":
-/*!*******************************************!*\
-  !*** ./src/app/contact/contact.page.scss ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbnRhY3QvY29udGFjdC5wYWdlLnNjc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/contact/contact.page.ts":
-/*!*****************************************!*\
-  !*** ./src/app/contact/contact.page.ts ***!
-  \*****************************************/
-/*! exports provided: ContactPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactPage", function() { return ContactPage; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var ContactPage = /** @class */ (function () {
-    function ContactPage() {
-    }
-    ContactPage = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-contact',
-            template: __webpack_require__(/*! ./contact.page.html */ "./src/app/contact/contact.page.html"),
-            styles: [__webpack_require__(/*! ./contact.page.scss */ "./src/app/contact/contact.page.scss")]
-        })
-    ], ContactPage);
-    return ContactPage;
-}());
-
-
-
-/***/ }),
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["home-home-module"],{
 
 /***/ "./src/app/home/home.module.ts":
 /*!*************************************!*\
@@ -402,7 +56,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n    <ion-refresher (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n    <!--<div class=\"swiper-container\">-->\r\n    <!--<div class=\"swiper-wrapper\">-->\r\n    <!--<ion-slides pager=\"false\" autoHeight=\"true\" (ionSlideDidChange)=\"slideDidChange()\" (ionSlideWillChange)=\"slideWillChange()\" [ngStyle]=\"{ 'height': slideIndex===0 ? 'auto' : '100vh' }\">-->\r\n    <!--<ion-slides ion-fixed pager=\"false\" [options]=\"slideOpts\" (ionSlideDidChange)=\"slideDidChange()\" [ngStyle]=\"{ 'height': slideIndex===1 ? '100vh': 'auto' }\">\r\n\r\n            <ion-slide>-->\r\n    <!--<ion-content>-->\r\n\r\n    <ion-grid style=\"width:100%;\">\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">This Week</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color: darkred;font-size:12px;\">Last Week</ion-label>\r\n                </ion-item>\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">2 Weeks Ago</ion-label>\r\n                </ion-item>\r\n\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">3 Week Ago</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_W4\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'W4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">Last Month</ion-label>\r\n                </ion-item>\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">2 Months Ago</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\">Earlier in : {{strM3Qualifier}}</ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_M3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'M3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y1')\">Year: {{strY1Qualifier}} </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y1\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y2')\">Year: {{strY2Qualifier}} </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y2\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y3')\">Year: {{strY3Qualifier}} </ion-label>\r\n                </ion-item>\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y3\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n\r\n        <ion-row>\r\n            <ion-col>\r\n                <ion-item>\r\n                    <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y4')\">Older... </ion-label>\r\n                </ion-item>\r\n\r\n\r\n\r\n                <ion-grid>\r\n                    <ion-row *ngFor=\"let row of grid_Y4\">\r\n                        <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                            <div class=\"square\" (click)=\"LoadImage(file_uri,'Y4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n            </ion-col>\r\n        </ion-row>\r\n    </ion-grid>\r\n\r\n    <!--</ion-content>-->\r\n    <!--  </ion-slide>-->\r\n    <!--</ion-content>-->\r\n    <!--<ion-slide >\r\n\r\n                    <h2> Album SLide</h2>\r\n\r\n                </ion-slide>\r\n\r\n    </ion-slides>\r\n            </div>-->\r\n\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button color=\"secondary\" (click)=\"LoadSourceOptions()\" ion-fab mini><ion-icon name=\"add\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <!--<ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button color=\"secondary\" (click)=\"presentAlertSettings()\" ion-fab mini><ion-icon name=\"settings\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n</ion-content>"
+module.exports = "      \r\n<ion-header>\r\n    <ion-toolbar>\r\n        <ion-segment [(ngModel)]=\"icons\" color=\"primary\" (ionChange)=\"tabChange()\">\r\n            <ion-segment-button value=\"grid\">\r\n                <ion-icon name=\"grid\"></ion-icon>\r\n            </ion-segment-button>\r\n            <ion-segment-button value=\"albums\">\r\n                <ion-icon name=\"albums\"></ion-icon>\r\n            </ion-segment-button>\r\n        </ion-segment>\r\n    </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n    <ion-refresher (ionRefresh)=\"doRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n    <div class=\"swiper-container\">\r\n        <!--<div class=\"swiper-wrapper\">-->\r\n        <!--<ion-slides pager=\"false\" autoHeight=\"true\" (ionSlideDidChange)=\"slideDidChange()\" (ionSlideWillChange)=\"slideWillChange()\" [ngStyle]=\"{ 'height': slideIndex===0 ? 'auto' : '100vh' }\">-->\r\n        <ion-slides sliderperview=\"2\" pager=\"false\" [options]=\"slideOpts\" (ionSlideDidChange)=\"slideDidChange()\" (ionSlideWillChange)=\"slideWillChange()\">\r\n\r\n            <ion-slide>\r\n\r\n\r\n\r\n                <ion-grid style=\"width:100%;\">\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">This Week</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color: darkred;font-size:12px;\">Last Week</ion-label>\r\n                            </ion-item>\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">2 Weeks Ago</ion-label>\r\n                            </ion-item>\r\n\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">3 Week Ago</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_W4\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'W4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">Last Month</ion-label>\r\n                            </ion-item>\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">2 Months Ago</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\">Earlier in : {{strM3Qualifier}}</ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_M3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'M3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y1')\">Year: {{strY1Qualifier}} </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y1\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y1')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y2')\">Year: {{strY2Qualifier}} </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y2\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y2')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y3')\">Year: {{strY3Qualifier}} </ion-label>\r\n                            </ion-item>\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y3\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y3')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n\r\n                    <ion-row>\r\n                        <ion-col>\r\n                            <ion-item>\r\n                                <ion-label style=\"color:darkred;font-size:12px;\" (click)=\"setImgFilter('Y4')\">Older... </ion-label>\r\n                            </ion-item>\r\n\r\n\r\n\r\n                            <ion-grid>\r\n                                <ion-row *ngFor=\"let row of grid_Y4\">\r\n                                    <ion-col *ngFor=\"let file_uri of row\" style=\"padding:2px;\">\r\n                                        <div class=\"square\" (click)=\"LoadImage(file_uri,'Y4')\" [style.background-image]=\"'url(' + file_uri + ')'\"></div>\r\n                                    </ion-col>\r\n                                </ion-row>\r\n                            </ion-grid>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n\r\n\r\n            </ion-slide>\r\n\r\n            <ion-slide>\r\n\r\n                <ion-grid class=\"MyGrid\">\r\n                    <ion-row wrap>\r\n                        <ion-col *ngFor=\"let album of Albums\">\r\n                            <img (click)=\"loadAlbum(album)\" src=\"assets/icon/albums.jpg\" />\r\n                            <ion-label align=\"center\">{{album}}</ion-label>\r\n                        </ion-col>\r\n                    </ion-row>\r\n                </ion-grid>\r\n\r\n\r\n            </ion-slide>\r\n\r\n        </ion-slides>\r\n    </div>\r\n\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"icons !='albums' \">\r\n        <ion-fab-button color=\"tertiary\" (click)=\"LoadSourceOptions()\" ion-fab mini><ion-icon name=\"cloud-upload\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\" *ngIf=\"icons ==='albums' \">\r\n        <ion-fab-button color=\"tertiary\" (click)=\"addAlbum()\" ion-fab mini><ion-icon name=\"add\"></ion-icon></ion-fab-button>\r\n    </ion-fab>\r\n    <!--<ion-fab vertical=\"top\" horizontal=\"start\" slot=\"fixed\">\r\n        <ion-fab-button color=\"secondary\" (click)=\"presentAlertSettings()\" ion-fab mini><ion-icon name=\"settings\"></ion-icon></ion-fab-button>\r\n    </ion-fab>-->\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -413,7 +67,7 @@ module.exports = "<ion-content>\r\n    <ion-refresher (ionRefresh)=\"doRefresh($
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".square {\n  width: 100%;\n  padding-bottom: 100%;\n  background-color: black;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center; }\n\n.wrapper * {\n  /*height: 100%;*/\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXGFtaXQucGF1bFxcRmlsZVVwbG9hZC9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFXO0VBQ1gscUJBQW9CO0VBQ3BCLHdCQUF1QjtFQUN2Qix5QkFBd0I7RUFDeEIsNkJBQTRCO0VBQzVCLDRCQUEyQixFQUM5Qjs7QUFFRDtFQUNJLGlCQUFpQjtFQUNqQixZQUFXLEVBRWQiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNxdWFyZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMDAlO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XHJcbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xyXG59XHJcblxyXG4ud3JhcHBlciAqIHtcclxuICAgIC8qaGVpZ2h0OiAxMDAlOyovXHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIFxyXG59XHJcblxyXG5cclxuXHJcbiJdfQ== */"
+module.exports = ".square {\n  width: 100%;\n  padding-bottom: 100%;\n  background-color: black;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center; }\n\n.wrapper * {\n  /*height: 100%;*/\n  width: 100%; }\n\n.MyGrid {\n  --ion-grid-columns: 2; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXGFtaXQucGF1bFxcRmlsZVVwbG9hZC9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFXO0VBQ1gscUJBQW9CO0VBQ3BCLHdCQUF1QjtFQUN2Qix5QkFBd0I7RUFDeEIsNkJBQTRCO0VBQzVCLDRCQUEyQixFQUM5Qjs7QUFFRDtFQUNJLGlCQUFpQjtFQUNqQixZQUFXLEVBRWQ7O0FBRUQ7RUFDSSxzQkFBbUIsRUFDdEIiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNxdWFyZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMDAlO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XHJcbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xyXG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xyXG59XHJcblxyXG4ud3JhcHBlciAqIHtcclxuICAgIC8qaGVpZ2h0OiAxMDAlOyovXHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIFxyXG59XHJcblxyXG4uTXlHcmlkIHtcclxuICAgIC0taW9uLWdyaWQtY29sdW1uczogMjtcclxufVxyXG5cclxuXHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -439,6 +93,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../app/services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_screenshot_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/screenshot/ngx */ "./node_modules/@ionic-native/screenshot/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -498,8 +153,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, transfer, camera, file, loadingCtrl, toastCtrl, httpClient, communityService, photoViewer, alertController, imagePicker, masterDetailService, route, storage) {
+    /////////////////////
+    function HomePage(navCtrl, transfer, camera, file, loadingCtrl, toastCtrl, httpClient, communityService, photoViewer, alertController, imagePicker, masterDetailService, route, storage, screenshot) {
         this.navCtrl = navCtrl;
         this.transfer = transfer;
         this.camera = camera;
@@ -514,13 +171,18 @@ var HomePage = /** @class */ (function () {
         this.masterDetailService = masterDetailService;
         this.route = route;
         this.storage = storage;
+        this.screenshot = screenshot;
         this.newImgArray = [];
         this.slideIndex = 0;
         this.blnLoadingDismissed = false;
         this.slideOpts = {
-            autoHeight: 'true'
+            autoHeight: 'true',
+            initialSlide: '1'
         };
+        //Album Slide specific
+        this.Albums = [];
         this.cntImagetoLoad = 0;
+        this.icons = "grid";
     }
     HomePage.prototype.ngOnInit = function () {
         var _this = this;
@@ -532,7 +194,9 @@ var HomePage = /** @class */ (function () {
             if (val != null) {
                 console.log(val);
                 if (val === "P") {
-                    _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    //this.communityService.baseUrl = "https://95.179.202.83:443/api";
+                    _this.communityService.baseUrl = "https://45.77.57.50:443/api";
                 }
                 else if (val === "A") {
                     _this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -546,7 +210,9 @@ var HomePage = /** @class */ (function () {
             }
             else {
                 //this.presentAlertLoadError("Service Version not found using default");
-                _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                //this.communityService.baseUrl = "https://95.179.202.83:443/api";
+                _this.communityService.baseUrl = "https://45.77.57.50:443/api";
                 _this.presentLoading();
                 _this.getImageList();
             }
@@ -650,7 +316,8 @@ var HomePage = /** @class */ (function () {
                                     text: 'Production',
                                     handler: function () {
                                         // this.navCtrl.navigateForward('add_news');
-                                        _this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                                        //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                                        _this.communityService.baseUrl = "https://95.179.202.83:443/api";
                                         _this.presentLoading();
                                         _this.getImageList();
                                         //this.slides.options = this.slideOpts;
@@ -673,7 +340,7 @@ var HomePage = /** @class */ (function () {
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
         }
-        else {
+        else if (imgUrl != '') {
             //this.presentLoading();
             var imgName_1 = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
             //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
@@ -753,6 +420,9 @@ var HomePage = /** @class */ (function () {
                     //this.presentAlertLoadError("Images Received");
                     _this.masterDetailService.setImages(resp);
                     console.log(_this.masterDetailService.setImages);
+                    ///////ALBUM PAGE//////////////
+                    _this.Albums = _this.masterDetailService.getAlbums().split(",");
+                    ///////////////////////////////
                     _this.populateGrid("W1");
                     _this.populateGrid("W2");
                     _this.populateGrid("W3");
@@ -764,6 +434,12 @@ var HomePage = /** @class */ (function () {
                     _this.populateGrid("Y2");
                     _this.populateGrid("Y3");
                     _this.populateGrid("Y4");
+                    ///////ALBUM PAGE//////////////
+                    _this.Albums = _this.masterDetailService.getAlbums().split(",");
+                    //this.slides.slideNext();
+                    _this.slides.slideTo(0);
+                    //this.slides.slidePrev();
+                    ///////////////////////////////
                     _this.loadingCtrl.dismiss();
                 }
                 catch (err) {
@@ -1191,26 +867,61 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.slideDidChange = function () {
         var _this = this;
         this.slidesMoving = false;
+        //////this.slides.getActiveIndex().then(val => {
+        //////    let slideIndex: number = val;
+        //////    this.slideIndex = val;
+        //////    //if (this.slideIndex === 1) {
+        //////    //    this.Albums = this.masterDetailService.getAlbums().split(",");
+        //////    //}
+        //////    //let currentSlide: Element = this.slides
+        //////    //let slideNumbers : number = this.slides.length();
+        //////    //if (slideIndex === 1) {
+        //////    //    this.slidesHeight = 200;
+        //////    //}
+        //////});
         this.slides.getActiveIndex().then(function (val) {
-            var slideIndex = val;
-            _this.slideIndex = val;
-            //let currentSlide: Element = this.slides
-            //let slideNumbers : number = this.slides.length();
-            //if (slideIndex === 1) {
-            //    this.slidesHeight = 200;
-            //}
+            if (val == 0) {
+                _this.icons = "grid";
+                //this.slides.lockSwipeToPrev(true);
+            }
+            else if (val == 1) {
+                _this.icons = "albums";
+                //this.slides.lockSwipeToPrev(false);
+            }
         });
+        //this.navCtrl.navigateRoot("about");
+    };
+    HomePage.prototype.tabChange = function () {
+        if (this.icons === "grid") {
+            this.slides.slideTo(0);
+            //this.slides.lockSwipeToPrev(true);
+        }
+        else if (this.icons === "albums") {
+            this.slides.slideTo(1);
+            //this.slides.lockSwipeToPrev(false);
+        }
     };
     HomePage.prototype.slideWillChange = function () {
         this.slidesMoving = true;
+        //this.screenshot.URI(100).then(scrUri => { this.masterDetailService.setTabImg(0, scrUri) });
     };
     HomePage.prototype.ionViewWillEnter = function () {
         console.log("ionViewWillEnter");
         if (this.masterDetailService.getFilter() != '' && this.masterDetailService.getIsDirty()) {
-            this.presentLoading();
-            this.populateGrid(this.masterDetailService.getFilter());
+            //this.presentLoading();
+            //this.populateGrid("W1");
+            //this.populateGrid("W2");
+            //this.populateGrid("W3");
+            //this.populateGrid("W4");
+            //this.populateGrid("M1");
+            //this.populateGrid("M3");
+            //this.populateGrid("M2");
+            //this.populateGrid("Y1");
+            //this.populateGrid("Y2");
+            //this.populateGrid("Y3");
+            //this.populateGrid("Y4");
             this.masterDetailService.setIsDirty(false);
-            this.loadingCtrl.dismiss();
+            //this.loadingCtrl.dismiss();
         }
     };
     HomePage.prototype.presentAlertSettings = function () {
@@ -1272,6 +983,86 @@ var HomePage = /** @class */ (function () {
             refresher.target.complete();
         }, 2000);
     };
+    /////////////////////ALBUM PAGE SPECIFIC//////////////////////
+    HomePage.prototype.presentAlbumLoading = function (strAlbum) {
+        return __awaiter(this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadingCtrl.create({
+                            message: 'loading images...'
+                            //,duration: 3000
+                        })];
+                    case 1:
+                        loading = _a.sent();
+                        //return await loading.present();
+                        return [4 /*yield*/, loading.present().then(function (val) {
+                                _this.loadImgLIst(strAlbum);
+                            })];
+                    case 2:
+                        //return await loading.present();
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    HomePage.prototype.loadImgLIst = function (strAlbum) {
+        this.masterDetailService.setCurrAlbum(strAlbum);
+        this.masterDetailService.setListMode("ALBUM");
+        this.navCtrl.navigateForward('imglist');
+    };
+    HomePage.prototype.loadAlbum = function (strAlbum) {
+        this.presentAlbumLoading(strAlbum);
+    };
+    HomePage.prototype.addAlbum = function () {
+        this.presentAlbumPrompt();
+    };
+    HomePage.prototype.presentAlbumPrompt = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var alert;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: "Add Album",
+                            inputs: [
+                                {
+                                    name: 'albumname',
+                                    placeholder: 'Album Name'
+                                }
+                            ],
+                            buttons: [
+                                {
+                                    text: 'Cancel',
+                                    role: 'cancel',
+                                    handler: function (data) {
+                                        console.log('Cancel clicked');
+                                    }
+                                },
+                                {
+                                    text: 'Create',
+                                    handler: function (data) {
+                                        console.log(data);
+                                        console.log(data.albumname);
+                                        var strAlbum = data.albumname;
+                                        _this.masterDetailService.addAlbum(strAlbum.toUpperCase().replace("-", "_"));
+                                        _this.Albums = _this.masterDetailService.getAlbums().split(",");
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"]),
         __metadata("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Slides"])
@@ -1298,201 +1089,10 @@ var HomePage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
             _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_8__["ImagePicker"],
             _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_9__["MasterDetailService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"], _ionic_storage__WEBPACK_IMPORTED_MODULE_11__["Storage"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"], _ionic_storage__WEBPACK_IMPORTED_MODULE_11__["Storage"],
+            _ionic_native_screenshot_ngx__WEBPACK_IMPORTED_MODULE_12__["Screenshot"]])
     ], HomePage);
     return HomePage;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.module.ts":
-/*!*************************************!*\
-  !*** ./src/app/tabs/tabs.module.ts ***!
-  \*************************************/
-/*! exports provided: TabsPageModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsPageModule", function() { return TabsPageModule; });
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _tabs_router_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tabs.router.module */ "./src/app/tabs/tabs.router.module.ts");
-/* harmony import */ var _tabs_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tabs.page */ "./src/app/tabs/tabs.page.ts");
-/* harmony import */ var _contact_contact_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../contact/contact.module */ "./src/app/contact/contact.module.ts");
-/* harmony import */ var _about_about_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../about/about.module */ "./src/app/about/about.module.ts");
-/* harmony import */ var _home_home_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../home/home.module */ "./src/app/home/home.module.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-
-
-var TabsPageModule = /** @class */ (function () {
-    function TabsPageModule() {
-    }
-    TabsPageModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            imports: [
-                _ionic_angular__WEBPACK_IMPORTED_MODULE_0__["IonicModule"],
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-                _tabs_router_module__WEBPACK_IMPORTED_MODULE_4__["TabsPageRoutingModule"],
-                _home_home_module__WEBPACK_IMPORTED_MODULE_8__["HomePageModule"],
-                _about_about_module__WEBPACK_IMPORTED_MODULE_7__["AboutPageModule"],
-                _contact_contact_module__WEBPACK_IMPORTED_MODULE_6__["ContactPageModule"]
-            ],
-            declarations: [_tabs_page__WEBPACK_IMPORTED_MODULE_5__["TabsPage"]]
-        })
-    ], TabsPageModule);
-    return TabsPageModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.page.html":
-/*!*************************************!*\
-  !*** ./src/app/tabs/tabs.page.html ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-tabs>\r\n\r\n  <ion-tab tab=\"Gallery\">\r\n    <ion-router-outlet name=\"home\"></ion-router-outlet>\r\n  </ion-tab>\r\n  <ion-tab tab=\"Albums\">\r\n    <ion-router-outlet name=\"about\"></ion-router-outlet>\r\n  </ion-tab>\r\n  <!--<ion-tab tab=\"contact\">\r\n    <ion-router-outlet name=\"contact\"></ion-router-outlet>\r\n  </ion-tab>-->\r\n\r\n  <ion-tab-bar slot=\"top\" translucent=\"true\" color=\"primary\">\r\n\r\n    <ion-tab-button tab=\"Gallery\" href=\"/tabs/(home:home)\">\r\n      <ion-icon name=\"film\"></ion-icon>\r\n      <ion-label>Gallery</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"Albums\" href=\"/tabs/(about:about)\">\r\n      <ion-icon name=\"albums\"></ion-icon>\r\n      <ion-label>Albums</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <!--<ion-tab-button tab=\"contact\" href=\"/tabs/(contact:contact)\">\r\n      <ion-icon name=\"contacts\"></ion-icon>\r\n      <ion-label>Contact</ion-label>\r\n    </ion-tab-button>-->\r\n\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.page.scss":
-/*!*************************************!*\
-  !*** ./src/app/tabs/tabs.page.scss ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".tabs .tab-button[aria-selected=true] {\n  padding: 0;\n  border-top: black;\n  border-style: solid;\n  border-width: 10px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy9DOlxcVXNlcnNcXGFtaXQucGF1bFxcRmlsZVVwbG9hZC9zcmNcXGFwcFxcdGFic1xcdGFicy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxXQUFVO0VBQ1Ysa0JBQWlCO0VBQ2pCLG9CQUFtQjtFQUNuQixtQkFDSixFQUFDIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50YWJzIC50YWItYnV0dG9uW2FyaWEtc2VsZWN0ZWQ9dHJ1ZV0ge1xyXG4gICAgcGFkZGluZzogMDtcclxuICAgIGJvcmRlci10b3A6IGJsYWNrO1xyXG4gICAgYm9yZGVyLXN0eWxlOiBzb2xpZDtcclxuICAgIGJvcmRlci13aWR0aDogMTBweFxyXG59XHJcbiJdfQ== */"
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.page.ts":
-/*!***********************************!*\
-  !*** ./src/app/tabs/tabs.page.ts ***!
-  \***********************************/
-/*! exports provided: TabsPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsPage", function() { return TabsPage; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var TabsPage = /** @class */ (function () {
-    function TabsPage() {
-    }
-    TabsPage = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-tabs',
-            template: __webpack_require__(/*! ./tabs.page.html */ "./src/app/tabs/tabs.page.html"),
-            styles: [__webpack_require__(/*! ./tabs.page.scss */ "./src/app/tabs/tabs.page.scss")]
-        })
-    ], TabsPage);
-    return TabsPage;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.router.module.ts":
-/*!********************************************!*\
-  !*** ./src/app/tabs/tabs.router.module.ts ***!
-  \********************************************/
-/*! exports provided: TabsPageRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsPageRoutingModule", function() { return TabsPageRoutingModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _tabs_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tabs.page */ "./src/app/tabs/tabs.page.ts");
-/* harmony import */ var _home_home_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../home/home.page */ "./src/app/home/home.page.ts");
-/* harmony import */ var _about_about_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../about/about.page */ "./src/app/about/about.page.ts");
-/* harmony import */ var _contact_contact_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contact/contact.page */ "./src/app/contact/contact.page.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-var routes = [
-    {
-        path: 'tabs',
-        component: _tabs_page__WEBPACK_IMPORTED_MODULE_2__["TabsPage"],
-        children: [
-            {
-                path: '',
-                redirectTo: '/tabs/(home:home)',
-                pathMatch: 'full',
-            },
-            {
-                path: 'home',
-                outlet: 'home',
-                component: _home_home_page__WEBPACK_IMPORTED_MODULE_3__["HomePage"]
-            },
-            {
-                path: 'about',
-                outlet: 'about',
-                component: _about_about_page__WEBPACK_IMPORTED_MODULE_4__["AboutPage"]
-            },
-            {
-                path: 'contact',
-                outlet: 'contact',
-                component: _contact_contact_page__WEBPACK_IMPORTED_MODULE_5__["ContactPage"]
-            }
-        ]
-    },
-    {
-        path: '',
-        redirectTo: '/tabs/(home:home)',
-        pathMatch: 'full'
-    }
-];
-var TabsPageRoutingModule = /** @class */ (function () {
-    function TabsPageRoutingModule() {
-    }
-    TabsPageRoutingModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
-        })
-    ], TabsPageRoutingModule);
-    return TabsPageRoutingModule;
 }());
 
 
@@ -1500,4 +1100,4 @@ var TabsPageRoutingModule = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=tabs-tabs-module.js.map
+//# sourceMappingURL=home-home-module.js.map

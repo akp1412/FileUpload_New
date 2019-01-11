@@ -15,6 +15,7 @@ import { ViewChild } from '@angular/core';
 import { Slides, Slide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
 
 interface CameraDetail {
     filename: string;
@@ -68,7 +69,8 @@ export class HomePage {
     slideIndex: any = 0;
     blnLoadingDismissed: boolean = false;
     slideOpts = {
-        autoHeight: 'true'
+        autoHeight: 'true',
+        initialSlide: '1'
     };
     //Album Slide specific
     Albums: string[] = [];
@@ -86,7 +88,8 @@ export class HomePage {
         public alertController: AlertController,
         private imagePicker: ImagePicker,
         private masterDetailService: MasterDetailService,
-        private route: ActivatedRoute, private storage: Storage
+        private route: ActivatedRoute, private storage: Storage,
+        private screenshot: Screenshot
         ) { }
 
     public images: Array<string>;
@@ -108,7 +111,7 @@ export class HomePage {
     private strY1Qualifier: string;
     private strY2Qualifier: string;
     private strY3Qualifier: string;
-
+    private icons: any = "grid";
 
     ngOnInit() {
         this.slideIndex = 0;
@@ -119,7 +122,9 @@ export class HomePage {
             if (val != null) {
                 console.log(val);
                 if (val === "P") {
-                    this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                    //this.communityService.baseUrl = "https://95.179.202.83:443/api";
+                    this.communityService.baseUrl = "https://45.77.57.50:443/api";
                     
                 } else if (val === "A") {
                     this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -132,7 +137,9 @@ export class HomePage {
             }
             else {
                 //this.presentAlertLoadError("Service Version not found using default");
-                this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                //this.communityService.baseUrl = "https://95.179.202.83:443/api";
+                this.communityService.baseUrl = "https://45.77.57.50:443/api";
                 this.presentLoading();
                 this.getImageList();
             }
@@ -238,7 +245,8 @@ export class HomePage {
                     text: 'Production',
                     handler: () => {
                         // this.navCtrl.navigateForward('add_news');
-                        this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                        //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
+                        this.communityService.baseUrl = "https://95.179.202.83:443/api";
                         this.presentLoading();
                         this.getImageList();
                         //this.slides.options = this.slideOpts;
@@ -258,7 +266,7 @@ export class HomePage {
         
         if (imgUrl === 'assets/icon/more.png') {
             this.setImgFilter(strFilter);
-        } else {
+        } else if(imgUrl != ''){
             //this.presentLoading();
             let imgName = imgUrl.replace(this.masterDetailService.getThumbBase(), '');
             //let intIndex = this.objImage.findIndex(x => x.imgName === imgName);
@@ -371,6 +379,13 @@ export class HomePage {
                     this.populateGrid("Y2");
                     this.populateGrid("Y3");
                     this.populateGrid("Y4");
+
+                    ///////ALBUM PAGE//////////////
+                    this.Albums = this.masterDetailService.getAlbums().split(",");
+                    //this.slides.slideNext();
+                    this.slides.slideTo(0);
+                    //this.slides.slidePrev();
+                    ///////////////////////////////
                     this.loadingCtrl.dismiss();
                 } catch (err) {
                     this.blnLoadingDismissed = true;
@@ -785,34 +800,66 @@ export class HomePage {
     slideDidChange () {
         this.slidesMoving = false;
 
+        //////this.slides.getActiveIndex().then(val => {
+        //////    let slideIndex: number = val;
+        //////    this.slideIndex = val;
+        //////    //if (this.slideIndex === 1) {
+        //////    //    this.Albums = this.masterDetailService.getAlbums().split(",");
+        //////    //}
+        //////    //let currentSlide: Element = this.slides
+        //////    //let slideNumbers : number = this.slides.length();
+        //////    //if (slideIndex === 1) {
+        //////    //    this.slidesHeight = 200;
+        //////    //}
+        //////});
         this.slides.getActiveIndex().then(val => {
-            let slideIndex: number = val;
-            this.slideIndex = val;
-            //if (this.slideIndex === 1) {
-            //    this.Albums = this.masterDetailService.getAlbums().split(",");
-            //}
-            //let currentSlide: Element = this.slides
-            //let slideNumbers : number = this.slides.length();
-            //if (slideIndex === 1) {
-            //    this.slidesHeight = 200;
-            //}
+            if (val == 0) {
+                this.icons = "grid";
+                //this.slides.lockSwipeToPrev(true);
+            } else if (val == 1) {
+                this.icons = "albums";
+                //this.slides.lockSwipeToPrev(false);
+            }
         });
+        //this.navCtrl.navigateRoot("about");
         
         
     }
 
+    
+    tabChange() {
+        if (this.icons === "grid") {
+            this.slides.slideTo(0);
+            //this.slides.lockSwipeToPrev(true);
+        } else if (this.icons === "albums") {
+            this.slides.slideTo(1);
+            //this.slides.lockSwipeToPrev(false);
+        }
+    }
+
     slideWillChange() {
         this.slidesMoving = true;
+        //this.screenshot.URI(100).then(scrUri => { this.masterDetailService.setTabImg(0, scrUri) });
     }
 
     ionViewWillEnter() {
         console.log("ionViewWillEnter");
 
         if (this.masterDetailService.getFilter() != '' && this.masterDetailService.getIsDirty()) {
-            this.presentLoading();
-            this.populateGrid(this.masterDetailService.getFilter());
+            //this.presentLoading();
+            //this.populateGrid("W1");
+            //this.populateGrid("W2");
+            //this.populateGrid("W3");
+            //this.populateGrid("W4");
+            //this.populateGrid("M1");
+            //this.populateGrid("M3");
+            //this.populateGrid("M2");
+            //this.populateGrid("Y1");
+            //this.populateGrid("Y2");
+            //this.populateGrid("Y3");
+            //this.populateGrid("Y4");
             this.masterDetailService.setIsDirty(false);
-            this.loadingCtrl.dismiss();
+            //this.loadingCtrl.dismiss();
         }
     }
 

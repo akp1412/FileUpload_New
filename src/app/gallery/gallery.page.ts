@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MasterDetailService } from '../../app/services/masterdetail.service';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { ViewChild } from '@angular/core';
-import { Slides } from '@ionic/angular';
+import { Slides, Tabs } from '@ionic/angular';
 import { CommunityService } from '../../app/services/community.service';
 import { AlertController } from '@ionic/angular';
 import { PopoverPage } from '../popover/popover.page';
@@ -33,7 +33,7 @@ export class GalleryPage {
     noOfSLides: any = 11;
     slidePadding: any = 5;
     blnFirstImage: boolean = false;
-    
+    blnShowOptions: boolean = false;
 
     constructor(private navCtrl: NavController,
         private photoViewer: PhotoViewer,
@@ -685,6 +685,12 @@ export class GalleryPage {
         var ref = document.querySelector('f');
         this.insertAfter(newEle, ref);
         this.insertLog('add');
+    }
+
+    imageClicked() {
+        console.log("ImageClicked");
+        this.blnShowOptions = !this.blnShowOptions;
+        console.log(this.blnShowOptions);
     }
 }
 

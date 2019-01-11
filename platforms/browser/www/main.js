@@ -1540,9 +1540,16 @@ var map = {
 		"./src/app/gallery/gallery.module.ts",
 		"gallery-gallery-module"
 	],
-	"./tabs/tabs.module": [
-		"./src/app/tabs/tabs.module.ts",
-		"tabs-tabs-module"
+	"./home/home.module": [
+		"./src/app/home/home.module.ts",
+		"home-home-module"
+	],
+	"./imglist/imglist.module": [
+		"./src/app/imglist/imglist.module.ts",
+		"imglist-imglist-module"
+	],
+	"./popover/popover.module": [
+		"./src/app/popover/popover.module.ts"
 	]
 };
 function webpackAsyncContext(req) {
@@ -1554,7 +1561,7 @@ function webpackAsyncContext(req) {
 			throw e;
 		});
 	}
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		var id = ids[0];
 		return __webpack_require__(id);
 	});
@@ -1588,8 +1595,10 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 var routes = [
-    { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-    { path: 'gallery', loadChildren: './gallery/gallery.module#GalleryPageModule' }
+    { path: '', loadChildren: './home/home.module#HomePageModule' },
+    { path: 'gallery', loadChildren: './gallery/gallery.module#GalleryPageModule' },
+    { path: 'imglist', loadChildren: './imglist/imglist.module#ImglistPageModule' },
+    { path: 'popover', loadChildren: './popover/popover.module#PopoverPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1614,7 +1623,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<!--<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>-->\r\n\r\n<ion-app>\r\n    <ion-menu side=\"start\" menuId=\"settings\">\r\n        <ion-header>\r\n            <ion-toolbar>\r\n                <ion-title>Settings</ion-title>\r\n            </ion-toolbar>\r\n        </ion-header>\r\n        <ion-content padding>\r\n            \r\n            <form id=\"page-form1\">\r\n                <ion-label color=\"primary\">Credentials</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"tertiary\" position=\"stacked\">User Name</ion-label>\r\n                    <ion-input type=\"text\" name=\"username\" [(ngModel)]=\"UserID\"></ion-input>\r\n                </ion-item>\r\n\r\n                <ion-item>\r\n                    <ion-label color=\"tertiary\" position=\"stacked\">Password</ion-label>\r\n                    <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"password\"></ion-input>\r\n                </ion-item>\r\n                <br />\r\n                <div>  </div>\r\n                <ion-label color=\"primary\">Image Grid display settings</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Images per line</ion-label>\r\n                    <ion-input type=\"number\" name=\"imgPerRow\" [(ngModel)]=\"imgPerRow\"></ion-input>\r\n                </ion-item>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Rows per page</ion-label>\r\n                    <ion-input type=\"number\" name=\"rowsPerPage\" [(ngModel)]=\"rowsPerPage\"></ion-input>\r\n                </ion-item>\r\n                <br />\r\n                <div>  </div>\r\n                <ion-label color=\"primary\">Service version</ion-label>\r\n                <ion-item>\r\n                    <ion-label color=\"secondary\" position=\"stacked\">Select Service version</ion-label>\r\n                    <ion-select  name=\"serviceVersion\" [(ngModel)]=\"serviceVersion\" [value]=\"serviceVersion\">\r\n                        <ion-select-option value=\"P\">Production</ion-select-option>\r\n                        <ion-select-option value=\"A\">Android</ion-select-option>\r\n                        <ion-select-option value=\"B\">Browser</ion-select-option>\r\n                    </ion-select>\r\n                    \r\n                </ion-item>\r\n                <div padding>\r\n                    <ion-button size=\"large\" (click)=\"saveSetting()\" expand=\"block\">Save</ion-button>\r\n                </div>\r\n            </form>\r\n        </ion-content>\r\n\r\n    </ion-menu>\r\n    <ion-router-outlet main></ion-router-outlet>\r\n\r\n</ion-app>"
 
 /***/ }),
 
@@ -1634,6 +1643,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _services_community_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/community.service */ "./src/app/services/community.service.ts");
 /* harmony import */ var _services_masterdetail_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1649,11 +1659,32 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    function AppComponent(platform, splashScreen, statusBar, storage, navCtrl) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.storage = storage;
+        this.navCtrl = navCtrl;
+        this.appPages = [
+            {
+                title: 'My Communities',
+                url: '/mycommunities',
+                icon: 'contacts'
+            },
+            {
+                title: 'Add Community',
+                url: '/about',
+                icon: 'add'
+            }
+        ];
+        this.UserID = "";
+        this.password = "";
+        this.imgPerRow = 4;
+        this.rowsPerPage = 5;
+        this.serviceVersion = "P";
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -1661,7 +1692,60 @@ var AppComponent = /** @class */ (function () {
         this.platform.ready().then(function () {
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
+            _this.storage.get('UserID').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.UserID = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('password').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.password = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('imgPerRow').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.imgPerRow = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('rowsPerPage').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.rowsPerPage = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
+            _this.storage.get('serviceVersion').then(function (val) {
+                if (val != null) {
+                    console.log(val);
+                    _this.serviceVersion = val;
+                }
+                else {
+                    //this.navCtrl.navigateForward('login');
+                }
+            });
         });
+    };
+    AppComponent.prototype.saveSetting = function () {
+        this.storage.set('UserID', this.UserID);
+        this.storage.set('password', this.password);
+        this.storage.set('imgPerRow', this.imgPerRow);
+        this.storage.set('rowsPerPage', this.rowsPerPage);
+        this.storage.set('serviceVersion', this.serviceVersion);
+        this.navCtrl.navigateForward('');
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1671,7 +1755,8 @@ var AppComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_2__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_3__["StatusBar"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -1705,6 +1790,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 /* harmony import */ var _ionic_native_photo_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/photo-viewer/ngx */ "./node_modules/@ionic-native/photo-viewer/ngx/index.js");
 /* harmony import */ var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/image-picker/ngx */ "./node_modules/@ionic-native/image-picker/ngx/index.js");
+/* harmony import */ var _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./popover/popover.module */ "./src/app/popover/popover.module.ts");
+/* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1726,6 +1814,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+//import { SuperTabsModule } from 'ionic2-super-tabs';
+//import { Base64 } from '@ionic-native/base64/ngx';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -1733,7 +1826,7 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_12__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"], _angular_http__WEBPACK_IMPORTED_MODULE_11__["HttpModule"]],
+            imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormsModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_12__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"], _angular_http__WEBPACK_IMPORTED_MODULE_11__["HttpModule"], _popover_popover_module__WEBPACK_IMPORTED_MODULE_15__["PopoverPageModule"]],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
@@ -1744,12 +1837,166 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],
                 _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_10__["Camera"],
                 _ionic_native_photo_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__["PhotoViewer"],
+                _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_16__["SocialSharing"],
                 _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_14__["ImagePicker"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.module.ts":
+/*!*******************************************!*\
+  !*** ./src/app/popover/popover.module.ts ***!
+  \*******************************************/
+/*! exports provided: PopoverPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PopoverPageModule", function() { return PopoverPageModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
+/* harmony import */ var _popover_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./popover.page */ "./src/app/popover/popover.page.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _popover_page__WEBPACK_IMPORTED_MODULE_5__["PopoverPage"]
+    }
+];
+var PopoverPageModule = /** @class */ (function () {
+    function PopoverPageModule() {
+    }
+    PopoverPageModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
+            ],
+            declarations: [_popover_page__WEBPACK_IMPORTED_MODULE_5__["PopoverPage"]]
+        })
+    ], PopoverPageModule);
+    return PopoverPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.page.html":
+/*!*******************************************!*\
+  !*** ./src/app/popover/popover.page.html ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-content>\r\n    <ion-list width=\"100%\" *ngIf=\"displayMode==='GALLERY'\">\r\n\r\n        <ion-item>\r\n            <ion-select placeholder=\"Select a Month\" [(ngModel)]=\"filterBy\" interface=\"popover\" [value]=\"filterBy\">\r\n                <ion-select-option *ngFor=\"let opt of selectOptions\" [value]=\"opt\">{{opt}}</ion-select-option>\r\n\r\n            </ion-select>\r\n        </ion-item>\r\n               \r\n        <ion-grid width=\"100%\">\r\n            <ion-row>\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"filter()\">Filter</ion-button>\r\n                </ion-col>\r\n\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"close()\">Cancel</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            <ion-row *ngIf=\"filterBy !=''\">\r\n                <ion-col>\r\n                    <ion-button expand=\"block\" (click)=\"clear()\">Clear Filter</ion-button>\r\n                </ion-col>\r\n            </ion-row>\r\n            \r\n        </ion-grid>\r\n    </ion-list>\r\n</ion-content>\r\n<ion-content id=\"content\" class=\"radio-test outer-content\">\r\n    <ion-list *ngIf=\"displayMode==='ALBUM'\">\r\n        <ion-radio-group [(ngModel)]=\"currAlbum\">\r\n            <ion-item-divider>\r\n                <ion-label>Choose an Album</ion-label>\r\n            </ion-item-divider>\r\n            <ion-list>\r\n                <ion-item *ngFor=\"let opt of selectOptions\">\r\n                    <ion-label>{{opt}}</ion-label>\r\n                    <ion-radio slot=\"end\" value={{opt}}></ion-radio>\r\n                </ion-item>\r\n\r\n\r\n            </ion-list>\r\n        </ion-radio-group>\r\n        <ion-button expand=\"block\" (click)=\"AddToAlbum()\">Add to Album</ion-button>\r\n    </ion-list>\r\n</ion-content>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.page.scss":
+/*!*******************************************!*\
+  !*** ./src/app/popover/popover.page.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BvcG92ZXIvcG9wb3Zlci5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.page.ts":
+/*!*****************************************!*\
+  !*** ./src/app/popover/popover.page.ts ***!
+  \*****************************************/
+/*! exports provided: PopoverPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PopoverPage", function() { return PopoverPage; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/index.js");
+/* harmony import */ var _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../app/services/masterdetail.service */ "./src/app/services/masterdetail.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PopoverPage = /** @class */ (function () {
+    function PopoverPage(navParams, popoverController, masterDetailService) {
+        this.navParams = navParams;
+        this.popoverController = popoverController;
+        this.masterDetailService = masterDetailService;
+        this.excludeAlbums = true;
+        this.displayMode = "";
+        this.currAlbum = "";
+    }
+    PopoverPage.prototype.populateOptions = function () {
+        var strOptions = this.masterDetailService.getImgListFilterOptions().split(',');
+        this.selectOptions = this.masterDetailService.getImgListFilterOptions().split(',');
+    };
+    PopoverPage.prototype.close = function () {
+        this.popoverController.dismiss("");
+    };
+    PopoverPage.prototype.filter = function () {
+        this.popoverController.dismiss(this.filterBy);
+    };
+    PopoverPage.prototype.AddToAlbum = function () {
+        this.popoverController.dismiss(this.currAlbum);
+    };
+    PopoverPage.prototype.clear = function () {
+        this.popoverController.dismiss("0-0");
+    };
+    PopoverPage.prototype.ngOnInit = function () {
+        this.displayMode = this.navParams.get('source');
+        if (this.displayMode === "GALLERY") {
+            this.selectOptions = this.navParams.get('filters').split(',');
+            this.filterBy = this.navParams.get('curr_filter');
+        }
+        else if (this.displayMode === "ALBUM") {
+            this.selectOptions = this.navParams.get('albums').split(',');
+            this.currAlbum = this.navParams.get('curr_album');
+        }
+    };
+    PopoverPage = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-popover',
+            template: __webpack_require__(/*! ./popover.page.html */ "./src/app/popover/popover.page.html"),
+            styles: [__webpack_require__(/*! ./popover.page.scss */ "./src/app/popover/popover.page.scss")],
+        }),
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavParams"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["PopoverController"], _app_services_masterdetail_service__WEBPACK_IMPORTED_MODULE_2__["MasterDetailService"]])
+    ], PopoverPage);
+    return PopoverPage;
 }());
 
 
@@ -1769,9 +2016,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_Rx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/Rx */ "../node_modules/rxjs-compat/_esm5/Rx.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1784,7 +2030,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
+//import 'rxjs/Rx';
 
 
 var CommunityService = /** @class */ (function () {
@@ -1795,23 +2041,40 @@ var CommunityService = /** @class */ (function () {
         this.baseUrl = "http://localhost:49168/api";
     }
     CommunityService.prototype.getImageList = function () {
-        return this.http.get(this.baseUrl + '/ImageUpload/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/ImageUpload/Files/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+    };
+    CommunityService.prototype.getImageBaseUrls = function () {
+        return this.http.get(this.baseUrl + "/ImageUpload/BaseUrls/1").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getCommunity = function (id) {
-        return this.http.get(this.baseUrl + '/Community/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/Community/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getCommunities = function (user) {
-        return this.http.get(this.baseUrl + '/Community/User/' + user + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/Community/User/' + user + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getNewsList = function (id) {
-        return this.http.get(this.baseUrl + '/News/Community/' + id + '/User/' + 'akp1412attherategmailddotcom').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/News/Community/' + id + '/User/' + 'akp1412attherategmailddotcom').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService.prototype.getNewsDetail = function (id, User) {
-        return this.http.get(this.baseUrl + '/News/News/' + id + '/User/' + User + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+        return this.http.get(this.baseUrl + '/News/News/' + id + '/User/' + User + '/').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+    };
+    CommunityService.prototype.postDelete = function (imgKey) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/json');
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({ headers: headers });
+        return this.http.post(this.baseUrl + '/ImageUpload/Delete/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
+    };
+    CommunityService.prototype.postAddToAlbum = function (strAlbum, imgKey) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/json');
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["RequestOptions"]({ headers: headers });
+        return this.http.post(this.baseUrl + '/ImageUpload/AddToAlbum/' + strAlbum + '/' + imgKey + '/', imgKey, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (e) { return e.json(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (e) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(e); }));
     };
     CommunityService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
     ], CommunityService);
     return CommunityService;
 }());
@@ -1843,12 +2106,167 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var MasterDetailService = /** @class */ (function () {
     function MasterDetailService() {
+        this.imgFilterYear = "";
+        this.imgFilterMonth = "";
+        this.strAlbums = "";
+        this.imgListMode = "";
+        this.strCurrAlbum = "";
+        this.strLastActiveAlbum = "";
+        this.IsDirty = false;
+        this.strParentBase = "";
+        this.strThumbBase = "";
+        this.strY4Filter = "";
+        this.blnListShowAlbums = false;
+        this.imagesPerPage = 200;
+        this.imgGridRows = 5;
+        this.imgGridCols = 4;
     }
     MasterDetailService.prototype.setUris = function (uris) {
         this.uris = uris;
     };
     MasterDetailService.prototype.getUris = function () {
         return this.uris;
+    };
+    MasterDetailService.prototype.getImages = function () {
+        return this.objImages;
+    };
+    MasterDetailService.prototype.setImages = function (Images) {
+        this.objImages = Images;
+        var x = Images.filter(function (p) { return p.imgAlbum != ''; });
+        for (var i = 0; i < x.length; i++) {
+            if (this.strAlbums.search(x[i].imgAlbum) === -1) {
+                this.strAlbums = this.strAlbums.concat(x[i].imgAlbum + ',');
+            }
+        }
+    };
+    MasterDetailService.prototype.pushImage = function (newEntry) {
+        this.objImages.push(newEntry);
+    };
+    MasterDetailService.prototype.setIndex = function (intIndex) {
+        this.imgIndex = intIndex;
+    };
+    MasterDetailService.prototype.getIndex = function () {
+        return this.imgIndex;
+    };
+    MasterDetailService.prototype.getFilter = function () {
+        return this.perFilter;
+    };
+    MasterDetailService.prototype.setFilter = function (strFilter) {
+        this.perFilter = strFilter;
+    };
+    MasterDetailService.prototype.setImgListFilterOptions = function (strFilter) {
+        this.imgListPeriods = strFilter;
+    };
+    MasterDetailService.prototype.getImgListFilterOptions = function () {
+        return this.imgListPeriods;
+    };
+    MasterDetailService.prototype.setImgFilterMonth = function (strFilter) {
+        this.imgFilterMonth = strFilter;
+    };
+    MasterDetailService.prototype.getImgFilterMonth = function () {
+        return this.imgFilterMonth;
+    };
+    MasterDetailService.prototype.setImgFilterYear = function (strFilter) {
+        this.imgFilterYear = strFilter;
+    };
+    MasterDetailService.prototype.getImgFilterYear = function () {
+        return this.imgFilterYear;
+    };
+    MasterDetailService.prototype.setImgDeleted = function (imgName) {
+        var listIndex = this.objImages.findIndex(function (p) { return p.imgName === imgName; });
+        //this.objImages[listIndex].imgUrl = 'assets/icon/imgDeleted.jpg';
+        this.objImages[listIndex].imgName = 'assets/icon/imgDeleted.jpg';
+        this.objImages[listIndex].imgParentUrl = 'assets/icon/imgDeleted.jpg';
+        this.IsDirty = true;
+    };
+    MasterDetailService.prototype.getAlbums = function () {
+        if (this.strAlbums.length > 0) {
+            return this.strAlbums.substr(0, this.strAlbums.length - 1);
+        }
+        else {
+            return this.strAlbums;
+        }
+    };
+    MasterDetailService.prototype.getListMode = function () {
+        return this.imgListMode;
+    };
+    MasterDetailService.prototype.setListMode = function (strMode) {
+        this.imgListMode = strMode;
+    };
+    MasterDetailService.prototype.getCurrAlbum = function () {
+        return this.strCurrAlbum;
+    };
+    MasterDetailService.prototype.setCurrAlbum = function (strAlbum) {
+        this.strCurrAlbum = strAlbum;
+    };
+    MasterDetailService.prototype.setLastActiveAlbum = function (strAlbum) {
+        this.strAlbums = strAlbum + "," + this.strAlbums.replace(strAlbum + ",", "");
+        this.strLastActiveAlbum = strAlbum;
+    };
+    MasterDetailService.prototype.getLastActiveAlbum = function () {
+        return this.strLastActiveAlbum;
+    };
+    MasterDetailService.prototype.addAlbum = function (strAlbum) {
+        this.strAlbums = strAlbum + "," + this.strAlbums.replace(strAlbum + ",", "");
+    };
+    MasterDetailService.prototype.setImgAlbum = function (imgKey, resp) {
+        var intIndex = this.objImages.findIndex(function (x) { return x.imgName === imgKey; });
+        this.objImages[intIndex].imgName = resp.imgName;
+        //this.objImages[intIndex].imgUrl = resp.imgUrl;
+        this.objImages[intIndex].imgParentUrl = resp.imgParentUrl;
+        this.objImages[intIndex].period = resp.period;
+        this.objImages[intIndex].imgMonth = resp.imgMonth;
+        this.objImages[intIndex].imgYear = resp.imgYear;
+        this.objImages[intIndex].imgAlbum = resp.imgAlbum;
+        if (resp.imgAlbum != '') {
+            this.setLastActiveAlbum(resp.imgAlbum);
+        }
+        this.IsDirty = true;
+    };
+    MasterDetailService.prototype.setIsDirty = function (blnDirty) {
+        this.IsDirty = blnDirty;
+    };
+    MasterDetailService.prototype.getIsDirty = function () {
+        return this.IsDirty;
+    };
+    MasterDetailService.prototype.setParentBase = function (strBase) {
+        this.strParentBase = strBase;
+    };
+    MasterDetailService.prototype.setThumbBase = function (strBase) {
+        this.strThumbBase = strBase;
+    };
+    MasterDetailService.prototype.getParentBase = function () {
+        return this.strParentBase;
+    };
+    MasterDetailService.prototype.getThumbBase = function () {
+        return this.strThumbBase;
+    };
+    MasterDetailService.prototype.setY4Filter = function (strFilter) {
+        this.strY4Filter = strFilter;
+    };
+    MasterDetailService.prototype.getY4Filter = function () {
+        return this.strY4Filter;
+    };
+    MasterDetailService.prototype.getListShowAlbum = function () {
+        return this.blnListShowAlbums;
+    };
+    MasterDetailService.prototype.setFilteredImgList = function (imgList) {
+        this.filteredImgList = imgList;
+    };
+    MasterDetailService.prototype.getImagesPerPage = function () {
+        return this.imgGridRows * this.imgGridCols;
+    };
+    MasterDetailService.prototype.getImgGridCols = function () {
+        return this.imgGridCols;
+    };
+    MasterDetailService.prototype.setImgGridCols = function (count) {
+        this.imgGridCols = count;
+    };
+    MasterDetailService.prototype.getImgGridRows = function () {
+        return this.imgGridRows;
+    };
+    MasterDetailService.prototype.setImgGridRows = function (count) {
+        this.imgGridRows = count;
     };
     MasterDetailService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

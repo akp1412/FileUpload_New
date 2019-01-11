@@ -90,6 +90,7 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Image Upload" />
     </plugin>
     <plugin name="com-badrit-base64" spec="0.2.0" />
+    <plugin name="com.darktalker.cordova.screenshot" spec="0.1.6" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>

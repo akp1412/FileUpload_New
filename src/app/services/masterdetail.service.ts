@@ -24,6 +24,7 @@ export class MasterDetailService {
     private imagesPerPage: any = 200;
     private imgGridRows: any = 5;
     private imgGridCols: any = 4;
+    private arrTabImages: any = [2];
 
     constructor() { }
 
@@ -216,5 +217,13 @@ export class MasterDetailService {
 
     public setImgGridRows(count) {
         this.imgGridRows = count;
+    }
+
+    public setTabImg(slideIndex, URI) {
+        this.arrTabImages[slideIndex] = URI;
+    }
+
+    public getTabImg(slideIndex) {
+        return this.arrTabImages[slideIndex];
     }
 }
