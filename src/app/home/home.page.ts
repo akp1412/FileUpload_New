@@ -124,7 +124,7 @@ export class HomePage {
                 if (val === "P") {
                     //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                     //this.communityService.baseUrl = "https://95.179.202.83:443/api";
-                    this.communityService.baseUrl = "https://45.77.57.50:443/api";
+                    this.communityService.baseUrl = "http://45.77.57.50:80/api";
                     
                 } else if (val === "A") {
                     this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -139,7 +139,7 @@ export class HomePage {
                 //this.presentAlertLoadError("Service Version not found using default");
                 //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                 //this.communityService.baseUrl = "https://95.179.202.83:443/api";
-                this.communityService.baseUrl = "https://45.77.57.50:443/api";
+                this.communityService.baseUrl = "http://45.77.57.50:80/api";
                 this.presentLoading();
                 this.getImageList();
             }
