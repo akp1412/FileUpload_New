@@ -3,14 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\about",
     "\\src\\app\\gallery",
     "\\src\\app\\home",
-    "\\src\\app\\imglist",
-    "\\src\\app\\popover",
-    "\\src\\app\\services",
-    "\\src\\app\\tabs"
+    "\\src\\app\\popover"
   ],
-  "SelectedNode": "\\src\\app\\gallery\\gallery.page.html",
+  "SelectedNode": "\\src\\app\\popover\\popover.page.ts",
   "PreviewInSolutionExplorer": false
 }

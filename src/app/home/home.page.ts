@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController, Datetime } from '@ionic/angular';
+import { Component, ElementRef } from '@angular/core';
+import { NavController, LoadingController, ToastController, Datetime, Img } from '@ionic/angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -16,6 +16,7 @@ import { Slides, Slide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
+import * as exif from 'exif-js'
 
 interface CameraDetail {
     filename: string;
@@ -52,6 +53,8 @@ interface CameraExifDetail {
 export class HomePage {
     @ViewChild(Slides) slides: Slides;
     @ViewChild(Slide) slide: Slide;
+    @ViewChild('img1') img1: Img;
+
 
     imgSource: any;
     imageURI: any;
@@ -112,6 +115,7 @@ export class HomePage {
     private strY2Qualifier: string;
     private strY3Qualifier: string;
     private icons: any = "grid";
+    private chosenImg: string;
 
     ngOnInit() {
         this.slideIndex = 0;
@@ -124,7 +128,7 @@ export class HomePage {
                 if (val === "P") {
                     //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                     //this.communityService.baseUrl = "https://95.179.202.83:443/api";
-                    this.communityService.baseUrl = "http://45.77.57.50:80/api";
+                    this.communityService.baseUrl = "http://atozsolutions.co.za:49168/api";
                     
                 } else if (val === "A") {
                     this.communityService.baseUrl = "http://10.0.2.2:49168/api";
@@ -139,7 +143,7 @@ export class HomePage {
                 //this.presentAlertLoadError("Service Version not found using default");
                 //this.communityService.baseUrl = "https://azcommunityrestapi20181209100659.azurewebsites.net/api";
                 //this.communityService.baseUrl = "https://95.179.202.83:443/api";
-                this.communityService.baseUrl = "http://45.77.57.50:80/api";
+                this.communityService.baseUrl = "http://atozsolutions.co.za:8100/api";
                 this.presentLoading();
                 this.getImageList();
             }
@@ -327,13 +331,53 @@ export class HomePage {
         //        console.log("image date : " + metadata.modificationTime);
         //    });
         //});
+        //this.file.getFile(path, fileName).then()
+        //let img = { src: imageUri.webPath };
+
+
+        
+        //this.chosenImg = "data:image/jpeg;base64," + imageUri;
+
+        //if (this.platform.is('ios'))
+        //    this.chosenImg = normalizeURL(imageData);
+        //// IF problem only occur in ios and normalizeURL 
+        ////not work for you then you can also use 
+        ////this.base64Image= imageData.replace(/^file:\/\//, '');
+        //else
+    //        this.base64Image = "data:image/jpeg;base64," + imageData;
+    //}
+        
+    
+        //this.file.resolveDirectoryUrl(path).then(dirEntry => {
+            
+        //    this.file.getFile(dirEntry, fileName, { create: false }).then(fileEntry => {
+        //        fileEntry.getMetadata(function (metadata) {
+        //            console.log(metadata.modificationTime)
+        //        })
+        //    })
+        //});
+
         this.file.readAsDataURL(path, fileName)
             .then(base64File => {
                 //const cameraDetail = <CameraDetail>JSON.parse(base64File.replace("data:image/jpeg;base64,", ''));
 
                 //const exifData = <CameraExifDetail>JSON.parse(cameraDetail.json_metadata);
+                //this.chosenImg = base64File;
+                this.base64Image = base64File;
+                                
+                this.img1.src = this.base64Image;
 
-                this.base64Image = base64File.replace("data:image/jpeg;base64,",'');
+                exif.getData(this.img1, function () {
+                    var allMetaData = exif.getAllTags(this);
+                    console.log('ALL TAGS - ', allMetaData)
+
+                    let lng = exif.getTag(this, 'GPSLongitude') || null
+                    let lat = exif.getTag(this, 'GPSLatitude') || null
+
+                    console.log('LNG - ', lng)
+                    console.log('LAT - ', lat)
+                })
+
                 this.uploadFile();
                 
             })
@@ -343,6 +387,21 @@ export class HomePage {
             })
         
 
+    }
+
+    imgLoaded() {
+        //document.getElementById("img1")
+        exif.getData(this.img1, function () {
+            var allMetaData = exif.getAllTags(this);
+            console.log('ALL TAGS - ', allMetaData)
+
+            let lng = exif.getTag(this, 'GPSLongitude') || null
+            let lat = exif.getTag(this, 'GPSLatitude') || null
+
+            console.log('LNG - ', lng)
+            console.log('LAT - ', lat)
+        })
+        
     }
 
     setBase(baseResponse) {
@@ -515,19 +574,28 @@ export class HomePage {
         else if (periodFilter === 'M1') { this.grid_M1 = this.localGrid }
         else if (periodFilter === 'M2') { this.grid_M2 = this.localGrid }
         else if (periodFilter === 'M3') {
-            this.strM3Qualifier = localImgList[0].imgYear;
+            if (localImgList.length > 0) {
+                this.strM3Qualifier = localImgList[0].imgYear;
+            }
+            
             this.grid_M3 = this.localGrid;
         }
         else if (periodFilter === 'Y1') {
-            this.strY1Qualifier = localImgList[0].imgYear;
+            if (localImgList.length > 0) {
+                this.strY1Qualifier = localImgList[0].imgYear;
+            }
             this.grid_Y1 = this.localGrid;
         }
         else if (periodFilter === 'Y2') {
-            this.strY2Qualifier = localImgList[0].imgYear;
+            if (localImgList.length > 0) {
+                this.strY2Qualifier = localImgList[0].imgYear;
+            }
             this.grid_Y2 = this.localGrid;
         }
         else if (periodFilter === 'Y3') {
-            this.strY3Qualifier = localImgList[0].imgYear;
+            if (localImgList.length > 0) {
+                this.strY3Qualifier = localImgList[0].imgYear;
+            }
             this.grid_Y3 = this.localGrid;
         }
         else if (periodFilter === 'Y4') {
@@ -665,7 +733,7 @@ export class HomePage {
             this.presentLoading();
             this.cntImagetoLoad = 1;
             this.getBase64String(imageData);
-
+            
 
             //this.file.resolveLocalFilesystemUrl(imageData).then(oneFile => {
             //    this.imageFileName = oneFile.name;
@@ -741,7 +809,7 @@ export class HomePage {
 
        let picDetail = {
             "imgName": this.getDateTime()  + "-APP.jpg",
-            "imgData": this.base64Image
+           "imgData": this.base64Image.replace("data:image/jpeg;base64,", '')
         }
 
         

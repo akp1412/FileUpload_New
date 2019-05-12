@@ -15,6 +15,7 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <img #img1 class="image_error"  (load)="imgLoaded()">
     <div class="swiper-container">
         <!--<div class="swiper-wrapper">-->
         <!--<ion-slides pager="false" autoHeight="true" (ionSlideDidChange)="slideDidChange()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{ 'height': slideIndex===0 ? 'auto' : '100vh' }">-->

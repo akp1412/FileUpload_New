@@ -55,6 +55,7 @@
     "cordova-plugin-x-socialsharing": "5.4.3",
     "core-js": "^2.5.4",
     "es6-promise-plugin": "4.2.2",
+    "exif-js": "^2.3.0",
     "ionic": "^4.4.0",
     "rxjs": "6.2.2",
     "zone.js": "~0.8.26"
