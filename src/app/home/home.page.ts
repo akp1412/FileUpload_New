@@ -367,7 +367,7 @@ export class HomePage {
                                 
                 this.img1.src = this.base64Image;
 
-                exif.getData(this.img1, function () {
+                exif.getData(this.img1.src, function () {
                     var allMetaData = exif.getAllTags(this);
                     console.log('ALL TAGS - ', allMetaData)
 
