@@ -53,7 +53,7 @@ interface CameraExifDetail {
 export class HomePage {
     @ViewChild(Slides) slides: Slides;
     @ViewChild(Slide) slide: Slide;
-   //@ViewChild('img1') img1: Img;
+   @ViewChild('img1') img1: Img;
 
 
     imgSource: any;
