@@ -391,7 +391,7 @@ export class HomePage {
 
     imgLoaded() {
         //document.getElementById("img1")
-        exif.getData(this.img1, function () {
+        exif.getData(this.img1.src, function () {
             var allMetaData = exif.getAllTags(this);
             console.log('ALL TAGS - ', allMetaData)
 
